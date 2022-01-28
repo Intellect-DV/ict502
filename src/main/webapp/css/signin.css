@@ -1,0 +1,103 @@
+body::before {
+    content: '';
+    background: url("../img/background-home.jpg") no-repeat center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+}
+body::after {
+    content: '';
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+}
+.toggle {
+    display: flex;
+    gap: 5px;
+    color: white;
+    width: 20rem;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    align-items: center;
+    font-weight: 600;
+    margin-top: 15vh;
+}
+.toggle__box {
+    width: 6rem;
+    height: 3rem;
+    position: relative;
+}
+.toggle__box > .toggle__ch {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    display: none;
+}
+.toggle__box > label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    border-radius: 2rem;
+    padding: 3px;
+}
+.toggle__box > label::after {
+    content: "";
+    display: block;
+    width: 50%;
+    height: 100%;
+    background: white;
+    border-radius: 50%;
+    transform: scale(0.85);
+    transition: all ease-in-out 200ms;
+}
+.toggle__ch:checked + .toggle__btn:after {
+    transform: scale(0.85) translateX(100%);
+}
+#form-signin {
+    width: 20rem;
+    margin: 0 auto;
+    margin-top: 3rem;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+#form-signin > .title {
+    font-size: 2.7rem;
+    font-weight: 600;
+    color: var(--color-orange);
+    font-family: var(--font-montserrat);
+}
+#form-signin > .inputbox > input {
+    font-size: 1rem;
+    font-family: inherit;
+    border: none;
+    padding: 0.5rem;
+}
+#form-signin > .inputbox > input:focus {
+    outline: 2px solid var(--color-orange);
+}
+#form-signin > .btn-box > button {
+    all: unset;
+    background: var(--color-orange);
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+#form-signin > .btn-box > button:hover {
+    background: var(--color-orange-dark);
+}
