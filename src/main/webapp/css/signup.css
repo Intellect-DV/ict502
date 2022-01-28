@@ -1,0 +1,61 @@
+body::before {
+    content: '';
+    background: url("../img/background-home.jpg") no-repeat center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+}
+body::after {
+    content: '';
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+}
+.form-signup {
+    width: 20rem;
+    margin: 0 auto;
+    margin-top: 0px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2rem;
+    background: rgba(0,0,0,0.4);
+    margin-top: 20vh;
+}
+.form-signup > .title {
+    font-family: var(--font-montserrat);
+    font-size: 2.7rem;
+    text-align: center;
+    color: var(--color-orange);
+}
+.form-signup > .input-box > input {
+    font-family: inherit;
+    font-size: 1rem;
+    border: none;
+    padding: 0.5rem;
+}
+.form-signup > .input-box > input:focus {
+    outline: 2px solid var(--color-orange);
+}
+.form-signup > .action-box > button {
+    all: unset;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    background: var(--color-orange);
+    padding: 0.5rem 2rem;
+}
+.form-signup > .action-box > button:hover {
+    background: var(--color-orange-dark);
+}

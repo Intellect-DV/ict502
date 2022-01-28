@@ -3,7 +3,8 @@
     --font-quicksand: 'Quicksand', sans-serif;
     --font-montserrat: 'Montserrat', sans-serif;
 
-    --color-orange: rgb(191, 114, 45);
+    --color-orange: rgb(242, 137, 43);
+    --color-orange-dark: rgb(189, 108, 34);
 }
 html {
    font-size: 100%;
