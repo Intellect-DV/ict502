@@ -1,0 +1,62 @@
+body::before {
+    content: '';
+    background: url("../img/background-home.jpg") no-repeat center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+}
+body::after {
+    content: '';
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+}
+.container {
+    margin: 0 auto;
+    max-width: 70rem;
+    margin-top: 35vh;
+}
+.title {
+    text-align: center;
+    font-family: var(--font-montserrat);
+    font-size: 9rem;
+    color: var(--color-orange);
+    margin: 0;
+}
+.title__full {
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    margin-top: -1.4rem;
+    font-size: 1.2rem;
+}
+.action {
+    width: 25rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.action > .btn {
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    padding: 0.7rem 2rem;
+    border-radius: 25rem;
+    margin-top: 2rem;
+    font-weight: 600;
+    transition: all ease-in-out 200ms;
+}
+.action > .btn:hover {
+    color: var(--color-orange);
+    border-color: var(--color-orange);
+    transform: translateY(0.5rem);
+}
