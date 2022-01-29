@@ -57,7 +57,7 @@ public abstract class CustomerDA {
                     cust.getCustomerEmail()
             };
 
-            int rowAffected = QueryHelper.insertUpdateQuery(sql,obj) ;
+            int rowAffected = QueryHelper.insertUpdateDeleteQuery(sql,obj) ;
             if(rowAffected == 1) succeed = true;
         } catch (Exception err) {
             err.printStackTrace();

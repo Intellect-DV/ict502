@@ -86,7 +86,7 @@ public abstract class WorkerDA {
                 sql = "UPDATE worker set username=?, name=?, email=? WHERE id=?";
             }
 
-            int affectedRow  = QueryHelper.insertUpdateQuery(sql,new Object[]{
+            int affectedRow  = QueryHelper.insertUpdateDeleteQuery(sql,new Object[]{
                     updateWorker.getWorkerUsername(),
                     updateWorker.getWorkerName(),
                     updateWorker.getWorkerEmail(),
@@ -112,7 +112,7 @@ public abstract class WorkerDA {
                 sql = "UPDATE worker set password=? WHERE id=?";
             }
 
-            int affectedRow = QueryHelper.insertUpdateQuery(sql, new Object[]{
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Object[]{
                     newPassword,
                     id
             });

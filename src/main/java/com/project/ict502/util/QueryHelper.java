@@ -53,7 +53,7 @@ public class QueryHelper {
      * @return Either -1 for failed, 0 for not updating, > 0 updating 1 or more rows in table
      */
     // INSERT OR UPDATE STATEMENT - return row updated (-1 for failed) (0 for not updating row)
-    public static int insertUpdateQuery(String sql, Object [] data) {
+    public static int insertUpdateDeleteQuery(String sql, Object [] data) {
         PreparedStatement prepStmt = null;
         int updatedRow = -1;
 
