@@ -38,6 +38,9 @@ public class WorkerServlet extends HttpServlet {
             case "add":
                 addWorker(request,response);
                 break;
+            case "delete":
+                deleteWorker(request, response);
+                break;
             case "login":
                 loginWorker(request, response);
                 break;
@@ -99,6 +102,58 @@ public class WorkerServlet extends HttpServlet {
         }
 
         jsonResponse(response, succeed ? 201 : 400, json);
+    }
+
+    private void deleteWorker(HttpServletRequest request, HttpServletResponse response)  {
+        JSONObject json = new JSONObject();
+        int workerId;
+        String tempWorkerId = request.getParameter("workerId");
+
+        if(tempWorkerId == null || tempWorkerId.equals("")) {
+            json.put("error","Parameter for worker id is empty");
+            jsonResponse(response,400,json);
+            return;
+        }
+
+        try {
+            workerId = Integer.parseInt(tempWorkerId);
+        } catch (NumberFormatException err) {
+            err.printStackTrace();
+            json.put("error","Worker id must be number");
+            json.put("given", tempWorkerId);
+            jsonResponse(response,406,json);
+            return;
+        }
+
+        // check session
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            System.out.println("Please login first before update profile");
+            json.put("error", "Authorization failed! Please login first!");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
+        Worker currentWorker = (Worker) session.getAttribute("workerObj");
+
+        if(currentWorker.getManagerId() != -1) {
+            System.out.println("Only manager can delete worker");
+            json.put("error","Only manager can delete worker");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
+        boolean succeed = false;
+        if(WorkerDA.deleteWorker(workerId)) {
+            json.put("message", "Worker has been deleted");
+            succeed = true;
+        } else {
+            json.put("error", "Worker id not exist");
+            json.put("workerId", workerId);
+        }
+
+        jsonResponse(response, succeed ? 200 : 400, json);
     }
 
     private void loginWorker(HttpServletRequest request, HttpServletResponse response) {

@@ -153,4 +153,27 @@ public abstract class WorkerDA {
 
         return  succeed;
     }
+
+    public static boolean deleteWorker(int id) {
+        boolean succeed = false;
+        try{
+            String sql;
+
+            if(Database.getDbType().equals("oracle")) {
+                sql = "DELETE FROM worker WHERE workerid=?";
+            } else {
+                sql = "DELETE FROM worker WHERE id=?";
+            }
+
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Integer[] {
+                    id
+            });
+
+            if(affectedRow == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return succeed;
+    }
 }
