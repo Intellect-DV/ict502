@@ -1,0 +1,75 @@
+body::before {
+    content: '';
+    background: url("../img/background-home.jpg") no-repeat center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+    filter: blur(2px);
+}
+body::after {
+    content: '';
+    background: rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+}
+.form_profile {
+    background: rgba(0,0,0,0.7);
+    color: white;
+    width: 25rem;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 8rem;
+}
+.form_profile__title {
+    color: var(--color-orange);
+    font-weight: 600;
+    font-size: 1.7rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.form_profile__item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.3rem;
+    padding: 0 1rem;
+    align-items: center;
+}
+.form_profile__item > input {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.2rem 0.3rem;
+    border: none;
+    transition: all ease-in-out 200ms;
+}
+.form_profile__item > input:focus {
+    outline: 2px solid var(--color-orange);
+}
+.form_profile > button {
+    all: unset;
+    cursor: pointer;
+    background: var(--color-orange);
+    padding: 0.5rem 2rem;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+}
+.form_profile > button:hover {
+    background: var(--color-orange-dark);
+}
+.form_profile__link {
+    color: rgb(25, 140, 255);
+    font-weight: 600;
+    display: block;
+    text-align: center;
+}
+.form_profile__link > a {
+    color: inherit;
+}
