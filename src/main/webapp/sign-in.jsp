@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="css/signin.css">
     <link rel="stylesheet" href="component/modal__info.css">
 
+    <%-- Font Awesome --%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/sign-in.js" defer></script>
@@ -33,7 +36,7 @@
             </div>
             <span>Worker</span>
         </div>
-        <form action="" id="form-signin">
+        <form data-action="customer" id="form-signin">
             <div class="title">Sign In</div>
             <div class="inputbox">
                 <input type="text" name="username" placeholder="Username" autocomplete="off" required>
