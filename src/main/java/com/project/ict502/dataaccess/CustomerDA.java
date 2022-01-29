@@ -74,7 +74,7 @@ public abstract class CustomerDA {
             String sql = null;
 
             if(Database.getDbType().equals("oracle")) {
-                sql = "SELECT custid, custname, custemail FROM customer WHERE username=? AND password=?";
+                sql = "SELECT custid as id, custname as name, custemail as email FROM customer WHERE username=? AND password=?";
             } else {
                 sql = "SELECT id, name, email FROM customer WHERE username=? AND password=?";
             }
@@ -84,15 +84,9 @@ public abstract class CustomerDA {
             if(rs.next()) {
                 String name, email;
                 int id;
-                if(Database.getDbType().equals("oracle")) {
-                    id = rs.getInt("custid");
-                    name = rs.getString("custname");
-                    email = rs.getString("custemail");
-                } else {
-                    id = rs.getInt("id");
-                    name = rs.getString("name");
-                    email = rs.getString("email");
-                }
+                id = rs.getInt("id");
+                name = rs.getString("name");
+                email = rs.getString("email");
 
                 cust.setCustomer(id,username,name,email); cust.setValid(true);
             } else {
