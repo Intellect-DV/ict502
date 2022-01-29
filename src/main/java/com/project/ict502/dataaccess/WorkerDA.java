@@ -38,6 +38,35 @@ public abstract class WorkerDA {
         return worker;
     }
 
+    public static boolean createWorker(Worker worker, int managerId) {
+        boolean succeed = false;
+
+        try {
+            String sql;
+
+            if(Database.getDbType().equals("oracle")){
+                sql = "INSERT INTO worker (username, password, workername, workeremail, managerid) VALUES (?,?,?,?,?)";
+            } else {
+                sql = "INSERT INTO worker (username, password, name, email, manager_id) VALUES (?,?,?,?,?)";
+            }
+
+            Object[] obj = new Object[] {
+                    worker.getWorkerUsername(),
+                    worker.getWorkerPassword(),
+                    worker.getWorkerName(),
+                    worker.getWorkerEmail(),
+                    managerId
+            };
+
+            int rowAffected = QueryHelper.insertUpdateDeleteQuery(sql,obj) ;
+            if(rowAffected == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return succeed;
+    }
+
     public static Worker retrieveWorker(String username, String password) {
         Worker worker = new Worker();
 

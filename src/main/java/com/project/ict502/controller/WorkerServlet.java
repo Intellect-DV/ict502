@@ -35,6 +35,9 @@ public class WorkerServlet extends HttpServlet {
         if(action == null) return;
 
         switch (action.toLowerCase()) {
+            case "add":
+                addWorker(request,response);
+                break;
             case "login":
                 loginWorker(request, response);
                 break;
@@ -45,6 +48,57 @@ public class WorkerServlet extends HttpServlet {
                 updatePassword(request, response);
                 break;
         }
+    }
+
+    private void addWorker(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+        System.out.println("addWorker");
+        String username, password, name ,email; int managerId;
+
+        username = request.getParameter("username");
+        password = request.getParameter("password");
+        name = request.getParameter("name");
+        email = request.getParameter("email");
+
+        if((username == null || password == null || name == null || email == null)
+                || (username.equals("") || password.equals("") || name.equals("") || email.equals("")) ) {
+            System.out.println("Input empty");
+            json.put("error", "Input empty");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        // get manager session
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            System.out.println("Login first before add worker");
+            json.put("error", "Authorization failed! Please login first!");
+            jsonResponse(response, 401, json);
+            return;
+        }
+        Worker manager = (Worker) session.getAttribute("workerObj");
+        managerId = manager.getWorkerId();
+
+        // check existed username
+        Worker worker = WorkerDA.isUsernameExisted(username);
+        boolean succeed = false;
+
+        if(!worker.isValid()) {
+            // add worker into database
+            worker.setWorker(username,password,name,email);
+
+            if(WorkerDA.createWorker(worker,managerId)) {
+                System.out.println("New worker added");
+                json.put("message", "New worker added");
+                succeed = true;
+            }
+        } else {
+            System.out.println("Cannot add: username duplicated");
+            json.put("error", "Username duplicated");
+        }
+
+        jsonResponse(response, succeed ? 201 : 400, json);
     }
 
     private void loginWorker(HttpServletRequest request, HttpServletResponse response) {
