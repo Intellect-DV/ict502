@@ -14,7 +14,7 @@ public abstract class CustomerDA {
         Customer cust = new Customer();
 
         try {
-            String sql = null;
+            String sql;
             if(Database.getDbType().equals("oracle")) {
                 sql = "SELECT custid FROM customer WHERE username=?";
             } else {
@@ -42,7 +42,7 @@ public abstract class CustomerDA {
     public static boolean createCustomer(Customer cust) {
         boolean succeed = false;
         try {
-            String sql = null;
+            String sql;
 
             if(Database.getDbType().equals("oracle")) {
                 sql = "INSERT INTO customer(username,password,custname,custemail) VALUES (?,?,?,?)";
@@ -71,7 +71,7 @@ public abstract class CustomerDA {
         Customer cust = new Customer();
 
         try {
-            String sql = null;
+            String sql;
 
             if(Database.getDbType().equals("oracle")) {
                 sql = "SELECT custid as id, custname as name, custemail as email FROM customer WHERE username=? AND password=?";
