@@ -1,0 +1,29 @@
+/* const modalInfo =  document.querySelector(".modal__info"); */
+.modal__info {
+    color: white;
+    position: fixed;
+    bottom: -5vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    transition: all ease-in-out 200ms;
+}
+.modal__info.active {
+    bottom: 5vh;
+}
+.modal__card {
+    padding: 0.5rem 2rem;
+    padding-left: 1rem;
+}
+.modal__card.success {
+    background: rgb(51, 181, 51);
+}
+.modal__card.failed {
+    background: rgb(183, 36, 36);
+}
+.modal__close {
+    cursor: pointer;
+    position: absolute;
+    right: 0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
