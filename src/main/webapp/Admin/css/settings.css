@@ -55,6 +55,8 @@ body::after {
 .form_profile > button {
     all: unset;
     cursor: pointer;
+    font-family: var(--font-quicksand);
+    font-weight: 600;
     background: var(--color-orange);
     padding: 0.5rem 2rem;
     display: block;
