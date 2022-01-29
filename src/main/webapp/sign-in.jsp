@@ -17,6 +17,11 @@
     <%-- Boilerplate - reset css style --%>
     <link rel="stylesheet" href="css/boilerplate.css">
     <link rel="stylesheet" href="css/signin.css">
+    <link rel="stylesheet" href="component/modal__info.css">
+
+    <%-- Axios - to make Http request --%>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/sign-in.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -42,19 +47,15 @@
         </form>
     </div>
 
-    <script type="text/javascript">
-        const form = document.querySelector("#form-signin");
-        const toggleBtn = document.querySelector("#toggle__ch");
+    <div class="modal__info">
+        <div class="modal__card">
+            <span class="modal__content">
 
-        window.addEventListener("DOMContentLoaded", () => {
-            toggleBtn.addEventListener("change", event => {
-                if(toggleBtn.checked) {
-                    form.action = "/worker/"; // todo - worker servlet
-                } else {
-                    form.action = "/customer/"; // todo - customer servlet
-                }
-            })
-        })
-    </script>
+            </span>
+            <span class="modal__close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+    </div>
 </body>
 </html>

@@ -17,8 +17,8 @@
         <h1 class="title">SEFOS</h1>
         <div class="title__full">SalizaEja Enterprise Food Ordering System</div>
         <div class="action">
-            <a href="signup.jsp" class="btn">Sign Up</a>
-            <a href="signin.jsp" class="btn">Sign In</a>
+            <a href="sign-up.jsp" class="btn">Sign Up</a>
+            <a href="sign-in.jsp" class="btn">Sign In</a>
         </div>
     </div>
 </body>

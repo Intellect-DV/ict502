@@ -24,7 +24,7 @@
 
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/signup.js" defer></script>
+    <script src="js/sign-up.js" defer></script>
 </head>
 <body>
     <form class="form-signup">
