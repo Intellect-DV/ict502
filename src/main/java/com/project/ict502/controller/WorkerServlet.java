@@ -149,6 +149,45 @@ public class WorkerServlet extends HttpServlet {
     }
 
     private void updatePassword(HttpServletRequest request, HttpServletResponse response){
+        JSONObject json = new JSONObject();
+        String currentPassword, newPassword;
 
+        currentPassword = request.getParameter("current-password");
+        newPassword = request.getParameter("new-password");
+
+        if(currentPassword == null || newPassword == null || currentPassword.equals("") || newPassword.equals("")) {
+            System.out.println("Input empty");
+            json.put("error","Input empty");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        // check session
+        HttpSession session = request.getSession(false);
+        if(session == null || session.getAttribute("workerObj") == null) {
+            System.out.println("Please login first before update profile");
+            json.put("error", "Authorization failed! Please login first!");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
+        // check current password same or not
+        Worker currentWorker = (Worker) session.getAttribute("workerObj");
+        boolean proceed = WorkerDA.retrieveWorker(currentWorker.getWorkerUsername(), currentPassword).isValid();
+        boolean succeed = false;
+
+        // update new password
+        if(proceed) {
+            if(WorkerDA.updateWorkerPassword(newPassword, currentWorker.getWorkerId())) {
+                json.put("message","Password updated");
+                succeed = true;
+            } else {
+                json.put("error", "Could not update password!");
+            }
+        } else {
+            json.put("error", "Current password is wrong");
+        }
+
+        jsonResponse(response, succeed ? 200 : 400, json);
     }
 }
