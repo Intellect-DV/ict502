@@ -182,9 +182,9 @@ public class WorkerServlet extends HttpServlet {
             System.out.println("Session created");
             json.put("message", "Login success!");
             if(worker.getManagerId() == -1) {
-                json.put("url", "/admin/");
+                json.put("url", "/Admin/");
             } else {
-                json.put("url", "/worker/");
+                json.put("url", "/Worker/");
             }
             succeed = true;
             // todo - redirect page
