@@ -101,6 +101,8 @@ public abstract class CustomerDA {
             rs.close();
         } catch (SQLException err) {
             err.printStackTrace();
+        } finally {
+            Database.closeConnection();
         }
 
         return cust;
