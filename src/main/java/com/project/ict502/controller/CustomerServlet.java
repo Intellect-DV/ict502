@@ -34,6 +34,9 @@ public class CustomerServlet extends HttpServlet {
             case "signup":
                 signup(request, response);
                 break;
+            case "login":
+                login(request, response);
+                break;
         }
     }
 
@@ -74,5 +77,40 @@ public class CustomerServlet extends HttpServlet {
         }
 
         jsonResponse(response,succeed ? 201 : 400, json);
+    }
+
+    private void login(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+        String username, password;
+        username = request.getParameter("username");
+        password = request.getParameter("password");
+
+        if(username == null || password == null || username.equals("") || password.equals("")) {
+            System.out.println("Input empty");
+            json.put("error", "input empty");
+            jsonResponse(response,400, json);
+            return;
+        }
+
+        Customer cust = CustomerDA.retrieveCustomer(username, password);
+        boolean succeed = false;
+
+        if(cust.isValid()) {
+            // make session
+            HttpSession session = request.getSession();
+            session.setAttribute("customerObj", cust);
+            session.setMaxInactiveInterval(60*20); // 20 min timeout after inactivity
+
+            System.out.println("Session created");
+            json.put("message", "Login success!");
+            succeed = true;
+            // todo - redirect page
+        } else {
+            // todo - wrong username / password
+            System.out.println("Wrong username or password");
+            json.put("error", "Wrong username or password!");
+        }
+
+        jsonResponse(response, succeed ? 200 : 400 , json);
     }
 }
