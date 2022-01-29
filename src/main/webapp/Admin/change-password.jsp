@@ -16,17 +16,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <%-- Boilerplate - reset css style --%>
     <link rel="stylesheet" href="../css/boilerplate.css">
-    <link rel="stylesheet" href="component/navigation.css">
     <link rel="stylesheet" href="css/settings.css">
 
+    <link rel="stylesheet" href="component/navigation.css">
+    <link rel="stylesheet" href="../component/modal__info.css">
     <%-- Font Awesome --%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/settings.js" defer></script>
 </head>
 <body>
-    <form class="form_profile">
+    <form class="form_profile" data-action="updatepassword">
         <div class="form_profile__title">Profile Settings</div>
         <div class="form_profile__item">
             <label for="current-password">Current Password: </label>
@@ -43,5 +45,16 @@
 
         <button type="submit">Change Password</button>
     </form>
+
+    <div class="modal__info">
+        <div class="modal__card">
+            <span class="modal__content">
+
+            </span>
+            <span class="modal__close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+    </div>
 </body>
 </html>

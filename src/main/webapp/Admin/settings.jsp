@@ -58,7 +58,7 @@
     </header>
 
     <div class="container">
-        <form class="form_profile">
+        <form class="form_profile" data-action="updateprofile">
             <div class="form_profile__title">Profile Settings</div>
             <div class="form_profile__item">
                 <label for="username">Username: </label>
