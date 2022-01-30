@@ -43,13 +43,18 @@ window.addEventListener("DOMContentLoaded", () => {
                 modalContent.innerText = error;
                 modalCard.className = "modal__card failed";
                 modalInfo.className = "modal__info active";
+                setTimeout(closePopup, 3000);
             })
     })
     toggleBtn.checked = false;
 })
 
 modalClose.addEventListener("click", () => {
+    closePopup();
+})
+
+function closePopup() {
     if(modalInfo.className === "modal__info active") {
         modalInfo.className = "modal__info";
     }
-})
+}

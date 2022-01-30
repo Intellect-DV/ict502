@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded",(event) => {
             modalContent.innerText = "Password did not match!";
             modalCard.className = "modal__card failed";
             modalInfo.className = "modal__info active";
+            setTimeout(closePopup, 3000);
             return;
         }
 
@@ -35,6 +36,7 @@ window.addEventListener("DOMContentLoaded",(event) => {
                     modalContent.innerText = "Successfully registered!";
                     modalCard.className = "modal__card success";
                     modalInfo.className = "modal__info active";
+                    setTimeout(closePopup, 3000);
                 }
             })
             .catch(err => {
@@ -44,13 +46,21 @@ window.addEventListener("DOMContentLoaded",(event) => {
                     modalContent.innerText = "Register failed! Please use another username.";
                     modalCard.className = "modal__card failed";
                     modalInfo.className = "modal__info active";
+                    setTimeout(closePopup, 3000);
                 }
             })
     })
 
-    modalClose.addEventListener("click", () => {
-        if(modalInfo.className === "modal__info active") {
-            modalInfo.className = "modal__info";
-        }
-    })
 })
+
+modalClose.addEventListener("click", () => {
+    if(modalInfo.className === "modal__info active") {
+        modalInfo.className = "modal__info";
+    }
+})
+
+function closePopup() {
+    if(modalInfo.className === "modal__info active") {
+        modalInfo.className = "modal__info";
+    }
+}
