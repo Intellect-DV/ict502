@@ -46,6 +46,7 @@
         </div>
 
         <button type="submit">Change Password</button>
+        <span class="form_profile__link"><a href="manage-worker.jsp"> Go Back </a></span>
     </form>
 
     <div class="modal__info">
