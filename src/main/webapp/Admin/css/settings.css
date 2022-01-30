@@ -61,7 +61,6 @@ body::after {
     padding: 0.5rem 2rem;
     display: block;
     margin: 0 auto;
-    margin-bottom: 1.5rem;
 }
 .form_profile > button:hover {
     background: var(--color-orange-dark);
@@ -71,6 +70,7 @@ body::after {
     font-weight: 600;
     display: block;
     text-align: center;
+    margin-top: 1.5rem;
 }
 .form_profile__link > a {
     color: inherit;
