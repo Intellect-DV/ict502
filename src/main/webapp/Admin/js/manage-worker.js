@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     modalContent.innerText = "Worker successfully registered";
                     modalCard.className = "modal__card success";
                     modalInfo.className = "modal__info active";
-                    setTimeout(closePopup, 5000);
+                    setTimeout(closePopup, 3000);
                 }
             })
             .catch(err => {
@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 modalCard.className = "modal__card failed";
                 modalInfo.className = "modal__info active";
-                setTimeout(closePopup, 5000);
+                setTimeout(closePopup, 3000);
             })
     })
 })

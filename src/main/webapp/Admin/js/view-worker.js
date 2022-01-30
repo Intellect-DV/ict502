@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 modalContent.innerText = message;
                 modalCard.className = "modal__card success";
                 modalInfo.className = "modal__info active";
-                setTimeout(closePopup, 5000);
+                setTimeout(closePopup, 3000);
                 getWorker();
             })
             .catch(err => {
@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 modalContent.innerText = error;
                 modalCard.className = "modal__card failed";
                 modalInfo.className = "modal__info active";
-                setTimeout(closePopup, 5000);
+                setTimeout(closePopup, 3000);
             })
     })
 
@@ -55,7 +55,7 @@ function getWorker() {
             modalContent.innerText = error;
             modalCard.className = "modal__card failed";
             modalInfo.className = "modal__info active";
-            setTimeout(closePopup, 5000);
+            setTimeout(closePopup, 3000);
         })
 }
 

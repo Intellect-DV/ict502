@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 modalContent.innerText = "Password did not match!";
                 modalCard.className = "modal__card failed";
                 modalInfo.className = "modal__info active";
-                setTimeout(closePopup, 5000);
+                setTimeout(closePopup, 3000);
                 return;
             }
         }
@@ -43,7 +43,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 modalCard.className = "modal__card success";
                 modalInfo.className = "modal__info active";
-                setTimeout(closePopup, 5000);
+                setTimeout(closePopup, 3000);
             })
             .catch(err => {
                 const {error} = err.response.data;
@@ -55,7 +55,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 modalCard.className = "modal__card failed";
                 modalInfo.className = "modal__info active";
-                setTimeout(closePopup, 5000);
+                setTimeout(closePopup, 3000);
             })
     })
 })
