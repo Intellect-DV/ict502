@@ -1,0 +1,66 @@
+body::before {
+    content: '';
+    background: url("../img/background-home.jpg") no-repeat center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+    filter: blur(2px);
+}
+body::after {
+    content: '';
+    background: rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: -99;
+}
+.form__add_worker {
+    color: white;
+    width: 25rem;
+    margin: 0 auto;
+    margin-top: 4rem;
+    padding: 2rem;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+.form__add_worker > .title {
+    color: var(--color-orange);
+    font-weight: 600;
+    font-size: 1.7rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.form__item > input {
+    font-family: inherit;
+    font-size: 1rem;
+    border: none;
+    padding: 0.5rem;
+}
+.form__item > input:focus {
+    outline: 2px solid var(--color-orange);
+}
+.form__action > button {
+    all: unset;
+    background: var(--color-orange);
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+}
+.form__action > button:hover {
+    background: var(--color-orange-dark);
+}
+.form__redirect > a {
+    color: rgb(25, 140, 255);
+    font-weight: 600;
+}
