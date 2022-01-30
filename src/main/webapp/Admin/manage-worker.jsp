@@ -26,6 +26,7 @@
 
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/manage-worker.js" defer></script>
 </head>
 <body>
     <header class="navigation">
@@ -82,6 +83,17 @@
                 </a>
             </div>
         </form>
+
+        <div class="modal__info">
+            <div class="modal__card failed">
+            <span class="modal__content">
+                Register failed!
+            </span>
+                <span class="modal__close">
+                <i class="fas fa-times"></i>
+            </span>
+            </div>
+        </div>
     </div>
 </body>
 </html>
