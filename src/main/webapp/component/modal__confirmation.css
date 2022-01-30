@@ -1,0 +1,78 @@
+.modal__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,0.7);
+}
+.modal__backdrop.hide {
+    visibility: hidden;
+}
+.modal-confirm {
+    background: rgba(255,255,255);
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    min-width: 15rem;
+    margin: 0 auto;
+    margin-top: 50vh;
+    transform: translateY(-50%) scale(1);
+    transition: all ease-in-out 200ms;
+}
+.modal__backdrop.hide > .modal-confirm {
+    visibility: hidden;
+    opacity: 0;
+    margin-top: 40vh;
+    transform: translateY(-50%) scale(0.5);
+}
+.modal-confirm > .header {
+    font-family: var(--font-montserrat);
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+}
+.modal-confirm > .header.red {
+    color: rgb(225, 49, 49);
+}
+.modal-confirm > .content {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+.modal-confirm > .action {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+}
+.modal-confirm > .action > .btn-confirm {
+    all: unset;
+    font-weight: 600;
+    padding: 0.3rem 0;
+    width: 4rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all ease-in-out 200ms;
+}
+.modal-confirm > .action > .btn-confirm.grey {
+    background: rgb(100, 100, 100);
+    border: 2px solid rgb(100, 100, 100);
+    color: white;
+}
+.modal-confirm > .action > .btn-confirm.grey:hover {
+    background: white;
+    border: 2px solid rgb(100, 100, 100);
+    color: rgb(100, 100, 100);
+}
+.modal-confirm > .action > .btn-confirm.red {
+    background: rgb(225, 49, 49);
+    border: 2px  solid rgb(225, 49, 49);
+    color: white;
+}
+.modal-confirm > .action > .btn-confirm.red:hover {
+    background: white;
+    border: 2px  solid rgb(225, 49, 49);
+    color: rgb(225, 49, 49);
+}
