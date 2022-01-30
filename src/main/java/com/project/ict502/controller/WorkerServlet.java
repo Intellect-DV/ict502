@@ -95,7 +95,7 @@ public class WorkerServlet extends HttpServlet {
             System.out.println("invalidate session");
             request.getSession().invalidate();
         }
-        response.sendRedirect("/sign-in.jsp");
+        response.sendRedirect("/");
     }
 
     private void addWorker(HttpServletRequest request, HttpServletResponse response) {
