@@ -1,0 +1,27 @@
+.table {
+    border: 1px;
+    background-color: var(--color-black-trans);
+    border-collapse: collapse;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.table__row > th , .table__row > td {
+    color: white;
+    padding: 10px 50px;
+    padding-left: 5px;
+}
+.table__row > td > button {
+    all: unset;
+    cursor: pointer;
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0 auto;
+    padding: 5px 10px;
+    border-radius: 25px;
+    color: white;
+    background-color: var(--color-btn-error);
+}
+.table__row > td > button:hover, .table__row > td > button:focus {
+    background-color: var(--color-btn-error-hover);
+}
