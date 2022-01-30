@@ -34,6 +34,9 @@ public class WorkerServlet extends HttpServlet {
             case "retrieveworker":
                 retrieveWorker(request, response);
                 break;
+            case "logout":
+                logoutWorker(request, response);
+                break;
         }
     }
 
@@ -85,6 +88,14 @@ public class WorkerServlet extends HttpServlet {
         } catch (Exception err) {
             err.printStackTrace();
         }
+    }
+
+    private static void logoutWorker(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if(request.getSession(false) != null) {
+            System.out.println("invalidate session");
+            request.getSession().invalidate();
+        }
+        response.sendRedirect("/sign-in.jsp");
     }
 
     private void addWorker(HttpServletRequest request, HttpServletResponse response) {
