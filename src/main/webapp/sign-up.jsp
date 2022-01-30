@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <%-- Boilerplate - reset css style --%>
     <link rel="stylesheet" href="css/boilerplate.css">
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="css/sign-up.css">
     <link rel="stylesheet" href="component/modal__info.css">
 
     <%-- Font Awesome --%>
