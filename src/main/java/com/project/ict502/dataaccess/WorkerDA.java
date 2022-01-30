@@ -6,6 +6,7 @@ import com.project.ict502.util.QueryHelper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public abstract class WorkerDA {
 
@@ -102,6 +103,40 @@ public abstract class WorkerDA {
         }
 
         return worker;
+    }
+
+    public static ArrayList<Worker> retrieveAllWorkerBelowManager(int id) {
+        ArrayList<Worker> workers = new ArrayList<>();
+
+        try {
+            String sql;
+
+            if(Database.getDbType().equals("oracle")) {
+                sql = "SELECT workerid as id, username, workername as name, workeremail as email FROM worker WHERE managerid=? ORDER BY workerid ASC";
+            } else {
+                sql = "SELECT id, username, name, email FROM worker WHERE manager_id=? ORDER BY id ASC";
+            }
+
+            ResultSet rs = QueryHelper.getResultSet(sql,new Integer[]{
+                    id
+            });
+
+            if(rs != null) {
+                while(rs.next()) {
+                    Worker temp = new Worker();
+                    temp.setWorkerId(rs.getInt("id"));
+                    temp.setWorkerUsername(rs.getString("username"));
+                    temp.setWorkerName(rs.getString("name"));
+                    temp.setWorkerEmail(rs.getString("email"));
+
+                    workers.add(temp);
+                }
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return workers;
     }
 
     public static boolean updateWorkerProfile(Worker updateWorker, int id) {

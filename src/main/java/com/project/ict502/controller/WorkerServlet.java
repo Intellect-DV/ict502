@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 @WebServlet(name = "WorkerServlet", value = "/worker")
@@ -25,7 +26,15 @@ public class WorkerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
 
+        if(action == null) return;
+
+        switch(action.toLowerCase()) {
+            case "retrieveworker":
+                retrieveWorker(request, response);
+                break;
+        }
     }
 
     @Override
@@ -50,6 +59,31 @@ public class WorkerServlet extends HttpServlet {
             case "updatepassword":
                 updatePassword(request, response);
                 break;
+        }
+    }
+
+    private void retrieveWorker(HttpServletRequest request, HttpServletResponse response) {
+        // check session if the worker is manager
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            JSONObject json = new JSONObject();
+            json.put("error", "Authorization failed! Please login first.");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
+        // retrieve worker supervised by worker
+        Worker currentWorker = (Worker) session.getAttribute("workerObj");
+        ArrayList<Worker> workers = WorkerDA.retrieveAllWorkerBelowManager(currentWorker.getWorkerId());
+        request.setAttribute("workers", workers);
+
+        // get jsp view to render
+        try {
+            response.setContentType("text/plain");
+            request.getRequestDispatcher("/view/view-worker__worker-table.jsp").include(request,response);
+        } catch (Exception err) {
+            err.printStackTrace();
         }
     }
 
