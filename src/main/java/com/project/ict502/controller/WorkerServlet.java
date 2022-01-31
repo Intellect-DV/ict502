@@ -128,6 +128,13 @@ public class WorkerServlet extends HttpServlet {
         Worker manager = (Worker) session.getAttribute("workerObj");
         managerId = manager.getWorkerId();
 
+        if(managerId != -1) {
+            System.out.println("Only manager can create worker");
+            json.put("error","Only manager can create worker");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
         // check existed username
         Worker worker = WorkerDA.isUsernameExisted(username);
         boolean succeed = false;
