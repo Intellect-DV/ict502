@@ -30,7 +30,7 @@
     <script src="js/update-menu.js" defer></script>
 </head>
 <body>
-    <form id="form_update_menu" enctype="multipart/form-data" data-menu-id='${param.id}'>
+    <form id="form_update_menu" enctype="multipart/form-data" data-menu-id='${param.id}' data-menu-type="${param.type}">
         <div class="title">Update Menu</div>
 
         <div class="item">
