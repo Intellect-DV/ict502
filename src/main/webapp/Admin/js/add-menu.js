@@ -30,7 +30,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 modalContent.innerText = message;
                 modalCard.className = "modal__card success";
                 modalInfo.className = "modal__info active";
-                setTimeout(closePopup, 3000);
+                setTimeout(closePopup, 1500);
+                setTimeout(()=>{
+                    window.location.href = "edit-menu.jsp";
+                }, 1500)
             })
             .catch(err => {
                 // error message
@@ -39,7 +42,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 modalContent.innerText = error;
                 modalCard.className = "modal__card failed";
                 modalInfo.className = "modal__info active";
-                setTimeout(closePopup, 3000);
+                setTimeout(closePopup, 2000);
             })
     })
 })

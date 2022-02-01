@@ -86,7 +86,7 @@
     <div class="modal__info">
         <div class="modal__card failed">
             <span class="modal__content">
-                Register failed!
+
             </span>
             <span class="modal__close">
                 <i class="fas fa-times"></i>

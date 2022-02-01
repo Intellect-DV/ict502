@@ -13,7 +13,6 @@ import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 
 @WebServlet(name = "MenuServlet", value = "/menu")
 @MultipartConfig(
