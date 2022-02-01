@@ -58,6 +58,9 @@ public class MenuServlet extends HttpServlet {
             case "createmenu":
                 createMenu(request, response, applicationPath);
                 break;
+            case "updatemenuinfo":
+                updateMenuInfo(request, response);
+                break;
             case "deletemenu":
                 deleteMenu(request, response, applicationPath);
                 break;
@@ -228,6 +231,71 @@ public class MenuServlet extends HttpServlet {
 
         json.put("error", "Could not create menu.");
         jsonResponse(response, 400, json);
+    }
+
+    private void updateMenuInfo(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+        response.setContentType("application/json");
+
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            json.put("error", "Authorization failed! Please login first.");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
+        Worker worker = (Worker) session.getAttribute("workerObj");
+
+        if(worker.getManagerId() != -1) {
+            json.put("error", "Authorization failed! Only manager can update menu.");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
+        String idTemp, name, priceTemp, description, menuType;
+
+        idTemp = request.getParameter("id");
+        name = request.getParameter("name");
+        priceTemp = request.getParameter("price");
+        description = request.getParameter("description");
+        menuType = request.getParameter("menu-type");
+
+        if(idTemp == null || name == null || priceTemp == null || description == null || menuType == null
+                || idTemp.equals("") || name.equals("") || priceTemp.equals("") || description.equals("") || menuType.equals("")) {
+            json.put("error", "Input empty");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        int id = -1; double price = -1;
+        try {
+            id = Integer.parseInt(idTemp);
+            price = Double.parseDouble(priceTemp);
+        } catch (Exception err) {
+            err.printStackTrace();
+            json.put("error", "Id must be number / Price must be double");
+            jsonResponse(response, 400, json);
+        }
+
+        if(id == -1 || price == -1) return;
+
+        boolean succeed;
+
+        if(Database.getDbType().equals("oracle")) {
+            succeed = MenuDA.updateMenuInfoForOracle(id,name,price,description,menuType);
+        } else {
+            succeed = MenuDA.updateMenuInfo(id,name,price,description);
+        }
+
+        if(succeed) {
+            json.put("message", "Menu has been updated");
+            json.put("menuId", id);
+        } else {
+            json.put("error", "Cannot update menu");
+        }
+
+        jsonResponse(response, succeed ? 200 : 400, json);
     }
 
     private void deleteMenu(HttpServletRequest request, HttpServletResponse response, String applicationPath) {
