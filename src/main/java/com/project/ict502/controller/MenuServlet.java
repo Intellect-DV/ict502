@@ -41,6 +41,9 @@ public class MenuServlet extends HttpServlet {
             case "getmenus":
                 getMenus(request, response);
                 break;
+            case "getmenuinfo":
+                getMenuInfo(request, response);
+                break;
         }
     }
 
@@ -87,6 +90,52 @@ public class MenuServlet extends HttpServlet {
         } catch (Exception err) {
             err.printStackTrace();
         }
+    }
+
+    private void getMenuInfo(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+        String menuIdTemp = request.getParameter("id");
+        String type = request.getParameter("type");
+
+        if(menuIdTemp == null || menuIdTemp.equals("") || type == null || type.equals("")) {
+            json.put("error","Id or type is empty");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        int menuId = -1;
+        try {
+            menuId = Integer.parseInt(menuIdTemp);
+        } catch (Exception err) {
+            err.printStackTrace();
+            json.put("error", "Id must be number");
+            jsonResponse(response, 400, json);
+        }
+
+        if(menuId == -1) return;
+
+        Menu menu;
+        if(Database.getDbType().equals("oracle")) {
+            menu = MenuDA.retrieveMenuByIdAndTypeForOracle(menuId, type);
+        } else {
+            menu = MenuDA.retrieveMenuById(menuId);
+        }
+
+        if(menu.getItemId() == -1) {
+            json.put("error", "No menu with id provided");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        JSONObject menuJson = new JSONObject();
+        menuJson.put("menuId", menu.getItemId());
+        menuJson.put("menuName", menu.getItemName());
+        menuJson.put("menuPrice", menu.getItemPrice());
+        menuJson.put("menuDescription", menu.getItemDescription());
+
+        json.put("content", menuJson);
+
+        jsonResponse(response, 200, json);
     }
 
     private void createMenu(HttpServletRequest request, HttpServletResponse response, String applicationPath) {
