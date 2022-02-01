@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../css/boilerplate.css">
     <link rel="stylesheet" href="component/background.css">
     <link rel="stylesheet" href="component/navigation.css">
+    <link rel="stylesheet" href="../component/modal__info.css">
 
     <link rel="stylesheet" href="css/edit-menu.css">
 
@@ -26,6 +27,7 @@
 
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/edit-menu.js" defer></script>
 </head>
 <body>
     <header class="navigation">
@@ -57,7 +59,38 @@
     </header>
 
     <div class="container">
+        <div class="filter">
+            <div class="filter__box">
+                <div class="filter__item">
+                    <button class="active" data-menu-type="maincourse">Food</button>
+                </div>
+                <div class="filter__item">
+                    <button data-menu-type="beverage">Beverage</button>
+                </div>
+                <div class="filter__item">
+                    <button data-menu-type="dessert">Dessert</button>
+                </div>
+            </div>
+        </div>
+        <div class="menu">
 
+        </div>
+        <div class="add_menu">
+            <div class="add_menu__item">
+                <a href="add-menu.jsp">Add Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal__info">
+        <div class="modal__card failed">
+            <span class="modal__content">
+                Register failed!
+            </span>
+            <span class="modal__close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
     </div>
 </body>
 </html>
