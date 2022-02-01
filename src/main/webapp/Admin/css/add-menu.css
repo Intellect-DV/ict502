@@ -1,0 +1,54 @@
+#form_add_menu {
+    color: white;
+    background: rgba(0,0,0,0.7);
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    margin: 0 auto;
+    margin-top: 20vh;
+}
+#form_add_menu > .title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--color-orange);
+    text-align: center;
+}
+#form_add_menu > input,  #form_add_menu > select{
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.3rem;
+    border: 0;
+}
+#form_add_menu > input:focus, #form_add_menu > select:focus {
+    outline: 2px solid var(--color-orange);
+}
+#form_add_menu > input[type="file"] {
+    color: white;
+    text-align: center;
+}
+::file-selector-button {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.4rem 1.3rem;
+    border: none;
+    outline: none;
+}
+#form_add_menu > button {
+    all: unset;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.5rem 2rem;
+    margin: 0 auto;
+    display: block;
+    background: var(--color-orange);
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+#form_add_menu > button:hover, #form_add_menu > button:active {
+    background: var(--color-orange-dark);
+}
