@@ -1,5 +1,6 @@
 package com.project.ict502.controller;
 
+import com.project.ict502.connection.Database;
 import com.project.ict502.dataaccess.MenuDA;
 import com.project.ict502.model.Menu;
 import com.project.ict502.model.Worker;
@@ -54,6 +55,9 @@ public class MenuServlet extends HttpServlet {
         switch(action.toLowerCase()) {
             case "createmenu":
                 createMenu(request, response, applicationPath);
+                break;
+            case "deletemenu":
+                deleteMenu(request, response, applicationPath);
                 break;
         }
     }
@@ -175,6 +179,83 @@ public class MenuServlet extends HttpServlet {
         }
 
         json.put("error", "Could not create menu.");
+        jsonResponse(response, 400, json);
+    }
+
+    private void deleteMenu(HttpServletRequest request, HttpServletResponse response, String applicationPath) {
+        JSONObject json = new JSONObject();
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            json.put("error", "Authorization failed! Please login first.");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
+        Worker worker = (Worker) session.getAttribute("workerObj");
+
+        if(worker.getManagerId() != -1) {
+            json.put("error", "Authorization failed! Only manager can delete menu.");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
+        String idTemp = request.getParameter("id");
+        String parentIdTemp = request.getParameter("parentId");
+        String type = request.getParameter("type");
+
+        if(idTemp == null || idTemp.equals("") || type == null || type.equals("")) {
+            json.put("error", "Input empty");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        int id = -1, parentId = -1;
+
+        try {
+            id = Integer.parseInt(idTemp);
+
+            if(!(parentIdTemp == null || parentIdTemp.equals(""))) {
+                parentId = Integer.parseInt(parentIdTemp);
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+            json.put("error", "Id must be number and not null");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        if(id == -1) return;
+
+        String picUrl;
+
+        if(Database.getDbType().equals("postgres")) {
+            picUrl = MenuDA.retrieveMenuById(id).getItemPicUrl();
+        } else {
+            picUrl = MenuDA.retrieveMenuByIdAndTypeForOracle(id, type).getItemPicUrl();
+        }
+
+        String realPath = applicationPath + "upload" + File.separator + picUrl.split("/")[2];
+
+        boolean succeed;
+        if(Database.getDbType().equals("oracle")) {
+            succeed = MenuDA.deleteMenuForOracle(parentId, type);
+        } else {
+            succeed = MenuDA.deleteMenu(id);
+        }
+
+        if(succeed) {
+            File file = new File(realPath);
+            if(file.exists()) {
+                file.delete(); // delete file from upload folder
+            }
+
+            json.put("message", "The menu has been successfully deleted!");
+            jsonResponse(response, 200, json);
+            return;
+        }
+
+        json.put("error", "Cannot delete menu!");
         jsonResponse(response, 400, json);
     }
 }

@@ -104,10 +104,11 @@ const generateMenuHTML = (data) => {
 }
 
 const triggerConfirmPopup = (event) => {
-    const {menuId, menuType} = event.target.dataset;
+    const {menuId, menuType, menuParentId} = event.target.dataset;
 
     modalBtnYes.dataset.menuId = menuId;
     modalBtnYes.dataset.menuType = menuType;
+    modalBtnYes.dataset.menuParentId = menuParentId;
     modalBackdrop.className = "modal__backdrop";
 }
 
@@ -122,7 +123,46 @@ modalClose.addEventListener("click", () => closePopup())
 modalBtnNo.addEventListener("click", () => modalBackdrop.className = "modal__backdrop hide")
 
 modalBtnYes.addEventListener("click", () => {
-    modalBackdrop.className = "modal__backdrop hide";
-
     // delete http request
+    const {menuId,menuType} = modalBtnYes.dataset;
+    const url = "/menu";
+    const params = new URLSearchParams();
+
+    params.append("action","deletemenu")
+    params.append("id", menuId);
+    params.append("type",menuType);
+    if(!(modalBtnYes.dataset.menuParentId === "-1")) {
+        params.append("parentId",modalBtnYes.dataset.menuParentId);
+    }
+
+    axios.post(url,params)
+        .then(response => {
+            const {message} = response.data;
+            if (message === "The menu has been successfully deleted!") {
+                switch (menuType.toLowerCase()) {
+                    case "maincourse":
+                        getMainCourseMenu();
+                        break;
+                    case "beverage":
+                        getBeverageMenu();
+                        break;
+                    case "dessert":
+                        getDessertMenu();
+                        break;
+                }
+                modalContent.innerText = message;
+                modalCard.className = "modal__card success";
+                modalInfo.className = "modal__info active";
+                setTimeout(closePopup, 3000);
+            }
+            modalBackdrop.className = "modal__backdrop hide";
+        })
+        .catch (err => {
+            const {error} = err.response.data;
+            modalBackdrop.className = "modal__backdrop hide";
+            modalContent.innerText = error;
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup, 3000);
+        })
 })

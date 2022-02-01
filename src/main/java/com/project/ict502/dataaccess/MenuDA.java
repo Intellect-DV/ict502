@@ -69,6 +69,8 @@ public abstract class MenuDA {
             }
         } catch (Exception err) {
             err.printStackTrace();
+        } finally {
+            Database.closeConnection();
         }
 
         return succeed;
@@ -117,8 +119,143 @@ public abstract class MenuDA {
             }
         } catch (Exception err) {
             err.printStackTrace();
+        } finally {
+            Database.closeConnection();
         }
 
         return menus;
+    }
+
+    public static Menu retrieveMenuById(int id) {
+        Menu menu = new Menu();
+
+        try {
+            String sql = "SELECT id, name, price, description, pic_path FROM menu WHERE id=?";
+
+            ResultSet rs = QueryHelper.getResultSet(sql,new Integer[]{id});
+
+            if(rs.next()) {
+                menu.setItemId(rs.getInt("id"));
+                menu.setItemPrice(rs.getDouble("price"));
+                menu.setItemName(rs.getString("name"));
+                menu.setItemDescription(rs.getString("description"));
+                menu.setItemPicUrl(rs.getString("pic_path"));
+
+                if(Database.getDbType().equals("oracle")) {
+                    menu.setParentId(id);
+                }
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        } finally {
+            Database.closeConnection();
+        }
+
+        return menu;
+    }
+
+    public static Menu retrieveMenuByIdAndTypeForOracle(int id, String type) {
+        Menu menu = new Menu();
+
+        try {
+            String sql;
+
+            switch (type.toLowerCase()) {
+                case "maincourse":
+                    sql = "SELECT mainid as id, coursename as name, courseprice as price, coursedesc as description, coursepic as pic_path, itemid as parentid FROM maincourse WHERE mainid=?";
+                    break;
+                case "beverage":
+                    sql = "SELECT beverageid as id, beveragename as name, beverageprice as price, beveragedesc as description, beveragepic as pic_path, itemid as parentid FROM beverage WHERE beverageid=?";
+                    break;
+                default:
+                    sql = "SELECT dessertid as id, dessertname as name, dessertprice as price, dessertdesc as description, dessertpic as pic_path, itemid as parentid FROM dessert WHERE dessertid=?";
+                    break;
+            }
+
+            ResultSet rs = QueryHelper.getResultSet(sql,new Integer[]{ id });
+
+            if(rs.next()) {
+                menu.setItemId(rs.getInt("id"));
+                menu.setItemPrice(rs.getDouble("price"));
+                menu.setItemName(rs.getString("name"));
+                menu.setItemDescription(rs.getString("description"));
+                menu.setItemPicUrl(rs.getString("pic_path"));
+                menu.setParentId(rs.getInt("parentid"));
+
+                if(Database.getDbType().equals("oracle")) {
+                    menu.setParentId(id);
+                }
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        } finally {
+            Database.closeConnection();
+        }
+
+        return menu;
+    }
+
+    public static boolean deleteMenu(int id) {
+        // delete menu
+        boolean succeed = false;
+
+        try {
+            String sql = "DELETE FROM menu WHERE id=?";
+
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Integer[]{
+                    id
+            });
+
+            if(affectedRow == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return succeed;
+    }
+
+    public static boolean deleteMenuForOracle(int parentId, String type) {
+        // delete menu for ORACLE
+        boolean succeed = false;
+
+        try {
+            String sql;
+
+            switch (type.toLowerCase()) {
+                case "maincourse":
+                    sql = "DELETE FROM maincourse WHERE itemID=?";
+                    break;
+                case "beverage":
+                    sql = "DELETE FROM beverage WHERE itemID=?";
+                    break;
+                default:
+                    sql = "DELETE FROM dessert WHERE itemID=?";
+                    break;
+            }
+
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Integer[]{
+                    parentId
+            });
+
+            if(affectedRow == 1) succeed = true;
+
+            if(succeed) {
+                succeed = false;
+
+                sql = "DELETE FROM menu WHERE itemID=?";
+
+                affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Integer[]{
+                        parentId
+                });
+
+                if(affectedRow == 1) succeed = true;
+            } else {
+                succeed = false;
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return succeed;
     }
 }
