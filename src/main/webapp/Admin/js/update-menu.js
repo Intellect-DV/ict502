@@ -1,6 +1,5 @@
 const formUpdate = document.querySelector("#form_update_menu");
-const menuId = formUpdate.dataset.menuId;
-const menuType = formUpdate.dataset.menuType;
+const {menuId, menuType} = formUpdate.dataset;
 const inputName = document.querySelector("input[name='name']");
 const inputPrice = document.querySelector("input[name='price']")
 const inputDescription = document.querySelector("input[name='description']");
@@ -18,9 +17,15 @@ window.addEventListener("DOMContentLoaded", () => {
 })
 
 const getMenuInfo = () => {
-    if(menuId == null || menuId === "" || menuType == null || menuType === "") return;
+    if(menuId == null || menuId === "" || menuType == null || menuType === "") {
+        modalContent.innerText = "URL parameter does not have id or/and type of menu";
+        modalCard.className = "modal__card failed";
+        modalInfo.className = "modal__info active";
+        setTimeout(closePopup, 3000);
+        return;
+    }
 
-    axios.get(`/menu?action=getmenuinfo&id=${menuId}&type=${menuType}`)
+    axios.get(`/menu?action=getMenuInfo&id=${menuId}&type=${menuType}`)
         .then(response => {
             const {content} = response.data;
             inputName.value = content.menuName;
@@ -30,7 +35,7 @@ const getMenuInfo = () => {
         .catch(err => {
             const {error} = err.response.data;
             modalContent.innerText = error;
-            modalCard.className = "modal__card failed";
+            modalCard.className = "modal__card alert";
             modalInfo.className = "modal__info active";
             setTimeout(closePopup, 3000);
         })
@@ -38,6 +43,44 @@ const getMenuInfo = () => {
 
 const updateMenuInfo = (event) => {
     event.preventDefault();
+
+    if(menuId == null || menuId === "" || menuType == null || menuType === "") {
+        modalContent.innerText = "URL parameter does not have id or/and type of menu";
+        modalCard.className = "modal__card alert";
+        modalInfo.className = "modal__info active";
+        setTimeout(closePopup, 3000);
+        return;
+    }
+
+    const url = "/menu";
+    const formData = new FormData(formUpdate);
+    const params = new URLSearchParams();
+
+    params.append("action","updateMenuInfo");
+    params.append("id", menuId);
+    params.append("menu-type", menuType);
+    for(let key of formData.keys()) {
+        params.append(key, String(formData.get(key)));
+    }
+
+    axios.post(url, params)
+        .then(response => {
+            const {message} = response.data;
+            modalContent.innerText = message;
+            modalCard.className = "modal__card success";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup, 1600);
+            setTimeout(()=> {
+                window.location.href = "edit-menu.jsp";
+            },1700);
+        })
+        .catch(err => {
+            const {error} = err.response.data;
+            modalContent.innerText = error;
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup, 3000);
+        })
 }
 
 const closePopup = () => {
