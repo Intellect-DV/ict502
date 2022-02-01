@@ -31,7 +31,19 @@
 </head>
 <body>
     <div id="root">
-
+        <table class="table">
+            <thead>
+            <tr class="table__row">
+                <th>Id</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
     </div>
 
     <div class="modal__info">

@@ -43,11 +43,32 @@ window.addEventListener("DOMContentLoaded", () => {
 
     getWorker();
 })
-
 function getWorker() {
     axios.get("/worker?action=retrieveworker")
         .then(response => {
-            root.innerHTML = response.data;
+            // root.innerHTML = response.data;
+            let content;
+            if(response.data.length === 0) {
+                content =
+                `<tr class="table__row">
+                    <td colspan="5" style="text-align: center;">None of worker registered below you.</td>
+                </tr>`
+            } else {
+                 content = response.data.map(worker => {
+                     return `<tr class="table__row">
+                                <td>${worker.workerId}</td>
+                                <td>${worker.workerUsername}</td>
+                                <td>${worker.workerName}</td>
+                                <td>${worker.workerEmail}</td>
+                                <td>
+                                    <button data-worker-id="${worker.workerId}" onclick="deleteWorker(event)">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>`;
+                }).join("");
+            }
+            document.querySelector("#tbody").innerHTML = content;
         })
         .catch(err => {
             const {error} = err.response.data;
