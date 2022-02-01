@@ -17,6 +17,9 @@
 .modal__card.success {
     background: rgb(51, 181, 51);
 }
+.modal__card.alert {
+    background: rgb(206, 157, 11);
+}
 .modal__card.failed {
     background: rgb(183, 36, 36);
 }
