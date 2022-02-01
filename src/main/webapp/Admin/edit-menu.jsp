@@ -73,13 +73,13 @@
                 </div>
             </div>
         </div>
-        <div class="menu">
-
-        </div>
         <div class="add_menu">
             <div class="add_menu__item">
                 <a href="add-menu.jsp">Add Menu</a>
             </div>
+        </div>
+        <div class="menu">
+
         </div>
     </div>
 

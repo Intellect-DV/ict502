@@ -1,10 +1,10 @@
 .filter {
-    padding-top: 30px;
+    margin-bottom: 2rem;
 }
 .filter__box {
     background: var(--color-black-trans);
-    padding: 10px 20px;
-    width: 500px;
+    padding: 0.625rem 1.25rem;
+    width: 31.25rem;
     margin: 0 auto;
     display: flex;
     justify-content: space-around;
@@ -18,7 +18,7 @@
     color: white;
     font-weight: 600;
     border: 2px solid white;
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem;
     cursor: pointer;
 }
 .filter__item > button:hover, .filter__item > button:focus {
@@ -37,8 +37,8 @@
 .menu {
     display: grid;
     grid-template-columns: 25fr 25fr 25fr 25fr;
-    gap: 20px;
-    padding: 40px 30px;
+    gap: 1.25rem;
+    padding: 2.5rem 1.875rem;
 }
 .menu > .menu__item {
     display: block;
@@ -48,11 +48,11 @@
 .menu__item > .menu__image {
     display: block;
     width: 100%;
-    height: 300px;
-    padding: 10px;
+    height: 18.75rem;
+    padding: 0.625rem;
     overflow: hidden;
-    margin-bottom: 20px;
-    margin-top: 10px;
+    margin-bottom: 1.25rem;
+    margin-top: 0.625rem;
 }
 .menu__image > img {
     display: block;
@@ -61,32 +61,32 @@
 }
 .menu__item > .menu__title {
     display: block;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 600;
     text-align: center;
-    padding: 10px;
+    padding: 0.625rem;
 }
 .menu__item > .menu__price {
     display: block;
-    padding: 10px;
+    padding: 0.625rem;
     text-align: center;
 }
 .menu__item > .menu__desc {
     display: block;
-    margin: 10px 0;
-    padding: 0 40px;
+    margin: 0.625rem 0;
+    padding: 0 2.5rem;
     text-align: center;
 }
 .menu__item > .menu__action {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+    padding: 0.625rem;
 }
 .menu__item > .menu__action > button {
     display: block;
     cursor: pointer;
     font-size: inherit;
-    padding: 8px 30px;
+    padding: 0.5rem 1.875rem;
     background: none;
     border: 2px solid white;
     color: white;
@@ -95,11 +95,8 @@
     background: var(--color-orange);
     border-color: var(--color-orange);
 }
-.add_menu {
-    margin-bottom: 30px;
-}
 .add_menu__item {
-    width: 400px;
+    width: 25rem;
     margin: 0 auto;
     text-align: center;
 }
@@ -107,11 +104,11 @@
     all: unset;
     cursor: pointer;
     display: inline-block;
-    box-shadow: 0 0 20px var(--color-black-trans);
+    box-shadow: 0 0 1.25rem var(--color-black-trans);
     background: var(--color-orange);
     color: white;
     font-weight: 600;
-    padding: 10px 0;
+    padding: 0.625rem 0;
     width: 100%;
 }
 .add_menu__item > a:hover, .add_menu__item > a:focus {
