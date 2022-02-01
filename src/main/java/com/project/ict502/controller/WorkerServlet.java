@@ -2,6 +2,7 @@ package com.project.ict502.controller;
 
 import com.project.ict502.dataaccess.WorkerDA;
 import com.project.ict502.model.Worker;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.*;
@@ -81,10 +82,10 @@ public class WorkerServlet extends HttpServlet {
         ArrayList<Worker> workers = WorkerDA.retrieveAllWorkerBelowManager(currentWorker.getWorkerId());
         request.setAttribute("workers", workers);
 
-        // get jsp view to render
         try {
-            response.setContentType("text/plain");
-            request.getRequestDispatcher("/view/view-worker__worker-table.jsp").include(request,response);
+            JSONArray res = new JSONArray(workers);
+            response.setContentType("application/json");
+            response.getWriter().println(res);
         } catch (Exception err) {
             err.printStackTrace();
         }
@@ -128,7 +129,7 @@ public class WorkerServlet extends HttpServlet {
         Worker manager = (Worker) session.getAttribute("workerObj");
         managerId = manager.getWorkerId();
 
-        if(managerId != -1) {
+        if(manager.getManagerId() != -1) {
             System.out.println("Only manager can create worker");
             json.put("error","Only manager can create worker");
             jsonResponse(response, 401, json);

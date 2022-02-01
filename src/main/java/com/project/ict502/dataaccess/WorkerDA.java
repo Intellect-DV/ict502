@@ -128,6 +128,8 @@ public abstract class WorkerDA {
                     temp.setWorkerUsername(rs.getString("username"));
                     temp.setWorkerName(rs.getString("name"));
                     temp.setWorkerEmail(rs.getString("email"));
+                    temp.setManagerId(id);
+                    temp.setValid(true);
 
                     workers.add(temp);
                 }
