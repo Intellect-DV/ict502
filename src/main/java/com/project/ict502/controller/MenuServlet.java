@@ -107,7 +107,7 @@ public class MenuServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if(session == null || session.getAttribute("workerObj") == null) {
-            System.out.println("Login first before add worker");
+            System.out.println("Login first before create menu");
             json.put("error", "Authorization failed! Please login first!");
             jsonResponse(response, 401, json);
             return;
