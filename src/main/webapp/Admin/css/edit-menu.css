@@ -36,7 +36,7 @@
 }
 .menu {
     display: grid;
-    grid-template-columns: 25fr 25fr 25fr 25fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1.25rem;
     padding: 2.5rem 1.875rem;
 }
@@ -113,4 +113,10 @@
 }
 .add_menu__item > a:hover, .add_menu__item > a:focus {
     background: var(--color-orange-dark);
+}
+
+@media (max-width: 100rem) {
+    .menu {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }

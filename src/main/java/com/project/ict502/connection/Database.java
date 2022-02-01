@@ -39,7 +39,7 @@ public class Database {
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
             String dbURL = "jdbc:oracle:thin:@localhost:1521:xe";
-            String user = "SEFOS";
+            String user = "SEFOS"; //FOR DATABASE IN ORACLE
             String password = "system";
 
             conn = DriverManager.getConnection(dbURL,user,password);
