@@ -86,13 +86,13 @@ public abstract class MenuDA {
             } else {
                 switch (type.toLowerCase()) {
                     case "maincourse":
-                        sql = "SELECT mainID as id, courseName as name, coursePrice as price, courseDesc as description, coursePic as pic_path FROM MAINCOURSE";
+                        sql = "SELECT mainID as id, courseName as name, coursePrice as price, courseDesc as description, coursePic as pic_path, itemid FROM MAINCOURSE";
                         break;
                     case "beverage":
-                        sql = "SELECT beverageID as id, beverageName as name, beveragePrice as price, beverageDesc as description, beveragePic as pic_path FROM BEVERAGE";
+                        sql = "SELECT beverageID as id, beverageName as name, beveragePrice as price, beverageDesc as description, beveragePic as pic_path, itemid FROM BEVERAGE";
                         break;
                     case "dessert":
-                        sql = "SELECT dessertID as id, dessertName as name, dessertPrice as price, dessertDesc as description, dessertPic as pic_path FROM DESSERT";
+                        sql = "SELECT dessertID as id, dessertName as name, dessertPrice as price, dessertDesc as description, dessertPic as pic_path, itemid FROM DESSERT";
                         break;
                     default:
                         sql = null;
@@ -109,7 +109,11 @@ public abstract class MenuDA {
                 String description = rs.getString("description");
                 String path = rs.getString("pic_path");
 
-                menus.add(new Menu(id, name, price, description, path, type));
+                Menu temp = new Menu(id, name, price, description, path, type);
+                if(Database.getDbType().equals("oracle")) {
+                    temp.setParentId(rs.getInt("itemid"));
+                }
+                menus.add(temp);
             }
         } catch (Exception err) {
             err.printStackTrace();
