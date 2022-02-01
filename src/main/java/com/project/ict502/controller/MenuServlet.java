@@ -3,6 +3,7 @@ package com.project.ict502.controller;
 import com.project.ict502.dataaccess.MenuDA;
 import com.project.ict502.model.Menu;
 import com.project.ict502.model.Worker;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.*;
@@ -10,6 +11,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 @WebServlet(name = "MenuServlet", value = "/menu")
@@ -31,7 +33,15 @@ public class MenuServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
 
+        if(action == null) return;
+
+        switch (action.toLowerCase()) {
+            case "getmenus":
+                getMenus(request, response);
+                break;
+        }
     }
 
     @Override
@@ -45,6 +55,34 @@ public class MenuServlet extends HttpServlet {
             case "createmenu":
                 createMenu(request, response, applicationPath);
                 break;
+        }
+    }
+
+    private void getMenus(HttpServletRequest request, HttpServletResponse response) {
+        String type = request.getParameter("type");
+        JSONObject json = new JSONObject();
+        if(type == null || type.equals("")) {
+            json.put("error", "Specify type of menu");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        ArrayList<Menu> menus = MenuDA.retrieveMenus(type);
+
+        response.setContentType("application/json");
+
+        if(menus.size() == 0) {
+            json.put("error", "None of menu type");
+            jsonResponse(response, 400, json);
+            return;
+        }
+        request.setAttribute("menus", menus);
+
+        try {
+            response.setStatus(200);
+            response.getWriter().println(new JSONArray(menus));
+        } catch (Exception err) {
+            err.printStackTrace();
         }
     }
 

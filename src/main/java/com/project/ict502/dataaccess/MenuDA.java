@@ -5,6 +5,7 @@ import com.project.ict502.model.Menu;
 import com.project.ict502.util.QueryHelper;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public abstract class MenuDA {
     public static boolean createMenu(Menu menu) {
@@ -71,5 +72,49 @@ public abstract class MenuDA {
         }
 
         return succeed;
+    }
+
+    public static ArrayList<Menu> retrieveMenus(String type) {
+        // retrieve menu
+        ArrayList <Menu> menus = new ArrayList<>();
+        try {
+            String sql;
+            ResultSet rs;
+            if(Database.getDbType().equals("postgres")) {
+                sql = "SELECT * FROM menu WHERE type=?";
+                rs = QueryHelper.getResultSet(sql,new String[]{type});
+            } else {
+                switch (type.toLowerCase()) {
+                    case "maincourse":
+                        sql = "SELECT mainID as id, courseName as name, coursePrice as price, courseDesc as description, coursePic as pic_path FROM MAINCOURSE";
+                        break;
+                    case "beverage":
+                        sql = "SELECT beverageID as id, beverageName as name, beveragePrice as price, beverageDesc as description, beveragePic as pic_path FROM BEVERAGE";
+                        break;
+                    case "dessert":
+                        sql = "SELECT dessertID as id, dessertName as name, dessertPrice as price, dessertDesc as description, dessertPic as pic_path FROM DESSERT";
+                        break;
+                    default:
+                        sql = null;
+                        break;
+                }
+                if(sql == null) return menus;
+                rs = QueryHelper.getResultSet(sql);
+            }
+
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                double price = rs.getDouble("price");
+                String description = rs.getString("description");
+                String path = rs.getString("pic_path");
+
+                menus.add(new Menu(id, name, price, description, path, type));
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return menus;
     }
 }
