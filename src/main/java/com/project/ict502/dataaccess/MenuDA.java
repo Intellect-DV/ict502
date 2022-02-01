@@ -195,6 +195,56 @@ public abstract class MenuDA {
         return menu;
     }
 
+    public static boolean updateMenuInfo(int id, String name, double price, String description) {
+        // update menu
+        boolean succeed = false;
+
+        try {
+            String sql = "UPDATE menu SET name=?, price=?, description=? WHERE id=?";
+
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql,new Object[] {
+                    name, price, description, id
+            });
+
+            if (affectedRow == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return succeed;
+    }
+
+    public static boolean updateMenuInfoForOracle(int id, String name, double price, String description, String menuType){
+        // update menu
+        boolean succeed = false;
+
+        try {
+            String sql;
+
+            switch (menuType.toLowerCase()) {
+                case "maincourse":
+                    sql = "UPDATE maincourse SET courseName=?, coursePrice=?, courseDesc=? WHERE mainId=?";
+                    break;
+                case "beverage":
+                    sql = "UPDATE beverage SET beverageName=?, beveragePrice=?, beverageDesc=? WHERE beverageId=?";
+                    break;
+                default:
+                    sql = "UPDATE dessert SET dessertName=?, dessertPrice=?, dessertDesc=? WHERE dessertId=?";
+                    break;
+            }
+
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql,new Object[] {
+                    name, price, description, id
+            });
+
+            if (affectedRow == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return succeed;
+    }
+
     public static boolean deleteMenu(int id) {
         // delete menu
         boolean succeed = false;
