@@ -1,4 +1,4 @@
-const root = document.querySelector("#root");
+const tableBody = document.querySelector("#tbody");
 
 const modalInfo = document.querySelector(".modal__info");
 const modalCard = document.querySelector(".modal__card");
@@ -68,7 +68,7 @@ function getWorker() {
                             </tr>`;
                 }).join("");
             }
-            document.querySelector("#tbody").innerHTML = content;
+            tableBody.innerHTML = content;
         })
         .catch(err => {
             const {error} = err.response.data;
