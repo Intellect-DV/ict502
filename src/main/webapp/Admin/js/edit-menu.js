@@ -6,6 +6,10 @@ const modalCard = document.querySelector(".modal__card");
 const modalContent = document.querySelector(".modal__content");
 const modalClose = document.querySelector(".modal__close");
 
+const modalBackdrop = document.querySelector(".modal__backdrop");
+const modalBtnYes = document.querySelector(".action > .btn-confirm.red");
+const modalBtnNo = document.querySelector(".action > .btn-confirm.grey");
+
 window.addEventListener("DOMContentLoaded", () => {
     for(let i = 0; i <  filterBtn.length; i++) {
         filterBtn[i].addEventListener("click", event => {
@@ -86,25 +90,39 @@ const generateMenuHTML = (data) => {
                     <div class="menu__image">
                          <img src="${menu.itemPicUrl}" alt="${menu.itemName}" />
                     </div>
-                    <div class="menu__title">${menu.itemType}</div>
+                    <div class="menu__title">${menu.itemName}</div>
                     <div class="menu__price">${menu.itemPriceToCurrency}</div>
                     <div class="menu__desc">${menu.itemDescription}</div>
                     <div class="menu__action">
                         <button onclick='window.location.href="update-menu.jsp?id=${menu.itemId}"'>Update</button>
-                        <button data-menu-id="${menu.itemId}" data-menu-type="${menu.itemType}" onclick="triggerPopup(event)">Delete</button>
+                        <button data-menu-id="${menu.itemId}" data-menu-type="${menu.itemType}" data-menu-parent-id="${menu.parentId || -1}" onclick="triggerConfirmPopup(event)">Delete</button>
                     </div>
                 </div>`;
-    })
+    }).join("");
 
     menuDiv.innerHTML = content;
 }
 
-function closePopup() {
+const triggerConfirmPopup = (event) => {
+    const {menuId, menuType} = event.target.dataset;
+
+    modalBtnYes.dataset.menuId = menuId;
+    modalBtnYes.dataset.menuType = menuType;
+    modalBackdrop.className = "modal__backdrop";
+}
+
+const closePopup = () => {
     if(modalInfo.className === "modal__info active") {
         modalInfo.className = "modal__info";
     }
 }
 
-modalClose.addEventListener("click", () => {
-    closePopup();
+modalClose.addEventListener("click", () => closePopup())
+
+modalBtnNo.addEventListener("click", () => modalBackdrop.className = "modal__backdrop hide")
+
+modalBtnYes.addEventListener("click", () => {
+    modalBackdrop.className = "modal__backdrop hide";
+
+    // delete http request
 })
