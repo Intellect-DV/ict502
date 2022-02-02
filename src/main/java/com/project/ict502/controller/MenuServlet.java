@@ -199,8 +199,9 @@ public class MenuServlet extends HttpServlet {
             json.put("error", "Image file is null");
         }
 
+        String host = request.getScheme() + "://" + request.getHeader("host") + "/";
         String imageFileName = part.getSubmittedFileName();
-        String urlPathForDB = "/upload/" + imageFileName;
+        String urlPathForDB = host + "upload/" + imageFileName;
         String savePath = applicationPath + "upload" + File.separator + imageFileName;
 
         if(!new File(applicationPath + "upload").exists()) {
