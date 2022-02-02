@@ -92,11 +92,16 @@ public class WorkerServlet extends HttpServlet {
     }
 
     private static void logoutWorker(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
         if(request.getSession(false) != null) {
             System.out.println("invalidate session");
             request.getSession().invalidate();
+            response.setStatus(200);
+            response.getWriter().println(new JSONObject().put("message", "success"));
+        } else {
+            response.setStatus(400);
+            response.getWriter().println(new JSONObject().put("message", "failed"));
         }
-        response.sendRedirect("/");
     }
 
     private void addWorker(HttpServletRequest request, HttpServletResponse response) {
