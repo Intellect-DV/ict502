@@ -96,12 +96,9 @@ public class WorkerServlet extends HttpServlet {
         if(request.getSession(false) != null) {
             System.out.println("invalidate session");
             request.getSession().invalidate();
-            response.setStatus(200);
-            response.getWriter().println(new JSONObject().put("message", "success"));
-        } else {
-            response.setStatus(400);
-            response.getWriter().println(new JSONObject().put("message", "failed"));
         }
+        response.setStatus(200);
+        response.getWriter().println(new JSONObject().put("message", "success"));
     }
 
     private void addWorker(HttpServletRequest request, HttpServletResponse response) {
