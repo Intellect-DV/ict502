@@ -40,7 +40,6 @@ body::after {
     height: 100%;
     width: 100%;
     opacity: 0;
-    display: none;
 }
 .toggle__box > label {
     position: absolute;
@@ -61,6 +60,9 @@ body::after {
     border-radius: 50%;
     transform: scale(0.85) translateX(0);
     transition: all ease-in-out 200ms;
+}
+.toggle__ch:focus + .toggle__btn {
+    outline: 2px solid var(--color-orange);
 }
 .toggle__ch:checked + .toggle__btn:after {
     transform: scale(0.85) translateX(115%);
