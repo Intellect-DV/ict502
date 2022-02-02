@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="component/navigation.css">
 
     <link rel="stylesheet" href="css/index.css">
+
+    <%-- Axios - to make Http request --%>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/logout.js" defer></script>
 </head>
 <body>
     <header class="navigation">
@@ -43,7 +47,7 @@
                                     <a href="#">Settings</a>
                                 </li>
                                 <li>
-                                    <a href="#">Logout</a>
+                                    <a href="#" id="logoutBtn">Logout</a>
                                 </li>
                             </ul>
                         </div>

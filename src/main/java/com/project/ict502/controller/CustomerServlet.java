@@ -23,7 +23,15 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
 
+        if(action == null) return;
+
+        switch (action.toLowerCase()) {
+            case "logout":
+                logout(request, response);
+                break;
+        }
     }
 
     @Override
@@ -39,6 +47,19 @@ public class CustomerServlet extends HttpServlet {
             case "login":
                 login(request, response);
                 break;
+        }
+    }
+
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.setContentType("application/json");
+        if(request.getSession(false) != null) {
+            System.out.println("invalidate session");
+            request.getSession().invalidate();
+            response.setStatus(200);
+            response.getWriter().println(new JSONObject().put("message", "success"));
+        } else {
+            response.setStatus(400);
+            response.getWriter().println(new JSONObject().put("message", "failed"));
         }
     }
 
