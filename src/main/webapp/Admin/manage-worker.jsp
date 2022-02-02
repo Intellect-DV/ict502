@@ -28,6 +28,8 @@
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/manage-worker.js" defer></script>
+    <script src="js/logout.js" defer></script>
+
 </head>
 <body>
     <header class="navigation">
@@ -51,7 +53,7 @@
                 <a href="./settings.jsp" class="navigation__item line">
                     <i class="fas fa-user-cog"></i> Settings
                 </a>
-                <a href="../worker?action=logout" class="navigation__item">
+                <a href="#" id="logoutBtn" class="navigation__item">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </div>
