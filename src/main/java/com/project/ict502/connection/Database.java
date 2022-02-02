@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 
 public class Database {
     private static Connection conn = null;
-    private static final String currentDb = "oracle"; // oracle or postgress
+    private static final String currentDb = "postgres"; // oracle or postgress
 
     public static String getDbType() {
         return currentDb;
