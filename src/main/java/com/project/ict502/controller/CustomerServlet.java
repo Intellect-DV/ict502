@@ -105,7 +105,7 @@ public class CustomerServlet extends HttpServlet {
 
             System.out.println("Session created");
             json.put("message", "Login success!");
-            json.put("url", "/Customer/");
+            json.put("type", "customer");
             succeed = true;
             // todo - redirect page
         } else {

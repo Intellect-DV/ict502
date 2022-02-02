@@ -32,8 +32,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
         axios.post(url, params)
             .then(response => {
-                const {message, url} = response.data;
+                const {message, type} = response.data;
                 if(message === "Login success!") {
+                    let url = "/Customer/";
+                    switch (type.toLowerCase()) {
+                        case "admin":
+                            url = "/Admin/";
+                            break;
+                        case "worker":
+                            url = "/Worker/";
+                            break;
+                    }
+
                     window.location.assign(url);
                 }
             })
