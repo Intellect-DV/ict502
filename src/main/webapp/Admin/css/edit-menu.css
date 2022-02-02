@@ -70,6 +70,8 @@
     display: block;
     padding: 0.625rem;
     text-align: center;
+    color: var(--color-orange);
+    font-weight: 600;
 }
 .menu__item > .menu__desc {
     display: block;
