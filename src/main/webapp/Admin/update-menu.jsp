@@ -28,6 +28,7 @@
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/update-menu.js" defer></script>
+    <script src="js/logout.js" defer></script>
 </head>
 <body>
     <form id="form_update_menu" enctype="multipart/form-data" data-menu-id='${param.id}' data-menu-type="${param.type}">
