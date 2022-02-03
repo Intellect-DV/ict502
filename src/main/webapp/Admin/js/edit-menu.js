@@ -85,7 +85,8 @@ const showAlertPopup  = (error) => {
 }
 
 const generateMenuHTML = (data) => {
-    let content = data.map(menu => {
+    const {menus} = data;
+    let content = menus.map(menu => {
         return `<div class="menu__item">
                     <div class="menu__image">
                          <img src="${menu.itemPicUrl}" alt="${menu.itemName}" />
@@ -94,8 +95,8 @@ const generateMenuHTML = (data) => {
                     <div class="menu__price">${menu.itemPriceToCurrency}</div>
                     <div class="menu__desc">${menu.itemDescription}</div>
                     <div class="menu__action">
-                        <button onclick='window.location.href="update-menu.jsp?id=${menu.itemId}&type=${menu.itemType}"'>Update</button>
-                        <button data-menu-id="${menu.itemId}" data-menu-type="${menu.itemType}" data-menu-parent-id="${menu.parentId || -1}" onclick="triggerConfirmPopup(event)">Delete</button>
+                        <button onclick='window.location.href="update-menu.jsp?id=${menu.itemId}'>Update</button>
+                        <button data-menu-id="${menu.itemId}" data-menu-type="${menu.itemType}" onclick="triggerConfirmPopup(event)">Delete</button>
                     </div>
                 </div>`;
     }).join("");
@@ -104,11 +105,10 @@ const generateMenuHTML = (data) => {
 }
 
 const triggerConfirmPopup = (event) => {
-    const {menuId, menuType, menuParentId} = event.target.dataset;
+    const {menuId, menuType} = event.target.dataset;
 
     modalBtnYes.dataset.menuId = menuId;
     modalBtnYes.dataset.menuType = menuType;
-    modalBtnYes.dataset.menuParentId = menuParentId;
     modalBackdrop.className = "modal__backdrop";
 }
 
@@ -130,10 +130,6 @@ modalBtnYes.addEventListener("click", () => {
 
     params.append("action","deletemenu")
     params.append("id", menuId);
-    params.append("type",menuType);
-    if(!(modalBtnYes.dataset.menuParentId === "-1")) {
-        params.append("parentId",modalBtnYes.dataset.menuParentId);
-    }
 
     axios.post(url,params)
         .then(response => {
