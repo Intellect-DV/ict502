@@ -26,6 +26,7 @@
 
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/index.js" defer></script>
     <script src="js/logout.js" defer></script>
 </head>
 <body>
@@ -66,7 +67,7 @@
                 <button class="active" data-menu-type="all">All</button>
             </div>
             <div class="filter__box">
-                <button data-menu-type="food">Food</button>
+                <button data-menu-type="maincourse">Food</button>
             </div>
             <div class="filter__box">
                 <button data-menu-type="beverage">Beverage</button>
@@ -77,23 +78,7 @@
         </div>
 
         <div class="menu_list">
-            <div class="menu_list__item">
-                <div class="menu_list__image">
-                    <img src="/upload/mee_goreng.jpg" alt="Mee Goreng">
-                </div>
-                <div class="menu_list__name">
-                    Mee Goreng
-                </div>
-                <div class="menu_list__price">
-                    RM 3.50
-                </div>
-                <div class="menu_list__desc">
-                    This is mee goreng asli
-                </div>
-                <div class="menu_list__hoverbox">
-                    <button>Add to Cart</button>
-                </div>
-            </div>
+
         </div>
     </div>
 
