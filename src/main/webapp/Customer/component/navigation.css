@@ -1,3 +1,6 @@
+body {
+    padding-top: 12vh;
+}
 header.navigation {
     position: fixed;
     top: 0;
