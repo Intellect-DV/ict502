@@ -4,7 +4,6 @@ let logoutTimeout;
 const modalInfo = document.querySelector(".modal__info");
 const modalCard = document.querySelector(".modal__card");
 const modalContent = document.querySelector(".modal__content");
-const modalClose = document.querySelector(".modal__close");
 
 window.addEventListener("DOMContentLoaded", () => {
     logoutBtn.addEventListener("click", event => {
