@@ -67,7 +67,7 @@
                 <button class="active" data-menu-type="all">All</button>
             </div>
             <div class="filter__box">
-                <button data-menu-type="maincourse">Food</button>
+                <button data-menu-type="maincourse">Main Course</button>
             </div>
             <div class="filter__box">
                 <button data-menu-type="beverage">Beverage</button>
