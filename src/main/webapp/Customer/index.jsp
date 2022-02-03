@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../css/boilerplate.css">
     <link rel="stylesheet" href="component/background.css">
     <link rel="stylesheet" href="component/navigation.css">
+    <link rel="stylesheet" href="../component/modal__info.css">
 
     <link rel="stylesheet" href="css/index.css">
 
@@ -82,5 +83,15 @@
         </div>
     </div>
 
+    <div class="modal__info">
+        <div class="modal__card failed">
+            <span class="modal__content">
+
+            </span>
+            <span class="modal__close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+    </div>
 </body>
 </html>
