@@ -61,6 +61,21 @@
     </header>
 
     <div class="container">
+        <div class="filter">
+            <div class="filter__box">
+                <button class="active" data-menu-type="all">All</button>
+            </div>
+            <div class="filter__box">
+                <button data-menu-type="food">Food</button>
+            </div>
+            <div class="filter__box">
+                <button data-menu-type="beverage">Beverage</button>
+            </div>
+            <div class="filter__box">
+                <button data-menu-type="dessert">Dessert</button>
+            </div>
+        </div>
+
         <div class="menu_list">
             <div class="menu_list__item">
                 <div class="menu_list__image">
