@@ -59,5 +59,28 @@
             </div>
         </nav>
     </header>
+
+    <div class="container">
+        <div class="menu_list">
+            <div class="menu_list__item">
+                <div class="menu_list__image">
+                    <img src="/upload/mee_goreng.jpg" alt="Mee Goreng">
+                </div>
+                <div class="menu_list__name">
+                    Mee Goreng
+                </div>
+                <div class="menu_list__price">
+                    RM 3.50
+                </div>
+                <div class="menu_list__desc">
+                    This is mee goreng asli
+                </div>
+                <div class="menu_list__hoverbox">
+                    <button>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
