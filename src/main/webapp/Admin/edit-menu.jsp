@@ -64,7 +64,7 @@
         <div class="filter">
             <div class="filter__box">
                 <div class="filter__item">
-                    <button class="active" data-menu-type="maincourse">Food</button>
+                    <button class="active" data-menu-type="maincourse">Main Course</button>
                 </div>
                 <div class="filter__item">
                     <button data-menu-type="beverage">Beverage</button>
