@@ -70,13 +70,14 @@ public class MenuServlet extends HttpServlet {
     private void getMenus(HttpServletRequest request, HttpServletResponse response) {
         String type = request.getParameter("type");
         JSONObject json = new JSONObject();
+
+        ArrayList<Menu> menus;
         if(type == null || type.equals("")) {
-            json.put("error", "Specify type of menu");
-            jsonResponse(response, 400, json);
-            return;
+            menus = MenuDA.retrieveAllMenus();
+        } else {
+            menus = MenuDA.retrieveMenus(type);
         }
 
-        ArrayList<Menu> menus = MenuDA.retrieveMenus(type);
 
         response.setContentType("application/json");
 
