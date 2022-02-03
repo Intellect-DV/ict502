@@ -20,7 +20,7 @@
 }
 .menu_list__image > img {
     width: 100%;
-    height: auto;
+    height: 30vh;
 }
 .menu_list__name {
     font-weight: 700;
@@ -71,7 +71,7 @@
 .filter {
     background: rgba(0,0,0,0.7);
     padding: 1rem;
-    width: 30vw;
+    width: 50vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -83,7 +83,7 @@
     color: white;
     cursor: pointer;
     padding: 0.5rem 0;
-    width: 5vw;
+    width: 8vw;
     text-align: center;
     font-weight: 600;
     border: 2px solid white;
