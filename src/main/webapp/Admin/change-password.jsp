@@ -28,6 +28,7 @@
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/settings.js" defer></script>
+    <script src="js/logout.js" defer></script>
 </head>
 <body>
     <form class="form_profile" data-action="updatepassword">
