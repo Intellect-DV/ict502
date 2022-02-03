@@ -37,6 +37,39 @@ public abstract class MenuDA {
         return succeed;
     }
 
+    public static ArrayList<Menu> retrieveAllMenus() {
+        ArrayList <Menu> menus = new ArrayList<>();
+        try {
+            String sql;
+            if(Database.getDbType().equals("postgres")) {
+                sql = "SELECT * FROM menu order by type";
+            } else {
+                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path, itemtype as type FROM menu order by itemtype";
+            }
+
+            ResultSet rs = QueryHelper.getResultSet(sql);
+
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                double price = rs.getDouble("price");
+                String description = rs.getString("description");
+                String path = rs.getString("pic_path");
+                String type = rs.getString("type");
+
+                Menu temp = new Menu(id, name, price, description, path, type);
+
+                menus.add(temp);
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        } finally {
+            Database.closeConnection();
+        }
+
+        return menus;
+    }
+
     public static ArrayList<Menu> retrieveMenus(String type) {
         // retrieve menu
         ArrayList <Menu> menus = new ArrayList<>();
@@ -88,10 +121,6 @@ public abstract class MenuDA {
                 menu.setItemName(rs.getString("name"));
                 menu.setItemDescription(rs.getString("description"));
                 menu.setItemPicUrl(rs.getString("pic_path"));
-
-                if(Database.getDbType().equals("oracle")) {
-                    menu.setParentId(id);
-                }
             }
         } catch (Exception err) {
             err.printStackTrace();
