@@ -48,13 +48,14 @@ function getWorker() {
         .then(response => {
             // root.innerHTML = response.data;
             let content;
-            if(response.data.length === 0) {
+            const {workers, total} = response.data;
+            if(total === 0) {
                 content =
                 `<tr class="table__row">
                     <td colspan="5" style="text-align: center;">None of worker registered below you.</td>
                 </tr>`
             } else {
-                 content = response.data.map(worker => {
+                 content = workers.map(worker => {
                      return `<tr class="table__row">
                                 <td>${worker.workerId}</td>
                                 <td>${worker.workerUsername}</td>
