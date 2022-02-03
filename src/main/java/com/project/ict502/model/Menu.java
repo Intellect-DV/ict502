@@ -9,7 +9,6 @@ public class Menu {
     private String itemDescription;
     private String itemPicUrl; // url to picture
     private String itemType; // menu type (food, beverage, dessert)
-    private int parentId; // for oracle use
 
     public Menu() {
         this.itemId = -1;
@@ -17,7 +16,6 @@ public class Menu {
         this.itemDescription = null;
         this.itemPicUrl = null;
         this.itemType = null;
-        this.parentId = -1;
     }
 
     public Menu(int itemId, String itemName, double itemPrice, String itemDescription, String itemPicUrl, String itemType) {
@@ -27,16 +25,6 @@ public class Menu {
         this.itemDescription = itemDescription;
         this.itemPicUrl = itemPicUrl;
         this.itemType = itemType;
-    }
-
-    public Menu(int itemId, String itemName, double itemPrice, String itemDescription, String itemPicUrl, String itemType, int parentId) {
-        this.itemId = itemId;
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.itemDescription = itemDescription;
-        this.itemPicUrl = itemPicUrl;
-        this.itemType = itemType;
-        this.parentId = parentId;
     }
 
     public Menu(String itemName, double itemPrice, String itemDescription, String itemPicUrl, String itemType) {
@@ -106,13 +94,5 @@ public class Menu {
 
     public void setItemType(String itemType) {
         this.itemType = itemType;
-    }
-
-    public int getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
     }
 }

@@ -1,0 +1,99 @@
+.menu_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 5rem;
+}
+.menu_list__item {
+    background: #ececec;
+    padding: 1rem 1rem;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.menu_list__image {
+    max-width: 17vw;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    border-radius: 10px 10px 0 0;
+}
+.menu_list__image > img {
+    width: 100%;
+    height: 30vh;
+}
+.menu_list__name {
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.menu_list__price {
+    text-align: center;
+    color: var(--color-orange);
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+.menu_list__desc {
+    text-align: center;
+    font-weight: 600;
+    color: gray;
+}
+.menu_list__hoverbox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all ease-in-out 200ms;
+}
+.menu_list__item:hover > .menu_list__hoverbox {
+    opacity: 1;
+}
+.menu_list__hoverbox > button {
+    all: unset;
+    background: var(--color-orange);
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+}
+.menu_list__hoverbox > button:hover {
+    background: var(--color-orange-dark);
+}
+.filter {
+    background: rgba(0,0,0,0.7);
+    padding: 1rem;
+    width: 50vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+}
+.filter__box > button {
+    all: unset;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    width: 8vw;
+    text-align: center;
+    font-weight: 600;
+    border: 2px solid white;
+}
+.filter__box > button:hover {
+    border-color: var(--color-orange);
+    color: var(--color-orange);
+}
+.filter__box > button.active {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    color: white;
+}

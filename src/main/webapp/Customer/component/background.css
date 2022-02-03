@@ -20,3 +20,6 @@ body::after {
     width: 100vw;
     z-index: -99;
 }
+.container {
+    padding: 0 10vw;
+}

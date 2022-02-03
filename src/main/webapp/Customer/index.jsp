@@ -26,6 +26,7 @@
 
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/index.js" defer></script>
     <script src="js/logout.js" defer></script>
 </head>
 <body>
@@ -59,5 +60,27 @@
             </div>
         </nav>
     </header>
+
+    <div class="container">
+        <div class="filter">
+            <div class="filter__box">
+                <button class="active" data-menu-type="all">All</button>
+            </div>
+            <div class="filter__box">
+                <button data-menu-type="maincourse">Food</button>
+            </div>
+            <div class="filter__box">
+                <button data-menu-type="beverage">Beverage</button>
+            </div>
+            <div class="filter__box">
+                <button data-menu-type="dessert">Dessert</button>
+            </div>
+        </div>
+
+        <div class="menu_list">
+
+        </div>
+    </div>
+
 </body>
 </html>
