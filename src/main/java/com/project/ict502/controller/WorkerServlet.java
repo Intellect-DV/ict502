@@ -69,9 +69,9 @@ public class WorkerServlet extends HttpServlet {
     private void retrieveWorker(HttpServletRequest request, HttpServletResponse response) {
         // check session if the worker is manager
         HttpSession session = request.getSession(false);
+        JSONObject json = new JSONObject();
 
         if(session == null || session.getAttribute("workerObj") == null) {
-            JSONObject json = new JSONObject();
             json.put("error", "Authorization failed! Please login first.");
             jsonResponse(response, 401, json);
             return;
@@ -83,9 +83,9 @@ public class WorkerServlet extends HttpServlet {
         request.setAttribute("workers", workers);
 
         try {
-            JSONArray res = new JSONArray(workers);
-            response.setContentType("application/json");
-            response.getWriter().println(res);
+            json.put("total", workers.size());
+            json.put("workers", workers);
+            jsonResponse(response, 200, json);
         } catch (Exception err) {
             err.printStackTrace();
         }
