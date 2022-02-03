@@ -88,8 +88,9 @@ public class MenuServlet extends HttpServlet {
         request.setAttribute("menus", menus);
 
         try {
-            response.setStatus(200);
-            response.getWriter().println(new JSONArray(menus));
+            json.put("total", menus.size());
+            json.put("menus", new JSONArray(menus));
+            jsonResponse(response, 200, json);
         } catch (Exception err) {
             err.printStackTrace();
         }
@@ -98,9 +99,8 @@ public class MenuServlet extends HttpServlet {
     private void getMenuInfo(HttpServletRequest request, HttpServletResponse response) {
         JSONObject json = new JSONObject();
         String menuIdTemp = request.getParameter("id");
-        String type = request.getParameter("type");
 
-        if(menuIdTemp == null || menuIdTemp.equals("") || type == null || type.equals("")) {
+        if(menuIdTemp == null || menuIdTemp.equals("")) {
             json.put("error","Id or type is empty");
             jsonResponse(response, 400, json);
             return;
@@ -118,11 +118,7 @@ public class MenuServlet extends HttpServlet {
         if(menuId == -1) return;
 
         Menu menu;
-        if(Database.getDbType().equals("oracle")) {
-            menu = MenuDA.retrieveMenuByIdAndTypeForOracle(menuId, type);
-        } else {
-            menu = MenuDA.retrieveMenuById(menuId);
-        }
+        menu = MenuDA.retrieveMenuById(menuId);
 
         if(menu.getItemId() == -1) {
             json.put("error", "No menu with id provided");
@@ -260,10 +256,9 @@ public class MenuServlet extends HttpServlet {
         name = request.getParameter("name");
         priceTemp = request.getParameter("price");
         description = request.getParameter("description");
-        menuType = request.getParameter("menu-type");
 
-        if(idTemp == null || name == null || priceTemp == null || description == null || menuType == null
-                || idTemp.equals("") || name.equals("") || priceTemp.equals("") || description.equals("") || menuType.equals("")) {
+        if(idTemp == null || name == null || priceTemp == null || description == null
+                || idTemp.equals("") || name.equals("") || priceTemp.equals("") || description.equals("")) {
             json.put("error", "Input empty");
             jsonResponse(response, 400, json);
             return;
@@ -283,11 +278,7 @@ public class MenuServlet extends HttpServlet {
 
         boolean succeed;
 
-        if(Database.getDbType().equals("oracle")) {
-            succeed = MenuDA.updateMenuInfoForOracle(id,name,price,description,menuType);
-        } else {
-            succeed = MenuDA.updateMenuInfo(id,name,price,description);
-        }
+        succeed = MenuDA.updateMenuInfo(id,name,price,description);
 
         if(succeed) {
             json.put("message", "Menu has been updated");
@@ -346,20 +337,12 @@ public class MenuServlet extends HttpServlet {
 
         String picUrl;
 
-        if(Database.getDbType().equals("postgres")) {
-            picUrl = MenuDA.retrieveMenuById(id).getItemPicUrl();
-        } else {
-            picUrl = MenuDA.retrieveMenuByIdAndTypeForOracle(id, type).getItemPicUrl();
-        }
+        picUrl = MenuDA.retrieveMenuById(id).getItemPicUrl();
 
         String realPath = applicationPath + "upload" + File.separator + picUrl.split("/")[2];
 
         boolean succeed;
-        if(Database.getDbType().equals("oracle")) {
-            succeed = MenuDA.deleteMenuForOracle(parentId, type);
-        } else {
-            succeed = MenuDA.deleteMenu(id);
-        }
+        succeed = MenuDA.deleteMenu(id);
 
         if(succeed) {
             File file = new File(realPath);
