@@ -73,6 +73,11 @@
     color: var(--color-orange);
     font-weight: 600;
 }
+.menu__item > .menu__qty {
+    text-align: center;
+    font-weight: 600;
+    color: rgb(200, 200, 200);
+}
 .menu__item > .menu__desc {
     display: block;
     margin: 0.625rem 0;
