@@ -53,6 +53,14 @@ public class CartServlet extends HttpServlet {
         }
 
         // get menu id
+        String menuIdTemp = request.getParameter("menuId");
+
+        if(menuIdTemp == null || menuIdTemp.equals("")) {
+            json.put("error", "Please provide menu id");
+            jsonResponse(response, 400,  json);
+            return;
+        }
+
         // convert menu id to int
         // check menu id if existed
         // check menu quantity
