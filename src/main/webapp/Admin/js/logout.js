@@ -1,5 +1,5 @@
 const logoutBtn = document.querySelector("#logoutBtn");
-
+let logoutTimeout;
 
 window.addEventListener("DOMContentLoaded", () => {
     logoutBtn.addEventListener("click", event => {
@@ -34,12 +34,16 @@ const resetLogoutTimer = () => {
 }
 
 const showLogoutAlert = () => {
-    modalContent.innerText = "You will be logged out of inactivity!";
-    modalCard.className = "modal__card alert";
-    modalInfo.className = "modal__info active";
+    let mdlInf = document.querySelector(".modal__info");
+    let mdlCrd = document.querySelector(".modal__card");
+    let mdlCtnt = document.querySelector(".modal__content");
+
+    mdlCtnt.innerText = "You will be logged out of inactivity!";
+    mdlCrd.className = "modal__card alert";
+    mdlInf.className = "modal__info active";
     setTimeout(() => {
-        if(modalInfo.className === "modal__info active") {
-            modalInfo.className = "modal__info";
+        if(mdlInf.className === "modal__info active") {
+            mdlInf.className = "modal__info";
         }
         logoutHandler();
     }, 1000 * 3);
