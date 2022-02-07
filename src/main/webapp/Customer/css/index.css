@@ -48,6 +48,8 @@
     left: 0;
     background: rgba(0,0,0,0.5);
     display: flex;
+    flex-direction: column;
+    gap: 2rem;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -55,6 +57,9 @@
     transition: all ease-in-out 200ms;
 }
 .menu_list__item:hover > .menu_list__hoverbox {
+    opacity: 1;
+}
+.menu_list__hoverbox.show {
     opacity: 1;
 }
 .menu_list__hoverbox > button {
@@ -67,6 +72,15 @@
 }
 .menu_list__hoverbox > button:hover {
     background: var(--color-orange-dark);
+}
+.menu_list__hoverbox >.quantity {
+    color: white;
+    font-weight: 600;
+}
+.menu_list__hoverbox > .out_of_stock {
+    color: white;
+    font-weight: 600;
+    font-size: 1.7rem;
 }
 .filter {
     background: rgba(0,0,0,0.7);
