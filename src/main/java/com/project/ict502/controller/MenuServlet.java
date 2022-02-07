@@ -324,23 +324,17 @@ public class MenuServlet extends HttpServlet {
         }
 
         String idTemp = request.getParameter("id");
-        String parentIdTemp = request.getParameter("parentId");
-        String type = request.getParameter("type");
 
-        if(idTemp == null || idTemp.equals("") || type == null || type.equals("")) {
+        if(idTemp == null || idTemp.equals("")) {
             json.put("error", "Input empty");
             jsonResponse(response, 400, json);
             return;
         }
 
-        int id = -1, parentId = -1;
+        int id = -1;
 
         try {
             id = Integer.parseInt(idTemp);
-
-            if(!(parentIdTemp == null || parentIdTemp.equals(""))) {
-                parentId = Integer.parseInt(parentIdTemp);
-            }
         } catch (Exception err) {
             err.printStackTrace();
             json.put("error", "Id must be number and not null");
