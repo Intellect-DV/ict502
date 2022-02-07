@@ -62,6 +62,19 @@ public class CartServlet extends HttpServlet {
         }
 
         // convert menu id to int
+        int menuId = -1;
+        try {
+            menuId = Integer.parseInt(menuIdTemp);
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        if(menuId == -1) {
+            json.put("error", "Menu id is invalid format");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
         // check menu id if existed
         // check menu quantity
         // if menu available, add to cart, otherwise no
