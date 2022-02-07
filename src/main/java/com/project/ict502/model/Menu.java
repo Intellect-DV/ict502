@@ -9,6 +9,7 @@ public class Menu {
     private String itemDescription;
     private String itemPicUrl; // url to picture
     private String itemType; // menu type (food, beverage, dessert)
+    private int itemQuantity;
 
     public Menu() {
         this.itemId = -1;
@@ -16,23 +17,26 @@ public class Menu {
         this.itemDescription = null;
         this.itemPicUrl = null;
         this.itemType = null;
+        this.itemQuantity = -1;
     }
 
-    public Menu(int itemId, String itemName, double itemPrice, String itemDescription, String itemPicUrl, String itemType) {
+    public Menu(int itemId, String itemName, double itemPrice, String itemDescription, String itemPicUrl, String itemType, int itemQuantity) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemDescription = itemDescription;
         this.itemPicUrl = itemPicUrl;
         this.itemType = itemType;
+        this.itemQuantity = itemQuantity;
     }
 
-    public Menu(String itemName, double itemPrice, String itemDescription, String itemPicUrl, String itemType) {
+    public Menu(String itemName, double itemPrice, String itemDescription, String itemPicUrl, String itemType, int itemQuantity) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemDescription = itemDescription;
         this.itemPicUrl = itemPicUrl;
         this.itemType = itemType;
+        this.itemQuantity = itemQuantity;
     }
 
     public Menu(Menu menu) {
@@ -41,6 +45,7 @@ public class Menu {
         this.itemPrice = menu.itemPrice;
         this.itemDescription = menu.itemDescription;
         this.itemPicUrl = menu.itemPicUrl;
+        this.itemQuantity = menu.itemQuantity;
     }
 
     public int getItemId() {
@@ -95,4 +100,8 @@ public class Menu {
     public void setItemType(String itemType) {
         this.itemType = itemType;
     }
+
+    public int getItemQuantity() { return itemQuantity; }
+
+    public void setItemQuantity(int itemQuantity) { this.itemQuantity = itemQuantity; }
 }

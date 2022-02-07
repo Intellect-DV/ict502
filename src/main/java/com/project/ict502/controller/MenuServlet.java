@@ -132,6 +132,7 @@ public class MenuServlet extends HttpServlet {
         menuJson.put("menuName", menu.getItemName());
         menuJson.put("menuPrice", menu.getItemPrice());
         menuJson.put("menuDescription", menu.getItemDescription());
+        menuJson.put("menuQuantity", menu.getItemQuantity());
 
         json.put("content", menuJson);
 
@@ -142,15 +143,16 @@ public class MenuServlet extends HttpServlet {
         JSONObject json = new JSONObject();
 
         Part part;
-        String menuName, menuPriceTemp, menuDescription, menuType;
+        String menuName, menuPriceTemp, menuDescription, menuType, menuQuantityTemp;
 
         menuName = request.getParameter("name");
         menuPriceTemp = request.getParameter("price");
         menuDescription = request.getParameter("description");
         menuType = request.getParameter("menu-type");
+        menuQuantityTemp = request.getParameter("menu-quantity");
 
-        if(menuName == null || menuPriceTemp == null || menuDescription == null || menuType == null ||
-                menuName.equals("") || menuPriceTemp.equals("") || menuDescription.equals("") || menuType.equals("")) {
+        if(menuName == null || menuPriceTemp == null || menuDescription == null || menuType == null || menuQuantityTemp == null ||
+                menuName.equals("") || menuPriceTemp.equals("") || menuDescription.equals("") || menuType.equals("") || menuQuantityTemp.equals("")) {
             json.put("error", "Input is empty");
             jsonResponse(response, 401, json);
             return;
@@ -179,6 +181,16 @@ public class MenuServlet extends HttpServlet {
         } catch (Exception err) {
             err.printStackTrace();
             json.put("error", "Price must a number and not null");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        int menuQuantity = -1;
+        try {
+            menuQuantity = Integer.parseInt(menuQuantityTemp);
+        } catch (Exception err) {
+            err.printStackTrace();
+            json.put("error", "Quantity must a number and not null");
             jsonResponse(response, 400, json);
             return;
         }
@@ -217,7 +229,7 @@ public class MenuServlet extends HttpServlet {
             return;
         }
 
-        Menu menu = new Menu(menuName, menuPrice, menuDescription, urlPathForDB, menuType);
+        Menu menu = new Menu(menuName, menuPrice, menuDescription, urlPathForDB, menuType, menuQuantity);
 
         boolean succeed = MenuDA.createMenu(menu);
 
@@ -251,27 +263,29 @@ public class MenuServlet extends HttpServlet {
             return;
         }
 
-        String idTemp, name, priceTemp, description, menuType;
+        String idTemp, name, priceTemp, description, menuType, quantityTemp;
 
         idTemp = request.getParameter("id");
         name = request.getParameter("name");
         priceTemp = request.getParameter("price");
         description = request.getParameter("description");
+        quantityTemp = request.getParameter("quantity");
 
-        if(idTemp == null || name == null || priceTemp == null || description == null
-                || idTemp.equals("") || name.equals("") || priceTemp.equals("") || description.equals("")) {
+        if(idTemp == null || name == null || priceTemp == null || description == null || quantityTemp == null
+                || idTemp.equals("") || name.equals("") || priceTemp.equals("") || description.equals("") || quantityTemp.equals("")) {
             json.put("error", "Input empty");
             jsonResponse(response, 400, json);
             return;
         }
 
-        int id = -1; double price = -1;
+        int id = -1, quantity = -1; double price = -1;
         try {
             id = Integer.parseInt(idTemp);
             price = Double.parseDouble(priceTemp);
+            quantity = Integer.parseInt(quantityTemp);
         } catch (Exception err) {
             err.printStackTrace();
-            json.put("error", "Id must be number / Price must be double");
+            json.put("error", "Id, quantity must be number / Price must be double");
             jsonResponse(response, 400, json);
         }
 
@@ -279,7 +293,7 @@ public class MenuServlet extends HttpServlet {
 
         boolean succeed;
 
-        succeed = MenuDA.updateMenuInfo(id,name,price,description);
+        succeed = MenuDA.updateMenuInfo(id,name,price,description, quantity);
 
         if(succeed) {
             json.put("message", "Menu has been updated");

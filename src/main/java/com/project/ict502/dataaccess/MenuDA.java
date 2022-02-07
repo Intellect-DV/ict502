@@ -15,16 +15,17 @@ public abstract class MenuDA {
             String sql;
 
             if(Database.getDbType().equals("postgres")) {
-                sql = "INSERT INTO menu(name, price, description, pic_path, type) VALUES (?,?,?,?,?)";
+                sql = "INSERT INTO menu(name, price, description, pic_path, type, quantity) VALUES (?,?,?,?,?,?)";
             } else {
-                sql = "INSERT INTO menu(itemname,itemprice,itemdesc,itempic,itemtype) VALUES (?,?,?,?,?)";
+                sql = "INSERT INTO menu(itemname,itemprice,itemdesc,itempic,itemtype, itemquantity) VALUES (?,?,?,?,?,?)";
             }
             int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Object[] {
                     menu.getItemName(),
                     menu.getItemPrice(),
                     menu.getItemDescription(),
                     menu.getItemPicUrl(),
-                    menu.getItemType()
+                    menu.getItemType(),
+                    menu.getItemQuantity()
             });
 
             if(affectedRow == 1) succeed = true;
@@ -44,7 +45,7 @@ public abstract class MenuDA {
             if(Database.getDbType().equals("postgres")) {
                 sql = "SELECT * FROM menu order by type";
             } else {
-                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path, itemtype as type FROM menu order by itemtype";
+                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path, itemtype as type, itemquantity as quantity FROM menu order by itemtype";
             }
 
             ResultSet rs = QueryHelper.getResultSet(sql);
@@ -56,8 +57,9 @@ public abstract class MenuDA {
                 String description = rs.getString("description");
                 String path = rs.getString("pic_path");
                 String type = rs.getString("type");
+                int quantity = rs.getInt("quantity");
 
-                Menu temp = new Menu(id, name, price, description, path, type);
+                Menu temp = new Menu(id, name, price, description, path, type, quantity);
 
                 menus.add(temp);
             }
@@ -79,7 +81,7 @@ public abstract class MenuDA {
             if(Database.getDbType().equals("postgres")) {
                 sql = "SELECT * FROM menu WHERE type=?";
             } else {
-                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path FROM menu WHERE itemtype=?";
+                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path, itemquantity as quantity FROM menu WHERE itemtype=?";
             }
             rs = QueryHelper.getResultSet(sql,new String[]{type});
 
@@ -89,8 +91,9 @@ public abstract class MenuDA {
                 double price = rs.getDouble("price");
                 String description = rs.getString("description");
                 String path = rs.getString("pic_path");
+                int quantity = rs.getInt("quantity");
 
-                Menu temp = new Menu(id, name, price, description, path, type);
+                Menu temp = new Menu(id, name, price, description, path, type, quantity);
 
                 menus.add(temp);
             }
@@ -110,7 +113,7 @@ public abstract class MenuDA {
             String sql = "SELECT id, name, price, description, pic_path FROM menu WHERE id=?";
 
             if(Database.getDbType().equals("oracle")) {
-                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path FROM menu WHERE itemid=?";
+                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path, itemquantity as quantity FROM menu WHERE itemid=?";
             }
 
             ResultSet rs = QueryHelper.getResultSet(sql,new Integer[]{id});
@@ -121,6 +124,7 @@ public abstract class MenuDA {
                 menu.setItemName(rs.getString("name"));
                 menu.setItemDescription(rs.getString("description"));
                 menu.setItemPicUrl(rs.getString("pic_path"));
+                menu.setItemQuantity(rs.getInt("quantity"));
             }
         } catch (Exception err) {
             err.printStackTrace();
@@ -131,19 +135,19 @@ public abstract class MenuDA {
         return menu;
     }
 
-    public static boolean updateMenuInfo(int id, String name, double price, String description) {
+    public static boolean updateMenuInfo(int id, String name, double price, String description, int quantity) {
         // update menu
         boolean succeed = false;
 
         try {
-            String sql = "UPDATE menu SET name=?, price=?, description=? WHERE id=?";
+            String sql = "UPDATE menu SET name=?, price=?, description=?, quantity=? WHERE id=?";
 
             if(Database.getDbType().equals("oracle")) {
-                sql = "UPDATE menu SET itemname=?, itemprice=?, itemdesc=? WHERE itemid=?";
+                sql = "UPDATE menu SET itemname=?, itemprice=?, itemdesc=?, itemquantity=? WHERE itemid=?";
             }
 
             int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql,new Object[] {
-                    name, price, description, id
+                    name, price, description, quantity, id
             });
 
             if (affectedRow == 1) succeed = true;
