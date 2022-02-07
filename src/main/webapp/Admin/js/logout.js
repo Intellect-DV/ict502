@@ -1,9 +1,5 @@
 const logoutBtn = document.querySelector("#logoutBtn");
 
-const modalCard = document.querySelector(".modal__card");
-const modalContent = document.querySelector(".modal__content");
-const modalInfo = document.querySelector(".modal__info");
-
 
 window.addEventListener("DOMContentLoaded", () => {
     logoutBtn.addEventListener("click", event => {
