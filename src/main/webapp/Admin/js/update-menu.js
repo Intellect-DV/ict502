@@ -17,15 +17,15 @@ window.addEventListener("DOMContentLoaded", () => {
 })
 
 const getMenuInfo = () => {
-    if(menuId == null || menuId === "" || menuType == null || menuType === "") {
-        modalContent.innerText = "URL parameter does not have id or/and type of menu";
+    if(menuId == null || menuId === "") {
+        modalContent.innerText = "URL parameter does not have menu id";
         modalCard.className = "modal__card failed";
         modalInfo.className = "modal__info active";
         setTimeout(closePopup, 3000);
         return;
     }
 
-    axios.get(`/menu?action=getMenuInfo&id=${menuId}&type=${menuType}`)
+    axios.get(`/menu?action=getMenuInfo&id=${menuId}`)
         .then(response => {
             const {content} = response.data;
             inputName.value = content.menuName;
@@ -44,8 +44,8 @@ const getMenuInfo = () => {
 const updateMenuInfo = (event) => {
     event.preventDefault();
 
-    if(menuId == null || menuId === "" || menuType == null || menuType === "") {
-        modalContent.innerText = "URL parameter does not have id or/and type of menu";
+    if(menuId == null || menuId === "") {
+        modalContent.innerText = "URL parameter does not have menu id";
         modalCard.className = "modal__card alert";
         modalInfo.className = "modal__info active";
         setTimeout(closePopup, 3000);
@@ -58,7 +58,6 @@ const updateMenuInfo = (event) => {
 
     params.append("action","updateMenuInfo");
     params.append("id", menuId);
-    params.append("menu-type", menuType);
     for(let key of formData.keys()) {
         params.append(key, String(formData.get(key)));
     }
