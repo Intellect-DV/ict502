@@ -66,16 +66,8 @@ const generateHTMLMenus = (data) => {
                     <div class="menu_list__desc">
                         ${menu.itemDescription}
                     </div>
-                    <div class="menu_list__hoverbox${menu.itemQuantity > 0 ? '' : ' show'}">
-                        ${
-                        menu.itemQuantity > 0 ? 
-                            `<button data-menu-id="${menu.itemId}">Add to Cart</button>
-                            <div class="quantity">
-                                Quantity: ${menu.itemQuantity}
-                            </div>` 
-                            : 
-                            `<div class="out_of_stock">Out of Stock</div>`
-                        }
+                    <div class="menu_list__hoverbox">
+                        <button data-menu-id="${menu.itemId}">Add to Cart</button>
                     </div>
                 </div>`
     }).join("");
