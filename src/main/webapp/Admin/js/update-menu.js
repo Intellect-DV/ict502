@@ -13,6 +13,10 @@ window.addEventListener("DOMContentLoaded", () => {
     modalClose.addEventListener("click", () => closePopup());
     formUpdate.addEventListener("submit", (event) => updateMenuInfo(event));
 
+    inputPrice.addEventListener("change", () => {
+        inputPrice.value = parseFloat(inputPrice.value).toFixed(2);
+    })
+
     getMenuInfo();
 })
 
@@ -29,7 +33,7 @@ const getMenuInfo = () => {
         .then(response => {
             const {content} = response.data;
             inputName.value = content.menuName;
-            inputPrice.value = content.menuPrice;
+            inputPrice.value = content.menuPrice.toFixed(2);
             inputDescription.value = content.menuDescription;
         })
         .catch(err => {
