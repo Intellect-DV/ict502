@@ -1,8 +1,7 @@
 const formUpdate = document.querySelector("#form_update_menu");
-const {menuId} = formUpdate.dataset;
+const {menuId, menuType} = formUpdate.dataset;
 const inputName = document.querySelector("input[name='name']");
-const inputPrice = document.querySelector("input[name='price']");
-const inputQty = document.querySelector("input[name='quantity']");
+const inputPrice = document.querySelector("input[name='price']")
 const inputDescription = document.querySelector("input[name='description']");
 
 const modalInfo = document.querySelector(".modal__info");
@@ -14,28 +13,23 @@ window.addEventListener("DOMContentLoaded", () => {
     modalClose.addEventListener("click", () => closePopup());
     formUpdate.addEventListener("submit", (event) => updateMenuInfo(event));
 
-    inputPrice.addEventListener("change", () => {
-        inputPrice.value = parseFloat(inputPrice.value).toFixed(2);
-    })
-
     getMenuInfo();
 })
 
 const getMenuInfo = () => {
-    if(menuId == null || menuId === "") {
-        modalContent.innerText = "URL parameter does not have id";
+    if(menuId == null || menuId === "" || menuType == null || menuType === "") {
+        modalContent.innerText = "URL parameter does not have id or/and type of menu";
         modalCard.className = "modal__card failed";
         modalInfo.className = "modal__info active";
         setTimeout(closePopup, 3000);
         return;
     }
 
-    axios.get(`/menu?action=getMenuInfo&id=${menuId}`)
+    axios.get(`/menu?action=getMenuInfo&id=${menuId}&type=${menuType}`)
         .then(response => {
             const {content} = response.data;
             inputName.value = content.menuName;
-            inputPrice.value = content.menuPrice.toFixed(2);
-            inputQty.value = content.menuQuantity;
+            inputPrice.value = content.menuPrice;
             inputDescription.value = content.menuDescription;
         })
         .catch(err => {
@@ -50,8 +44,8 @@ const getMenuInfo = () => {
 const updateMenuInfo = (event) => {
     event.preventDefault();
 
-    if(menuId == null || menuId === "") {
-        modalContent.innerText = "URL parameter does not have menu id";
+    if(menuId == null || menuId === "" || menuType == null || menuType === "") {
+        modalContent.innerText = "URL parameter does not have id or/and type of menu";
         modalCard.className = "modal__card alert";
         modalInfo.className = "modal__info active";
         setTimeout(closePopup, 3000);
@@ -64,6 +58,7 @@ const updateMenuInfo = (event) => {
 
     params.append("action","updateMenuInfo");
     params.append("id", menuId);
+    params.append("menu-type", menuType);
     for(let key of formData.keys()) {
         params.append(key, String(formData.get(key)));
     }

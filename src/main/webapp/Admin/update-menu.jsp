@@ -45,11 +45,6 @@
         </div>
 
         <div class="item">
-            <label for="quantity">Quantity</label>
-            <input type="number" id="quantity" name="quantity" min="0" step="1" placeholder="Quantity" autocomplete="off" required>
-        </div>
-
-        <div class="item">
             <label for="description">Description</label>
             <input type="text" id="description" name="description" placeholder="Description" autocomplete="off" required>
         </div>
