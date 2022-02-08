@@ -42,7 +42,6 @@
         <input type="text" name="name" autocomplete="off" placeholder="Name" required>
         <input type="number" name="price" min="0.00" max="1000.00" step="0.01" placeholder="Price" autocomplete="off" required>
         <input type="text" name="description" placeholder="Description" autocomplete="off" required>
-        <input type="number" name="quantity" placeholder="Quantity" autocomplete="off" required>
         <input type="file" name="image" accept="image/jpeg, image/png, image/jpg" placeholder="Image" autocomplete="off" required>
 
         <button type="submit">Add</button>

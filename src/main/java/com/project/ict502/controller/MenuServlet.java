@@ -149,7 +149,7 @@ public class MenuServlet extends HttpServlet {
         menuPriceTemp = request.getParameter("price");
         menuDescription = request.getParameter("description");
         menuType = request.getParameter("menu-type");
-        menuQuantityTemp = request.getParameter("quantity");
+        menuQuantityTemp = request.getParameter("menu-quantity");
 
         if(menuName == null || menuPriceTemp == null || menuDescription == null || menuType == null || menuQuantityTemp == null ||
                 menuName.equals("") || menuPriceTemp.equals("") || menuDescription.equals("") || menuType.equals("") || menuQuantityTemp.equals("")) {
