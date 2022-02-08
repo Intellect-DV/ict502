@@ -93,10 +93,9 @@ const generateMenuHTML = (data) => {
                     </div>
                     <div class="menu__title">${menu.itemName}</div>
                     <div class="menu__price">${menu.itemPriceToCurrency}</div>
-                    <div class="menu__qty">Quantity: ${menu.itemQuantity}</div>
                     <div class="menu__desc">${menu.itemDescription}</div>
                     <div class="menu__action">
-                        <button onclick='window.location.href="update-menu.jsp?id=${menu.itemId}"'>Update</button>
+                        <button onclick='window.location.href="update-menu.jsp?id=${menu.itemId}'>Update</button>
                         <button data-menu-id="${menu.itemId}" data-menu-type="${menu.itemType}" onclick="triggerConfirmPopup(event)">Delete</button>
                     </div>
                 </div>`;
