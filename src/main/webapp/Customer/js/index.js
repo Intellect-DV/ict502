@@ -2,6 +2,11 @@ const filterBtns = document.querySelectorAll(".filter__box > button");
 const menuList = document.querySelector("div.menu_list");
 let menusStored = [];
 
+const modalInfo = document.querySelector(".modal__info");
+const modalCard= document.querySelector(".modal__card");
+const modalContent = document.querySelector(".modal__content");
+const modalClose = document.querySelector(".modal__close");
+
 window.addEventListener("DOMContentLoaded", () => {
     getAllMenus();
     for(let btn of filterBtns) {
@@ -67,7 +72,7 @@ const generateHTMLMenus = (data) => {
                         ${menu.itemDescription}
                     </div>
                     <div class="menu_list__hoverbox">
-                        <button data-menu-id="${menu.itemId}">Add to Cart</button>
+                        <button data-menu-id="${menu.itemId}" onclick="addToCart(event)">Add to Cart</button>
                     </div>
                 </div>`
     }).join("");
@@ -89,3 +94,43 @@ const getAllMenus = () => {
             console.log(err.response.data);
         })
 }
+
+const addToCart = (event) => {
+    const {menuId} = event.target.dataset;
+    const url = "/cart";
+    const params = new URLSearchParams();
+
+    params.append("action", "add");
+    params.append("menuId", menuId);
+
+    axios.post(url, params)
+        .then(res => {
+            const {message} = res.data;
+
+            modalCard.className = "modal__card success";
+            modalInfo.className = "modal__info active";
+
+            if(message === "Added to Cart") {
+                modalContent.innerText = "Menu has been added!";
+            } else {
+                modalContent.innerText = message;
+            }
+
+            setTimeout(closePopup, 1000);
+        })
+        .catch(err => {
+            const {error} = err.response.data;
+
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            modalContent.innerText = error;
+        })
+}
+
+const closePopup = () => {
+    if(modalInfo.className === "modal__info active") {
+        modalInfo.className = "modal__info";
+    }
+}
+
+modalClose.addEventListener("click", () => closePopup())
