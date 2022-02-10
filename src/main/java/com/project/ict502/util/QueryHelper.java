@@ -2,10 +2,7 @@ package com.project.ict502.util;
 
 import com.project.ict502.connection.Database;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class QueryHelper {
     // SELECT STATEMENT - return ResultSet from executed query
@@ -95,6 +92,8 @@ public class QueryHelper {
                     prepStmt.setDouble(i + 1, (Double) data[i]);
                 } else if (data[i] instanceof Boolean) {
                     prepStmt.setBoolean(i + 1, (Boolean) data[i]);
+                } else  if(data[i] instanceof Date) {
+                    prepStmt.setDate(i + 1, (Date) data[i]);
                 }
             }
         } catch (SQLException err) {
