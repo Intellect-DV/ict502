@@ -1,6 +1,10 @@
 package com.project.ict502.controller;
 
+import com.project.ict502.dataaccess.MenuDA;
+import com.project.ict502.dataaccess.OrderDA;
 import com.project.ict502.model.Customer;
+import com.project.ict502.model.Menu;
+import com.project.ict502.model.Order;
 import org.json.JSONObject;
 
 import javax.servlet.*;
@@ -52,6 +56,8 @@ public class CartServlet extends HttpServlet {
             return;
         }
 
+        Customer currentCustomer = (Customer) session.getAttribute("customerObj");
+
         // get menu id
         String menuIdTemp = request.getParameter("menuId");
 
@@ -69,14 +75,25 @@ public class CartServlet extends HttpServlet {
             err.printStackTrace();
         }
 
-        if(menuId == -1) {
+        if(menuId <= 0) {
             json.put("error", "Menu id is invalid format");
             jsonResponse(response, 400, json);
             return;
         }
 
         // check menu id if existed
-        // check menu quantity
-        // if menu available, add to cart, otherwise no
+        Menu currentMenu = MenuDA.retrieveMenuById(menuId);
+        if(currentMenu.getItemId() == -1) {
+            json.put("error", "Menu id is not exist");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        // Check uncompleted order, if existed, use the same id, if not create new
+        Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+        if(currentOrder == null) {
+            OrderDA.createOrder(currentCustomer.getCustomerId());
+            currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+        }
     }
 }
