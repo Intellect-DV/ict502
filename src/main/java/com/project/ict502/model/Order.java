@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Order {
     private int orderId;
-    private String orderStatus;
+    private String orderStatus; // uncompleted, ongoing, complete
     private Date orderDate;
     private double totalPrice;
     private int customerId;
@@ -15,6 +15,13 @@ public class Order {
         this.orderDate = null;
         this.totalPrice = -1;
         this.customerId = -1;
+    }
+
+    public Order( String orderStatus, Date orderDate, double totalPrice, int customerId) {
+        this.orderStatus = orderStatus;
+        this.orderDate = orderDate;
+        this.totalPrice = totalPrice;
+        this.customerId = customerId;
     }
 
     public Order(int orderId, String orderStatus, Date orderDate, double totalPrice, int customerId) {
