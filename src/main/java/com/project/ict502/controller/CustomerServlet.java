@@ -85,13 +85,11 @@ public class CustomerServlet extends HttpServlet {
 
             // add new customer
             if(CustomerDA.createCustomer(cust)) {
-                // todo - message , etc
                 System.out.println("New User added");
                 json.put("message", "New user added");
                 succeed = true;
             }
         } else {
-            // todo - (use another username)
             System.out.println("Cannot add user: username duplicated");
             json.put("error", "Username duplicated");
         }
@@ -125,9 +123,7 @@ public class CustomerServlet extends HttpServlet {
             json.put("message", "Login success!");
             json.put("type", "customer");
             succeed = true;
-            // todo - redirect page
         } else {
-            // todo - wrong username / password
             System.out.println("Wrong username or password");
             json.put("error", "Wrong username or password!");
         }

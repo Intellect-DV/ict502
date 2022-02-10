@@ -9,9 +9,9 @@ const modalClose = document.querySelector(".modal__close");
 window.addEventListener("DOMContentLoaded", () => {
     toggleBtn.addEventListener("change", event => {
         if(toggleBtn.checked) {
-            formSignIn.dataset.action = "worker"; // todo - worker servlet
+            formSignIn.dataset.action = "worker";
         } else {
-            formSignIn.dataset.action = "customer"; // todo - customer servlet
+            formSignIn.dataset.action = "customer";
         }
     })
 
