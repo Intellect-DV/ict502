@@ -1,7 +1,9 @@
 package com.project.ict502.controller;
 
+import com.project.ict502.dataaccess.CartDA;
 import com.project.ict502.dataaccess.MenuDA;
 import com.project.ict502.dataaccess.OrderDA;
+import com.project.ict502.model.Cart;
 import com.project.ict502.model.Customer;
 import com.project.ict502.model.Menu;
 import com.project.ict502.model.Order;
@@ -94,6 +96,20 @@ public class CartServlet extends HttpServlet {
         if(currentOrder == null) {
             OrderDA.createOrder(currentCustomer.getCustomerId());
             currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+        }
+
+        if(CartDA.addToCart(menuId,currentOrder.getOrderId())) {
+            json.put("message", "Added to Cart");
+            int  currentQuantity = CartDA.retrieveCurrentQuantity(menuId,currentOrder.getOrderId());
+
+            Cart cartTemp = new Cart(menuId,currentOrder.getOrderId(), currentQuantity);
+            JSONObject arr = new JSONObject(cartTemp);
+
+            json.put("cart", arr);
+            jsonResponse(response, 200, json);
+        } else{
+            json.put("error","Cannot add to cart");
+            jsonResponse(response, 400, json);
         }
     }
 }
