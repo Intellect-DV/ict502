@@ -26,6 +26,10 @@
     font-weight: 600;
     font-size: 1rem;
 }
+.cart__price {
+    font-weight: 600;
+    color: rgb(111, 111, 111);
+}
 .cart__total_price {
     font-weight: 600;
     color: var(--color-orange);
