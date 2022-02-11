@@ -1,3 +1,4 @@
+const navItem = document.querySelector(".navigation__item[href='./edit-menu.jsp']");
 const filterBtn = document.querySelectorAll(".filter__item > button");
 const menuDiv = document.querySelector("div.menu");
 
@@ -11,6 +12,7 @@ const modalBtnYes = document.querySelector(".action > .btn-confirm.red");
 const modalBtnNo = document.querySelector(".action > .btn-confirm.grey");
 
 window.addEventListener("DOMContentLoaded", () => {
+    navItem.classList.add("active");
     for(let i = 0; i <  filterBtn.length; i++) {
         filterBtn[i].addEventListener("click", event => {
             filterBtn[0].removeAttribute("class");

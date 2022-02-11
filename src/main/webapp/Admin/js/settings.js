@@ -1,3 +1,4 @@
+const navItem = document.querySelector(".navigation__item[href='./settings.jsp']");
 const formProfile = document.querySelector(".form_profile");
 const newPassword = document.querySelector("#new-password");
 const confirmPassword = document.querySelector("#confirm-password");
@@ -8,6 +9,7 @@ const modalContent = document.querySelector(".modal__content");
 const modalClose = document.querySelector(".modal__close");
 
 window.addEventListener("DOMContentLoaded", () => {
+    navItem.classList.add("active");
     formProfile.addEventListener("submit", event => {
         event.preventDefault();
 
