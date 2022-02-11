@@ -194,6 +194,8 @@ public class MenuServlet extends HttpServlet {
 
         if(part == null) {
             json.put("error", "Image file is null");
+            jsonResponse(response, 400, json);
+            return;
         }
 
         String host = request.getScheme() + "://" + request.getHeader("host") + "/";
