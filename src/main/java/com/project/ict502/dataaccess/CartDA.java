@@ -2,8 +2,9 @@ package com.project.ict502.dataaccess;
 
 import com.project.ict502.connection.Database;
 import com.project.ict502.util.QueryHelper;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import javax.xml.transform.Result;
 import java.sql.ResultSet;
 
 public abstract class CartDA {
@@ -40,6 +41,42 @@ public abstract class CartDA {
         }
 
         return succeed;
+    }
+
+    public static JSONArray retrieveCartMenu(int orderId) {
+        JSONArray arr = new JSONArray();
+
+        try {
+            String sql = "select itemname, itemprice, quantity, (itemprice*quantity) as totalprice, itempic from cart, menu where cart.itemid = menu.itemid and orderid=?";
+
+            ResultSet rs = QueryHelper.getResultSet(sql, new Integer[]{orderId});
+
+            while(rs.next()) {
+                JSONObject json = new JSONObject();
+
+                String itemName = rs.getString("itemname");
+                double itemPrice = rs.getDouble("itemprice");
+                int quantity = rs.getInt("quantity");
+                double totalPrice = rs.getDouble("totalprice");
+                String url = rs.getString("itempic");
+
+                json.put("menu-name", itemName);
+                json.put("menu-price", itemPrice);
+                json.put("menu-quantity", quantity);
+                json.put("total-price", totalPrice);
+                json.put("image-url", url);
+
+                arr.put(json);
+            }
+        } catch(Exception err) {
+            err.printStackTrace();
+        }
+
+        if(arr.length() == 0) {
+            return null;
+        } else {
+            return arr;
+        }
     }
 
     public static int retrieveCurrentQuantity(int itemId, int orderId) {
