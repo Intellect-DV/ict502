@@ -94,7 +94,7 @@ public class CartServlet extends HttpServlet {
         for(int i = 0; i < SIZE; i++) {
             JSONObject jsonObject = (JSONObject) carts.get(i);
 
-            double totalPrice = jsonObject.getDouble("total-price");
+            double totalPrice = jsonObject.getDouble("total_price");
             grandTotal += totalPrice;
         }
 
