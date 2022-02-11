@@ -7,6 +7,7 @@ import com.project.ict502.model.Cart;
 import com.project.ict502.model.Customer;
 import com.project.ict502.model.Menu;
 import com.project.ict502.model.Order;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.*;
@@ -69,8 +70,39 @@ public class CartServlet extends HttpServlet {
         Customer currentCustomer = (Customer) session.getAttribute("customerObj");
 
         // get order -- if not exist, response none exist, if existed, search for the cart
+        Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+
+        if(currentOrder == null) {
+            json.put("message", "No order");
+            jsonResponse(response, 200, json);
+            return;
+        }
 
         // if the cart is none, response none also
+        JSONArray carts = CartDA.retrieveCartMenu(currentOrder.getOrderId());
+
+        if(carts == null || carts.length() == 0) {
+            json.put("message", "No menu added");
+            json.put("order-id", currentOrder.getOrderId());
+            jsonResponse(response, 200, json);
+            return;
+        }
+
+        final int SIZE = carts.length();
+        double grandTotal = 0;
+
+        for(int i = 0; i < SIZE; i++) {
+            JSONObject jsonObject = (JSONObject) carts.get(i);
+
+            double totalPrice = jsonObject.getDouble("total-price");
+            grandTotal += totalPrice;
+        }
+
+        json.put("order-id", currentOrder.getOrderId());
+        json.put("grand-total", grandTotal);
+        json.put("carts", carts);
+
+        jsonResponse(response, 200, json);
     }
 
     private void addToCart(HttpServletRequest request, HttpServletResponse response) {
