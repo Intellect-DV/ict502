@@ -124,6 +124,7 @@ const addToCart = (event) => {
             modalCard.className = "modal__card failed";
             modalInfo.className = "modal__info active";
             modalContent.innerText = error;
+            setTimeout(closePopup, 1000);
         })
 }
 
