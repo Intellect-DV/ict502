@@ -60,11 +60,11 @@ public abstract class CartDA {
                 double totalPrice = rs.getDouble("totalprice");
                 String url = rs.getString("itempic");
 
-                json.put("menu-name", itemName);
-                json.put("menu-price", itemPrice);
-                json.put("menu-quantity", quantity);
-                json.put("total-price", totalPrice);
-                json.put("image-url", url);
+                json.put("menu_name", itemName);
+                json.put("menu_price", itemPrice);
+                json.put("menu_quantity", quantity);
+                json.put("total_price", totalPrice);
+                json.put("image_url", url);
 
                 arr.put(json);
             }

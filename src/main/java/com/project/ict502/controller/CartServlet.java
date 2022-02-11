@@ -98,8 +98,8 @@ public class CartServlet extends HttpServlet {
             grandTotal += totalPrice;
         }
 
-        json.put("order-id", currentOrder.getOrderId());
-        json.put("grand-total", grandTotal);
+        json.put("order_id", currentOrder.getOrderId());
+        json.put("grand_total", grandTotal);
         json.put("carts", carts);
 
         jsonResponse(response, 200, json);
