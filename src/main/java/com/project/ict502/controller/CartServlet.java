@@ -28,7 +28,15 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
 
+        if(action == null || action.equals("")) return;
+
+        switch (action.toLowerCase()) {
+            case "retrieveforcust":
+                retrieveForCust(request, response);
+                break;
+        }
     }
 
     @Override
@@ -44,6 +52,25 @@ public class CartServlet extends HttpServlet {
             case "":
                 break;
         }
+    }
+
+    private void retrieveForCust(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        // check customer login info using session
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("customerObj") == null) {
+            json.put("error", "Please login first!");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        Customer currentCustomer = (Customer) session.getAttribute("customerObj");
+
+        // get order -- if not exist, response none exist, if existed, search for the cart
+
+        // if the cart is none, response none also
     }
 
     private void addToCart(HttpServletRequest request, HttpServletResponse response) {
