@@ -45,6 +45,11 @@
     padding: .5rem;
     cursor: pointer;
 }
+.cart__quantity > .btn_remove_cart {
+    color: rgb(217, 7, 7);
+    display: inline-block;
+    width: 2rem;
+}
 .cart__quantity > .btn_quantity:hover {
     background: var(--color-orange-dark);
 }
