@@ -74,6 +74,9 @@
                             <button class="btn_quantity plus">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
+                            <a href="#">
+
+                            </a>
                         </div>
                     </td>
                     <td>
@@ -110,12 +113,27 @@
                             <button class="btn_quantity plus">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
+                            <a href="#">
+
+                            </a>
                         </div>
                     </td>
                     <td>
                         <div class="cart__total_price">
                             RM 10.00
                         </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="cart__grandtotal_display">
+                        <div>
+                            Total Amount
+                        </div>
+                    </td>
+                    <td class="cart__grandtotal">
+                        <span>
+                            RM 18.00
+                        </span>
                     </td>
                 </tr>
             </tbody>
