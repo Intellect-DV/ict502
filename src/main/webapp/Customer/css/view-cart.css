@@ -44,3 +44,11 @@
 .cart__quantity > .btn_quantity:hover {
     background: var(--color-orange-dark);
 }
+.cart__grandtotal_display > div {
+    display: block;
+    text-align: right;
+}
+.cart__grandtotal > span {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
