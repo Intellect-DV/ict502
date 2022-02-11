@@ -32,34 +32,7 @@
 </head>
 <body>
     <header class="navigation">
-        <nav class="navbar">
-            <div class="navbar__brand">
-                <a class="title" href="/Customer/">SEFOS</a>
-            </div>
-            <div class="navbar__list">
-                <div class="navbar__item">
-                    <a href="#">Home</a>
-                </div>
-                <div class="navbar__item">
-                    <a href="#">Cart</a>
-                </div>
-                <div class="navbar__item">
-                    Profile <i class="fas fa-chevron-down"></i>
-                    <div class="dropdown_menu">
-                        <div class="dropdown__inner">
-                            <ul class="dropdown__list">
-                                <li>
-                                    <a href="#">Settings</a>
-                                </li>
-                                <li>
-                                    <a href="#" id="logoutBtn">Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <%@include file="component/navigation.html"%>
     </header>
 
     <div class="container">
