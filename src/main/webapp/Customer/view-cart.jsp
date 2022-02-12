@@ -27,6 +27,7 @@
 
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/view-cart.js" defer></script>
     <script src="js/logout.js" defer></script>
 </head>
 <body>
@@ -74,53 +75,14 @@
                             <button class="btn_quantity plus">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
-                            <a href="#">
-
+                            <a href="#" class="btn_remove_cart">
+                                <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </div>
                     </td>
                     <td>
                         <div class="cart__total_price">
                             RM 8.00
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>
-                        <div class="cart__flex">
-                            <div class="cart__menu_img">
-                                <img src="http://localhost:85/upload/mee_goreng.jpg" alt="Mee Goreng">
-                            </div>
-                            <div class="cart__menu_detail">
-                                Mee Goreng
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="cart__price">
-                            RM 5.00
-                        </div>
-                    </td>
-                    <td>
-                        <div class="cart__quantity">
-                            <button class="btn_quantity minus">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <span class="quantity">
-                                2
-                            </span>
-                            <button class="btn_quantity plus">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                            <a href="#">
-
-                            </a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="cart__total_price">
-                            RM 10.00
                         </div>
                     </td>
                 </tr>
