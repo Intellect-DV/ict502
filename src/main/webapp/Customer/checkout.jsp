@@ -41,27 +41,7 @@
             <div class="menu__title">
                 List of Menu
             </div>
-            <div class="menu__details">
-                <div class="menu__item">
-                    <span>Nasi Goreng Kampung</span>
-                    <i class="fa-solid fa-xmark"></i>
-                    <span>5</span>
-                </div>
-                <div class="menu__item">
-                    <span>Nasi Goreng Kampung</span>
-                    <i class="fa-solid fa-xmark"></i>
-                    <span>5</span>
-                </div>
-                <div class="menu__item">
-                    <span>Nasi Goreng Kampung</span>
-                    <i class="fa-solid fa-xmark"></i>
-                    <span>5</span>
-                </div>
-                <div class="menu__item result">
-                    <span>Total: </span>
-                    <span>RM 30.00</span>
-                </div>
-            </div>
+            <div class="menu__details"> </div>
         </div>
         <div class="checkout__payment">
             <div class="payment__title">
