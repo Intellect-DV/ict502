@@ -28,8 +28,13 @@ const getCart = () => {
             }
         })
         .catch(err => {
-            // todo - make propper message
-            console.log(err.response.data);
+            // make proper message
+            const {error} = err.response.data;
+
+            modalContent.innerText = error;
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup,2000);
         })
 }
 
@@ -119,9 +124,36 @@ modalClose.addEventListener("click", () => closePopup())
 modalBtnNo.addEventListener("click", () => modalBackdrop.className = "modal__backdrop hide")
 
 modalBtnYes.addEventListener("click", () => {
-    // todo - delete menu
+    // delete menu
     const {menuId} = modalBtnYes.dataset;
-    alert(menuId);
+    const url = "/cart";
+    const params = new URLSearchParams({
+        "action": "delete",
+        "menuId": menuId
+    });
 
-    modalBackdrop.className = "modal__backdrop hide"
+    axios.post(url, params)
+        .then(res => {
+            const {message} = res.data;
+
+            if(message === "Cart item deleted") {
+                modalContent.innerText = message;
+                modalCard.className = "modal__card success";
+                modalInfo.className = "modal__info active";
+                setTimeout(closePopup,2000);
+
+                getCart();
+                modalBackdrop.className = "modal__backdrop hide"
+            }
+        })
+        .catch(err => {
+            const {error} = err.response.data;
+            modalContent.innerText = error;
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup,2000);
+
+            modalBackdrop.className = "modal__backdrop hide"
+        });
+
 })
