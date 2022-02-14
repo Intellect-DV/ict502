@@ -11,6 +11,7 @@
     justify-content: space-around;
     align-items: center;
     margin-bottom: 2rem;
+    color: var(--color-grey);
 }
 .order__status {
     color: white;
@@ -27,6 +28,10 @@
 .order__total_price {
     color: var(--color-orange);
     font-weight: 600;
+}
+.order__all_menus {
+    font-weight: 600;
+    color: var(--color-grey);
 }
 .order__all_menus > .menu {
     display: flex;
