@@ -49,6 +49,10 @@
     color: rgb(217, 7, 7);
     display: inline-block;
     width: 2rem;
+    cursor: pointer;
+}
+.cart__quantity > .btn_remove_car:hover {
+    color: rgb(178, 6, 6);
 }
 .cart__quantity > .btn_quantity:hover {
     background: var(--color-orange-dark);
