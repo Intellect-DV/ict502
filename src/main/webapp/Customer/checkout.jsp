@@ -69,18 +69,15 @@
 
     <div class="modal__backdrop hide">
         <div class="modal-confirm">
-            <div class="header red">
-                Delete Item
+            <div class="header green">
+                Success
             </div>
             <div class="content">
-                Are you sure?
+                Payment has been made
             </div>
             <div class="action">
-                <button class="btn-confirm red">
-                    Yes
-                </button>
-                <button class="btn-confirm grey">
-                    No
+                <button class="btn-confirm green">
+                    Okay
                 </button>
             </div>
         </div>
