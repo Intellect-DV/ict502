@@ -99,7 +99,7 @@ public abstract class CartDA {
         return -1;
     }
 
-    private static boolean updateCart(int itemId, int orderId, int quantity) {
+    public static boolean updateCart(int itemId, int orderId, int quantity) {
         boolean succeed = false;
 
         try {
