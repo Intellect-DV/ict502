@@ -36,7 +36,16 @@
     </header>
 
     <div class="container">
-
+        <div class="filter">
+            <div class="filter__box">
+                <div class="filter__item">
+                    <button class="active" data-menu-type="ongoing">Ongoing</button>
+                </div>
+                <div class="filter__item">
+                    <button data-menu-type="complete">Complete</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="modal__info">
