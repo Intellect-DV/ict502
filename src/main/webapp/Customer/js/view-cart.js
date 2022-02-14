@@ -1,4 +1,5 @@
 const tbody = document.querySelector("#tbody");
+let currentOrderId = null;
 
 const modalInfo = document.querySelector(".modal__info");
 const modalCard= document.querySelector(".modal__card");
@@ -17,8 +18,7 @@ const getCart = () => {
             const {message} = res.data;
 
             if(!(message === undefined)) {
-                // todo - make proper message
-                console.log("Message",message);
+                tbody.innerHTML = `<tr><td colspan="5">Nothing added in cart</td></tr>`;
             } else {
                 generateTableCart(res.data);
             }
@@ -31,6 +31,7 @@ const getCart = () => {
 
 const generateTableCart = (data) => {
     const {carts, grand_total, order_id} = data;
+    currentOrderId = order_id;
 
     let tableCarts = carts.map((cart, index) => {
        return `<tr>
@@ -88,6 +89,18 @@ const generateTableCart = (data) => {
                 </tr>`;
 
     tbody.innerHTML = tableCarts;
+}
+
+const addQuantity = (event) => {
+
+}
+
+const minusQuantity = (event) => {
+
+}
+
+const deleteCart = (event) => {
+
 }
 
 const closePopup = () => {
