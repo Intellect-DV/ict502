@@ -47,19 +47,21 @@ public abstract class CartDA {
         JSONArray arr = new JSONArray();
 
         try {
-            String sql = "select itemname, itemprice, quantity, (itemprice*quantity) as totalprice, itempic from cart, menu where cart.itemid = menu.itemid and orderid=?";
+            String sql = "select cart.itemid as itemid, itemname, itemprice, quantity, (itemprice*quantity) as totalprice, itempic from cart, menu where cart.itemid = menu.itemid and orderid=?";
 
             ResultSet rs = QueryHelper.getResultSet(sql, new Integer[]{orderId});
 
             while(rs.next()) {
                 JSONObject json = new JSONObject();
 
+                int itemId = rs.getInt("itemid");
                 String itemName = rs.getString("itemname");
                 double itemPrice = rs.getDouble("itemprice");
                 int quantity = rs.getInt("quantity");
                 double totalPrice = rs.getDouble("totalprice");
                 String url = rs.getString("itempic");
 
+                json.put("menu_id", itemId);
                 json.put("menu_name", itemName);
                 json.put("menu_price", itemPrice);
                 json.put("menu_quantity", quantity);
