@@ -13,11 +13,16 @@
     margin-bottom: 2rem;
 }
 .order__status {
-    background: var(--color-btn-success);
     color: white;
     padding: 0.5rem 0.5rem;
     border-radius: 5rem;
     font-weight: 500;
+}
+.order__status.green {
+    background: var(--color-btn-success);
+}
+.order__status.yellow {
+    background: var(--color-btn-alert);
 }
 .order__total_price {
     color: var(--color-orange);
