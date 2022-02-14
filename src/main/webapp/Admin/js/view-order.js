@@ -4,6 +4,12 @@ const orderContent = document.querySelector(".orders__content");
 let storedOrders = {};
 let currentOrder = {};
 
+const modalInfo = document.querySelector(".modal__info");
+const modalCard = document.querySelector(".modal__card");
+const modalContent = document.querySelector(".modal__content");
+const modalClose = document.querySelector(".modal__close");
+
+
 window.addEventListener("DOMContentLoaded", () => {
     navItem.classList.add("active");
 
@@ -33,6 +39,14 @@ const filterHandler = (event) => {
     }
 }
 
+const closePopup = () => {
+    if(modalInfo.className === "modal__info active") {
+        modalInfo.className = "modal__info";
+    }
+}
+
+modalClose.addEventListener("click", () => closePopup())
+
 const retrieveOrders = () => {
     const url = "/order?action=retrieveorderforworker";
 
@@ -49,8 +63,12 @@ const retrieveOrders = () => {
             }
         })
         .catch(err => {
-            // todo - prooper message
-            console.log(err);
+            const {error} = err.response.data;
+
+            modalContent.innerText = error;
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup, 3000);
         })
 }
 
