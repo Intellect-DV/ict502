@@ -35,6 +35,8 @@
         <%@include file="component/navigation.html"%>
     </header>
 
+    <div class="order__table"> </div>
+
     <div class="modal__info">
         <div class="modal__card failed">
             <span class="modal__content">
