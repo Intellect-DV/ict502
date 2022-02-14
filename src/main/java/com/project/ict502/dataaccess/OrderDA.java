@@ -84,4 +84,32 @@ public abstract class OrderDA {
 
         return temp;
     }
+
+    public static boolean autoUpdateTotalPrice(int custId) {
+        boolean succeed = false;
+
+        try{
+            String sql = "select coalesce(sum(itemprice*quantity), 0) as totalprice from cart, menu, orders where orderStatus='uncompleted' and cart.itemid=menu.itemid and cart.orderid=orders.orderid and orders.custid=?";
+
+            ResultSet rs = QueryHelper.getResultSet(sql, new Integer[]{custId});
+
+            if(!rs.next()) {
+                return false;
+            }
+
+            double totalPrice = rs.getDouble("totalprice");
+
+            sql = "UPDATE orders SET totalprice=?";
+
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Double[] {totalPrice});
+
+            if(affectedRow == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        } finally {
+            Database.closeConnection();
+        }
+
+        return succeed;
+    }
 }

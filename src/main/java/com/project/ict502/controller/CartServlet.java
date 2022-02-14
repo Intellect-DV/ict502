@@ -170,6 +170,8 @@ public class CartServlet extends HttpServlet {
 
             json.put("cart", arr);
             jsonResponse(response, 200, json);
+            boolean isExecuted = OrderDA.autoUpdateTotalPrice(currentCustomer.getCustomerId());
+            System.out.println("Executed: " + isExecuted);
         } else{
             json.put("error","Cannot add to cart");
             jsonResponse(response, 400, json);
@@ -250,6 +252,8 @@ public class CartServlet extends HttpServlet {
         if(succeed) {
             json.put("message", "Removed from cart");
             jsonResponse(response, 200, json);
+            boolean isExecuted = OrderDA.autoUpdateTotalPrice(currentCustomer.getCustomerId());
+            System.out.println("Executed: " + isExecuted);
         } else {
             json.put("message", "Cannot remove from cart");
             jsonResponse(response, 400, json);
@@ -304,5 +308,7 @@ public class CartServlet extends HttpServlet {
 
         json.put("message", "Cart item deleted");
         jsonResponse(response, 200, json);
+        boolean isExecuted = OrderDA.autoUpdateTotalPrice(currentCustomer.getCustomerId());
+        System.out.println("Executed: " + isExecuted);
     }
 }
