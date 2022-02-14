@@ -99,9 +99,9 @@ public abstract class OrderDA {
 
             double totalPrice = rs.getDouble("totalprice");
 
-            sql = "UPDATE orders SET totalprice=?";
+            sql = "UPDATE orders SET totalprice=? where orderstatus='uncompleted' and custid=?";
 
-            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Double[] {totalPrice});
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Object[] {totalPrice, custId});
 
             if(affectedRow == 1) succeed = true;
         } catch (Exception err) {
