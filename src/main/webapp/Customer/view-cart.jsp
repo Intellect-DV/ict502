@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="component/background.css">
     <link rel="stylesheet" href="component/navigation.css">
     <link rel="stylesheet" href="../component/modal__info.css">
+    <link rel="stylesheet" href="../component/modal__confirmation.css">
 
     <link rel="stylesheet" href="css/view-cart.css">
 
@@ -50,6 +51,25 @@
 
             </tbody>
         </table>
+    </div>
+
+    <div class="modal__backdrop hide">
+        <div class="modal-confirm">
+            <div class="header red">
+                Delete Item
+            </div>
+            <div class="content">
+                Are you sure?
+            </div>
+            <div class="action">
+                <button class="btn-confirm red">
+                    Yes
+                </button>
+                <button class="btn-confirm grey">
+                    No
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="modal__info">
