@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>View Cart | Saliza Eja Cafe</title>
+    <title>Checkout | Saliza Eja Cafe</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,60 @@
     <script src="js/logout.js" defer></script>
 </head>
 <body>
+    <header class="navigation">
+        <%@include file="component/navigation.html"%>
+    </header>
+
+    <div class="checkout__box">
+        <div class="checkout__detail">
+            <div class="menu__title">
+                List of Menu
+            </div>
+            <div class="menu__details">
+                <div class="menu__item">
+                    <span>Nasi Goreng Kampung</span>
+                    <i class="fa-solid fa-xmark"></i>
+                    <span>5</span>
+                </div>
+                <div class="menu__item">
+                    <span>Nasi Goreng Kampung</span>
+                    <i class="fa-solid fa-xmark"></i>
+                    <span>5</span>
+                </div>
+                <div class="menu__item">
+                    <span>Nasi Goreng Kampung</span>
+                    <i class="fa-solid fa-xmark"></i>
+                    <span>5</span>
+                </div>
+                <div class="menu__item result">
+                    <span>Total: </span>
+                    <span>RM 30.00</span>
+                </div>
+            </div>
+        </div>
+        <div class="checkout__payment">
+            <div class="payment__title">
+                <span class="title big">Choose Bank <i class="fa-solid fa-wallet"></i></span>
+                <span class="title small">All payment are done via fpx </span>
+            </div>
+            <div class="payment_method__box">
+                <button class="payment_method__btn active" data-value="Maybank">
+                    Maybank
+                </button>
+                <button class="payment_method__btn" data-value="Bank Islam">
+                    Bank Islam
+                </button>
+                <button class="payment_method__btn" data-value="Cimb Bank">
+                    Cimb Bank
+                </button>
+            </div>
+            <div class="payment_action">
+                <button class="payment_action__btn">
+                    Pay
+                </button>
+            </div>
+        </div>
+    </div>
 
     <div class="modal__backdrop hide">
         <div class="modal-confirm">
