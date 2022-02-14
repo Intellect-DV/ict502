@@ -2,6 +2,7 @@ package com.project.ict502.controller;
 
 import com.project.ict502.dataaccess.OrderDA;
 import com.project.ict502.model.Customer;
+import com.project.ict502.model.Worker;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,6 +32,9 @@ public class OrderServlet extends HttpServlet {
         switch(action.toLowerCase()) {
             case "retrieveorderforcust":
                 retrieveForCust(request, response);
+                break;
+            case "retrieveorderforworker":
+                retrieveForWorker(request, response);
                 break;
         }
     }
@@ -62,6 +66,29 @@ public class OrderServlet extends HttpServlet {
         }
 
         json.put("orders", jsonArray);
+        jsonResponse(response, 200, json);
+    }
+
+    private void retrieveForWorker(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            json.put("error", "Please login first!");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        JSONArray orders = OrderDA.retrieveOrders();
+
+        if(orders.length() == 0) {
+            json.put("message", "No order");
+            jsonResponse(response, 200, json);
+            return;
+        }
+
+        json.put("orders", orders);
         jsonResponse(response, 200, json);
     }
 }
