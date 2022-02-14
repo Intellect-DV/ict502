@@ -50,6 +50,9 @@ public class CartServlet extends HttpServlet {
             case "add":
                 addToCart(request, response);
                 break;
+            case "remove":
+                removeFromCart(request, response);
+                break;
             case "delete":
                 deleteCart(request, response);
                 break;
@@ -169,6 +172,86 @@ public class CartServlet extends HttpServlet {
             jsonResponse(response, 200, json);
         } else{
             json.put("error","Cannot add to cart");
+            jsonResponse(response, 400, json);
+        }
+    }
+
+    private void removeFromCart(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        // check customer login info using session
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("customerObj") == null) {
+            json.put("error", "Please login first!");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        Customer currentCustomer = (Customer) session.getAttribute("customerObj");
+
+        // get menu id
+        String menuIdTemp = request.getParameter("menuId");
+
+        if(menuIdTemp == null || menuIdTemp.equals("")) {
+            json.put("error", "Please provide menu id");
+            jsonResponse(response, 400,  json);
+            return;
+        }
+
+        // convert menu id to int
+        int menuId = -1;
+        try {
+            menuId = Integer.parseInt(menuIdTemp);
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        if(menuId <= 0) {
+            json.put("error", "Menu id is invalid format");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        // check menu id if existed
+        Menu currentMenu = MenuDA.retrieveMenuById(menuId);
+        if(currentMenu.getItemId() == -1) {
+            json.put("error", "Menu id is not exist");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        // Check uncompleted order
+        Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+
+        int currentQuantity = CartDA.retrieveCurrentQuantity(menuId, currentOrder.getOrderId());
+
+        if(currentQuantity == -1) {
+            json.put("error", "Quantity not available");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        if(currentQuantity == 1) {
+            boolean succeed = CartDA.deleteCart(menuId, currentOrder.getOrderId());
+
+            if(succeed) {
+                json.put("message", "Removed from cart");
+                jsonResponse(response, 200, json);
+            } else {
+                json.put("message", "Cannot remove from cart");
+                jsonResponse(response, 400, json);
+            }
+            return;
+        }
+
+        boolean succeed = CartDA.updateCart(menuId, currentOrder.getOrderId(), --currentQuantity);
+
+        if(succeed) {
+            json.put("message", "Removed from cart");
+            jsonResponse(response, 200, json);
+        } else {
+            json.put("message", "Cannot remove from cart");
             jsonResponse(response, 400, json);
         }
     }
