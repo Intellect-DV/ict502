@@ -127,7 +127,29 @@ const addQuantity = (menuId) => {
 }
 
 const minusQuantity = (menuId) => {
+    const url = "/cart";
+    const params = new URLSearchParams({
+        "action": "remove",
+        "menuId": menuId
+    });
 
+    axios.post(url, params)
+        .then(res => {
+            const {message} = res.data;
+
+            if(message === "Removed from cart") {
+                getCart();
+            }
+        })
+        .catch(err => {
+            const {error} = err.response.data;
+            modalContent.innerText = error;
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup,2000);
+
+            modalBackdrop.className = "modal__backdrop hide"
+        })
 }
 
 const deleteCart = (menuId) => {
