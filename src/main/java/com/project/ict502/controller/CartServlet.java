@@ -192,7 +192,7 @@ public class CartServlet extends HttpServlet {
         Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
 
         if(tempMenuId == null || tempMenuId.equals("")) {
-            json.put("error", "Order Id / Menu Id is null");
+            json.put("error", "Menu Id is null");
             jsonResponse(response, 400, json);
             return;
         }
@@ -206,7 +206,7 @@ public class CartServlet extends HttpServlet {
         }
 
         if(menuId == -1) {
-            json.put("error", "Order Id / Menu Id is invalid format");
+            json.put("error", "Menu Id is invalid format");
             jsonResponse(response, 400, json);
             return;
         }
