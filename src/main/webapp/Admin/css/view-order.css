@@ -34,3 +34,71 @@
     background: var(--color-orange-dark);
     border-color: var(--color-orange-dark);
 }
+.order__item {
+    background: var(--color-white-dark);
+    width: 40rem;
+    padding: 1rem;
+    margin: 0 auto;
+}
+.order__cust_details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-grey);
+    padding-bottom: 1rem;
+    font-weight: 600;
+    color: var(--color-grey);
+}
+.order__order_details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-grey);
+    padding-bottom: 1rem;
+    font-weight: 500;
+    color: var(--color-grey);
+}
+.order_status {
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5rem;
+}
+.order_status.orange {
+    background: var(--color-orange);
+}
+.order_status.green {
+    background: var(--color-btn-success);
+}
+.order__menu_details {
+    border: 2px solid var(--color-grey);
+    padding: 1rem;
+}
+.menu_item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.menu_item:nth-last-child(1) {
+    margin-bottom: 0;
+}
+.order__action {
+    margin-top: 1rem;
+    text-align: center;
+}
+.order__action > button.btn_set {
+    all: unset;
+    font-size: 0.8rem;
+    background: var(--color-white-dark);
+    border: 2px solid var(--color-orange);
+    color: var(--color-orange);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    transition: all ease-in-out 200ms;
+    cursor: pointer;
+}
+.order__action > button.btn_set:hover {
+    color: white;
+    background: var(--color-orange);
+}
