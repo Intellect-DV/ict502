@@ -74,7 +74,7 @@ public class CartServlet extends HttpServlet {
         Customer currentCustomer = (Customer) session.getAttribute("customerObj");
 
         // get order -- if not exist, response none exist, if existed, search for the cart
-        Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+        Order currentOrder = OrderDA.retrieveUncompletedOrder(currentCustomer.getCustomerId());
 
         if(currentOrder == null) {
             json.put("message", "No order");
@@ -155,10 +155,10 @@ public class CartServlet extends HttpServlet {
         }
 
         // Check uncompleted order, if existed, use the same id, if not create new
-        Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+        Order currentOrder = OrderDA.retrieveUncompletedOrder(currentCustomer.getCustomerId());
         if(currentOrder == null) {
             OrderDA.createOrder(currentCustomer.getCustomerId());
-            currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+            currentOrder = OrderDA.retrieveUncompletedOrder(currentCustomer.getCustomerId());
         }
 
         if(CartDA.addToCart(menuId,currentOrder.getOrderId())) {
@@ -224,7 +224,7 @@ public class CartServlet extends HttpServlet {
         }
 
         // Check uncompleted order
-        Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+        Order currentOrder = OrderDA.retrieveUncompletedOrder(currentCustomer.getCustomerId());
 
         int currentQuantity = CartDA.retrieveCurrentQuantity(menuId, currentOrder.getOrderId());
 
@@ -276,7 +276,7 @@ public class CartServlet extends HttpServlet {
         Customer currentCustomer = (Customer) session.getAttribute("customerObj");
 
         // get order -- if not exist, response none exist, if existed, search for the cart
-        Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+        Order currentOrder = OrderDA.retrieveUncompletedOrder(currentCustomer.getCustomerId());
 
         if(tempMenuId == null || tempMenuId.equals("")) {
             json.put("error", "Menu Id is null");
