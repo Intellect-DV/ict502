@@ -39,6 +39,7 @@
     width: 40rem;
     padding: 1rem;
     margin: 0 auto;
+    margin-bottom: 4rem;
 }
 .order__cust_details {
     display: flex;
