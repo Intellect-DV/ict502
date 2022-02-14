@@ -1,4 +1,5 @@
 const tbody = document.querySelector("#tbody");
+const rootAction = document.querySelector("#root-action");
 let currentOrderId = null;
 
 const modalInfo = document.querySelector(".modal__info");
@@ -23,6 +24,7 @@ const getCart = () => {
 
             if(!(message === undefined)) {
                 tbody.innerHTML = `<tr><td colspan="5">Nothing added in cart</td></tr>`;
+                rootAction.innerHTML = ``;
             } else {
                 generateTableCart(res.data);
             }
@@ -98,6 +100,7 @@ const generateTableCart = (data) => {
                 </tr>`;
 
     tbody.innerHTML = tableCarts;
+    rootAction.innerHTML = `<a href="checkout.jsp">Checkout</a>`;
 }
 
 const addQuantity = (menuId) => {

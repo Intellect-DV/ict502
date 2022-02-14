@@ -51,6 +51,10 @@
 
             </tbody>
         </table>
+
+        <div id="root-action">
+
+        </div>
     </div>
 
     <div class="modal__backdrop hide">
