@@ -220,6 +220,6 @@ public class CartServlet extends HttpServlet {
         }
 
         json.put("message", "Cart item deleted");
-        jsonResponse(response, 400, json);
+        jsonResponse(response, 200, json);
     }
 }
