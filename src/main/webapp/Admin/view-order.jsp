@@ -39,13 +39,15 @@
         <div class="filter">
             <div class="filter__box">
                 <div class="filter__item">
-                    <button class="active" data-menu-type="ongoing">Ongoing</button>
+                    <button class="active" data-order-status="ongoing">Ongoing</button>
                 </div>
                 <div class="filter__item">
-                    <button data-menu-type="complete">Complete</button>
+                    <button data-order-status="complete">Complete</button>
                 </div>
             </div>
         </div>
+
+        <div class="orders__content"> </div>
     </div>
 
     <div class="modal__info">
