@@ -50,7 +50,8 @@ public class CartServlet extends HttpServlet {
             case "add":
                 addToCart(request, response);
                 break;
-            case "":
+            case "delete":
+                deleteCart(request, response);
                 break;
         }
     }
@@ -170,5 +171,55 @@ public class CartServlet extends HttpServlet {
             json.put("error","Cannot add to cart");
             jsonResponse(response, 400, json);
         }
+    }
+
+    private void deleteCart(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+        String tempMenuId = request.getParameter("menuId");
+
+        // check customer login info using session
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("customerObj") == null) {
+            json.put("error", "Please login first!");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        Customer currentCustomer = (Customer) session.getAttribute("customerObj");
+
+        // get order -- if not exist, response none exist, if existed, search for the cart
+        Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+
+        if(tempMenuId == null || tempMenuId.equals("")) {
+            json.put("error", "Order Id / Menu Id is null");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        int menuId = -1;
+
+        try {
+            menuId = Integer.parseInt(tempMenuId);
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        if(menuId == -1) {
+            json.put("error", "Order Id / Menu Id is invalid format");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        boolean succeed = CartDA.deleteCart(menuId, currentOrder.getOrderId());
+
+        if(!succeed) {
+            json.put("error", "Could not delete cart item!");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        json.put("message", "Cart item deleted");
+        jsonResponse(response, 400, json);
     }
 }

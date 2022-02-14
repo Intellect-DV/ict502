@@ -114,4 +114,20 @@ public abstract class CartDA {
 
         return succeed;
     }
+
+    public static boolean deleteCart(int itemId, int orderId) {
+        boolean succeed = false;
+
+        try {
+            String sql = "DELETE FROM cart WHERE itemid=? AND orderid=?";
+
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Integer[] {itemId, orderId});
+
+            if(affectedRow == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return succeed;
+    }
 }
