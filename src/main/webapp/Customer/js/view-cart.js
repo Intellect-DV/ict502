@@ -62,13 +62,13 @@ const generateTableCart = (data) => {
                     </td>
                     <td>
                         <div class="cart__quantity">
-                            <button class="btn_quantity minus">
+                            <button class="btn_quantity minus" onclick="minusQuantity(${cart.menu_id})">
                                 <i class="fa-solid fa-minus"></i>
                             </button>
                             <span class="quantity">
                                 ${cart.menu_quantity}
                             </span>
-                            <button class="btn_quantity plus">
+                            <button class="btn_quantity plus" onclick="addQuantity(${cart.menu_id})">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                             <a class="btn_remove_cart" onclick="deleteCart(${cart.menu_id})">
@@ -100,11 +100,33 @@ const generateTableCart = (data) => {
     tbody.innerHTML = tableCarts;
 }
 
-const addQuantity = (event) => {
+const addQuantity = (menuId) => {
+    const url = "/cart";
+    const params = new URLSearchParams();
 
+    params.append("action", "add");
+    params.append("menuId", menuId);
+
+    axios.post(url, params)
+        .then(res => {
+            const {message} = res.data;
+
+            if(message === "Added to Cart") {
+                getCart();
+            }
+        })
+        .catch(err => {
+            const {error} = err.response.data;
+            modalContent.innerText = error;
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup,2000);
+
+            modalBackdrop.className = "modal__backdrop hide"
+        })
 }
 
-const minusQuantity = (event) => {
+const minusQuantity = (menuId) => {
 
 }
 
