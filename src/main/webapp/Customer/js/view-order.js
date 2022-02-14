@@ -37,8 +37,7 @@ const getOrders = () => {
 
 const generateOrdersHtml = (orders) => {
     let content = orders.map(order => {
-        const {order_menus} = order;
-        const {order_date} = order;
+        const {order_menus, order_date} = order;
         const date = new Date(order_date);
 
         let odr = `<div class="order__item">
