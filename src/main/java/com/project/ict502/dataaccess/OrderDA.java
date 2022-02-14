@@ -61,6 +61,61 @@ public abstract class OrderDA {
         return temp;
     }
 
+    public static JSONArray retrieveOrders() {
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            String sql = "select orderid, orderstatus, orderdate, totalprice, username, custemail from orders odr, customer cs where orderstatus != 'uncompleted' and odr.custid = cs.custid order by orderid desc";
+
+            ResultSet rsOdr = QueryHelper.getResultSet(sql);
+
+            while(rsOdr != null && rsOdr.next()) {
+                JSONObject jsonOdr = new JSONObject();
+
+                int orderId = rsOdr.getInt("orderid");
+                String orderStatus = rsOdr.getString("orderstatus");
+                java.sql.Date orderDate = rsOdr.getDate("orderdate");
+                double totalPrice = rsOdr.getDouble("totalprice");
+                String custUsername = rsOdr.getString("username");
+                String custEmail = rsOdr.getString("custemail");
+
+                jsonOdr.put("order_id", orderId);
+                jsonOdr.put("order_status", orderStatus);
+                jsonOdr.put("order_date", orderDate);
+                jsonOdr.put("order_total_price", totalPrice);
+                jsonOdr.put("cust_username", custUsername);
+                jsonOdr.put("cust_email", custEmail);
+
+                sql = "select itemname, quantity from cart, menu where cart.itemid = menu.itemid and orderid = ?";
+
+                ResultSet rsCart = QueryHelper.getResultSet(sql, new Integer[] {orderId});
+                JSONArray jsonCartArr = new JSONArray();
+
+                while(rsCart != null && rsCart.next()) {
+                    JSONObject jsonCart = new JSONObject();
+
+                    String itemName = rsCart.getString("itemname");
+                    String itemQuantity = rsCart.getString("quantity");
+
+                    jsonCart.put("item_name", itemName);
+                    jsonCart.put("item_quantity", itemQuantity);
+
+                    jsonCartArr.put(jsonCart);
+                }
+
+                jsonOdr.put("order_menus", jsonCartArr);
+
+                jsonArray.put(jsonOdr);
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        } finally {
+            Database.closeConnection();
+        }
+
+        return jsonArray;
+    }
+
     public static JSONArray retrieveOrders (int custId) {
         JSONArray jsonArray = new JSONArray();
 
