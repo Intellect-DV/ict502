@@ -112,4 +112,20 @@ public abstract class OrderDA {
 
         return succeed;
     }
+
+    public static boolean updateOrderStatus(int orderId, String orderStatus) {
+        boolean succeed = false;
+
+        try {
+            String sql = "UPDATE orders SET orderstatus=? WHERE orderid=?";
+
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Object[]{orderStatus, orderId});
+
+            if(affectedRow == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return succeed;
+    }
 }
