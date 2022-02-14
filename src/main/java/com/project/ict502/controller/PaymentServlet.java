@@ -52,7 +52,7 @@ public class PaymentServlet extends HttpServlet {
 
         Customer currentCustomer = (Customer) session.getAttribute("customerObj");
 
-        Order currentOrder = OrderDA.retrieveUncompleteOrder(currentCustomer.getCustomerId());
+        Order currentOrder = OrderDA.retrieveUncompletedOrder(currentCustomer.getCustomerId());
 
         if(currentOrder == null) {
             json.put("error", "There is no order");
@@ -71,7 +71,15 @@ public class PaymentServlet extends HttpServlet {
         succeed = OrderDA.updateOrderStatus(currentOrder.getOrderId(), "ongoing");
 
         if(!succeed) {
-            json.put("error", "Could not update order");
+            json.put("error", "Could not update order status");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        succeed = OrderDA.updateDateNow(currentOrder.getOrderId());
+
+        if(!succeed) {
+            json.put("error", "Could not update order date");
             jsonResponse(response, 400, json);
             return;
         }
