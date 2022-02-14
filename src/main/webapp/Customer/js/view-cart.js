@@ -6,6 +6,10 @@ const modalCard= document.querySelector(".modal__card");
 const modalContent = document.querySelector(".modal__content");
 const modalClose = document.querySelector(".modal__close");
 
+const modalBackdrop = document.querySelector(".modal__backdrop");
+const modalBtnYes = document.querySelector(".action > .btn-confirm.red");
+const modalBtnNo = document.querySelector(".action > .btn-confirm.grey");
+
 window.addEventListener("DOMContentLoaded", () => {
     getCart();
 })
@@ -62,7 +66,7 @@ const generateTableCart = (data) => {
                             <button class="btn_quantity plus">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
-                            <a href="#" class="btn_remove_cart">
+                            <a class="btn_remove_cart" onclick="deleteCart(${cart.menu_id})">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </div>
@@ -99,8 +103,9 @@ const minusQuantity = (event) => {
 
 }
 
-const deleteCart = (event) => {
-
+const deleteCart = (menuId) => {
+    modalBtnYes.dataset.menuId = menuId;
+    modalBackdrop.className = "modal__backdrop";
 }
 
 const closePopup = () => {
@@ -110,3 +115,13 @@ const closePopup = () => {
 }
 
 modalClose.addEventListener("click", () => closePopup())
+
+modalBtnNo.addEventListener("click", () => modalBackdrop.className = "modal__backdrop hide")
+
+modalBtnYes.addEventListener("click", () => {
+    // todo - delete menu
+    const {menuId} = modalBtnYes.dataset;
+    alert(menuId);
+
+    modalBackdrop.className = "modal__backdrop hide"
+})
