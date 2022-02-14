@@ -1,0 +1,36 @@
+.filter {
+    margin-bottom: 2rem;
+}
+.filter__box {
+    background: var(--color-black-trans);
+    padding: 0.625rem 1.25rem;
+    width: 31.25rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.filter__item {
+    display: inline-block;
+}
+.filter__item > button {
+    all: unset;
+    color: white;
+    font-weight: 600;
+    border: 2px solid white;
+    padding: 0.625rem 1.25rem;
+    cursor: pointer;
+}
+.filter__item > button:hover {
+    border-color: var(--color-orange);
+    color: var(--color-orange);
+}
+.filter__item > button.active {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+}
+.filter__item > button.active:hover {
+    color: white;
+    background: var(--color-orange-dark);
+    border-color: var(--color-orange-dark);
+}
