@@ -54,9 +54,12 @@ const retrieveOrders = () => {
         .then(res => {
             const {message, orders} = res.data;
 
-            console.log(message, orders);
             if(!(message === undefined)) {
+                modalContent.innerText = message;
 
+                modalCard.className = "modal__card alert";
+                modalInfo.className = "modal__info active";
+                setTimeout(closePopup, 3000);
             } else {
                 storedOrders = orders;
                 filterOngoingOrders();
@@ -115,7 +118,7 @@ const generateHtml = () => {
 
         if (order.order_status === 'ongoing') {
             output += `<div class="order__action">
-                            <button class="btn_set" data-order-id="${order.order_id}" onclick="changeStatus()">
+                            <button class="btn_set" data-order-id="${order.order_id}" onclick="changeStatus(event)">
                                 Set Status to Complete
                             </button>
                         </div>`;
@@ -127,6 +130,36 @@ const generateHtml = () => {
     }).join("");
 }
 
-const changeStatus = () => {
-    // todo - make http request
+const changeStatus = (event) => {
+    const currentBtn = event.target;
+    const {orderId} = currentBtn.dataset;
+    const url = "/order";
+    const params = new URLSearchParams({
+        "action": "changestatus",
+        "orderId": orderId,
+        "orderStatus": "complete"
+    })
+
+    axios.post(url,params)
+        .then(res => {
+            const {message} = res.data;
+
+            if(message === "Order status updated") {
+                modalContent.innerText = message;
+
+                modalCard.className = "modal__card success";
+                modalInfo.className = "modal__info active";
+                setTimeout(closePopup, 3000);
+
+                retrieveOrders();
+            }
+        })
+        .catch(err => {
+            const {error} = err.response.data;
+
+            modalContent.innerText = error;
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup, 3000);
+        })
 }
