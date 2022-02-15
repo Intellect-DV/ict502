@@ -177,4 +177,23 @@ public abstract class MenuDA {
         return succeed;
     }
 
+    public static int countMenu() {
+        int count = -1;
+
+        try {
+            String sql = "select count(itemid) as totalmenu from menu";
+
+            ResultSet rs = QueryHelper.getResultSet(sql);
+
+            if(rs != null && rs.next()) {
+                count = rs.getInt("totalmenu");
+            }
+        } catch(Exception err) {
+            err.printStackTrace();
+        } finally {
+            Database.closeConnection();
+        }
+
+        return count;
+    }
 }

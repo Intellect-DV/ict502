@@ -44,6 +44,9 @@ public class MenuServlet extends HttpServlet {
             case "getmenuinfo":
                 getMenuInfo(request, response);
                 break;
+            case "getmenucount":
+                getMenuCount(request, response);
+                break;
         }
     }
 
@@ -135,6 +138,29 @@ public class MenuServlet extends HttpServlet {
 
         json.put("content", menuJson);
 
+        jsonResponse(response, 200, json);
+    }
+
+    private void getMenuCount(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            json.put("error", "Please login first");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        int menuCount = MenuDA.countMenu();
+
+        if(menuCount < 0) {
+            json.put("error", "Could not retrieve menu");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        json.put("menu_count", menuCount);
         jsonResponse(response, 200, json);
     }
 
