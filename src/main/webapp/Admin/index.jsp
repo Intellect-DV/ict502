@@ -35,7 +35,7 @@
     </header>
 
     <div class="container">
-
+        <div class="dashboard"> </div>
     </div>
 
     <div class="modal__info">
