@@ -35,30 +35,28 @@ public abstract class OrderDA {
         return succeed;
     }
 
-    public static Order retrieveOrder(int custId) {
-        Order temp = null;
+    public static JSONObject retrieveOrderDetail() {
+        JSONObject jsonObject = new JSONObject();
 
-        try{
-            String sql;
-            sql = "SELECT orderId, orderStatus, orderDate, totalPrice, custId FROM ORDERS WHERE custId=?";
+        try {
+            String sql = "select (select sum(totalprice) from orders where orderstatus != 'uncompleted') as totalsales,(select count(orderid) from orders where orderstatus = 'ongoing') as ongoing,(select count(orderid) from orders where orderstatus = 'complete') as complete from dual";
 
-            ResultSet rs = QueryHelper.getResultSet(sql, new Integer[]{custId});
+            ResultSet rs = QueryHelper.getResultSet(sql);
 
-            if(rs.next()){
-                int orderId = rs.getInt("orderId");
-                String orderStatus = rs.getString("orderStatus");
-                Date orderDate = rs.getDate("orderDate");
-                double totalPrice = rs.getDouble("totalPrice");
+            if(rs != null && rs.next()) {
+                double totalSales = rs.getDouble("totalsales");
+                int ongoing = rs.getInt("ongoing");
+                int complete = rs.getInt("complete");
 
-                temp = new Order(orderId ,orderStatus, orderDate, totalPrice, custId);
+                jsonObject.put("total_sales", totalSales);
+                jsonObject.put("order_ongoing", ongoing);
+                jsonObject.put("order_complete", complete);
             }
         } catch (Exception err) {
             err.printStackTrace();
-        } finally {
-            Database.closeConnection();
         }
 
-        return temp;
+        return jsonObject;
     }
 
     public static JSONArray retrieveOrders() {

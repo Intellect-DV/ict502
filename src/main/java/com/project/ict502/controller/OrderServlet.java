@@ -37,6 +37,9 @@ public class OrderServlet extends HttpServlet {
             case "retrieveorderforworker":
                 retrieveForWorker(request, response);
                 break;
+            case "getordersummary":
+                getOrderSummary(request, response);
+                break;
         }
     }
 
@@ -144,6 +147,29 @@ public class OrderServlet extends HttpServlet {
         }
 
         json.put("message", "Order status updated");
+        jsonResponse(response, 200, json);
+    }
+
+    private void getOrderSummary(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null){
+            json.put("error", "Please login first");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        JSONObject temp = OrderDA.retrieveOrderDetail();
+
+        if(temp.length() <= 0) {
+            json.put("message", "None");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        json = temp;
         jsonResponse(response, 200, json);
     }
 }
