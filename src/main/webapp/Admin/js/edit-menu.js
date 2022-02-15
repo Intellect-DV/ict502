@@ -98,7 +98,7 @@ const generateMenuHTML = (data) => {
                     <div class="menu__desc">${menu.itemDescription}</div>
                     <div class="menu__action">
                         <button onclick='window.location.href="update-menu.jsp?id=${menu.itemId}"'>Update</button>
-                        <button data-menu-id="${menu.itemId}" onclick="triggerConfirmPopup(event)">Delete</button>
+                        <button data-menu-id="${menu.itemId}" data-menu-type="${menu.itemType}" onclick="triggerConfirmPopup(event)">Delete</button>
                     </div>
                 </div>`;
     }).join("");
@@ -107,9 +107,10 @@ const generateMenuHTML = (data) => {
 }
 
 const triggerConfirmPopup = (event) => {
-    const {menuId} = event.target.dataset;
+    const {menuId, menuType} = event.target.dataset;
 
     modalBtnYes.dataset.menuId = menuId;
+    modalBtnYes.dataset.menuType = menuType;
     modalBackdrop.className = "modal__backdrop";
 }
 
@@ -125,7 +126,7 @@ modalBtnNo.addEventListener("click", () => modalBackdrop.className = "modal__bac
 
 modalBtnYes.addEventListener("click", () => {
     // delete http request
-    const {menuId} = modalBtnYes.dataset;
+    const {menuId, menuType} = modalBtnYes.dataset;
     const url = "/menu";
     const params = new URLSearchParams();
 
