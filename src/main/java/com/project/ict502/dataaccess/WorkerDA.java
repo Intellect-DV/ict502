@@ -68,6 +68,26 @@ public abstract class WorkerDA {
         return succeed;
     }
 
+    public static int getWorkerCount() {
+        int count = -1;
+
+        try {
+            String sql = "select count(workerid) as totalworker from worker";
+
+            ResultSet rs = QueryHelper.getResultSet(sql);
+
+            if(rs != null && rs.next()) {
+                count = rs.getInt("totalworker");
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        } finally {
+            Database.closeConnection();
+        }
+
+        return count;
+    }
+
     public static Worker retrieveWorker(String username, String password) {
         Worker worker = new Worker();
 

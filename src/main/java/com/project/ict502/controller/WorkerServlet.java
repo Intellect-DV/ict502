@@ -35,6 +35,9 @@ public class WorkerServlet extends HttpServlet {
             case "retrieveworker":
                 retrieveWorker(request, response);
                 break;
+            case "getworkercount":
+                getWorkerCount(request, response);
+                break;
             case "logout":
                 logoutWorker(request, response);
                 break;
@@ -89,6 +92,29 @@ public class WorkerServlet extends HttpServlet {
         } catch (Exception err) {
             err.printStackTrace();
         }
+    }
+
+    private void getWorkerCount(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            json.put("error", "Please login first");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        int workerCount = WorkerDA.getWorkerCount();
+
+        if(workerCount < 0) {
+            json.put("error", "Could not count worker");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        json.put("worker_count", workerCount);
+        jsonResponse(response, 200, json);
     }
 
     private static void logoutWorker(HttpServletRequest request, HttpServletResponse response) throws IOException {
