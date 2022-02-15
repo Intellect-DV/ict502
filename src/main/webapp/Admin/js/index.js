@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const sendRequest = () => {
     Promise.all([getOrderSummary(), getMenuCount(), getWorkerCount(), getCustomerCount()])
         .then( results => {
-            console.log(results);
+
             const {order_ongoing, order_complete, total_sales} = results[0].data;
             const {menu_count} = results[1].data;
             const {worker_count} = results[2].data;
