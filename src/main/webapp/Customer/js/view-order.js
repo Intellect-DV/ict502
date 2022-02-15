@@ -42,7 +42,7 @@ const generateOrdersHtml = (orders) => {
 
         let odr = `<div class="order__item">
                        <div class="order__detail">
-                            <span class="order__id">${order.order_id}</span>
+                            <span class="order__id">Order ID: ${order.order_id}</span>
                             <span class="order__date">${date.toLocaleDateString()}</span>
                             <span class="order__status${order.order_status === 'ongoing' ? ' yellow' : ' green'}">${order.order_status}</span>
                             <span class="order__total_price">${"RM " + parseFloat(order.order_total_price).toFixed(2)}</span>
