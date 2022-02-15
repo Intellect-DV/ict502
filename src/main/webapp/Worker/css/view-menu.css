@@ -97,25 +97,6 @@
     background: var(--color-orange);
     border-color: var(--color-orange);
 }
-.add_menu__item {
-    width: 25rem;
-    margin: 0 auto;
-    text-align: center;
-}
-.add_menu__item > a {
-    all: unset;
-    cursor: pointer;
-    display: inline-block;
-    box-shadow: 0 0 1.25rem var(--color-black-trans);
-    background: var(--color-orange);
-    color: white;
-    font-weight: 600;
-    padding: 0.625rem 0;
-    width: 100%;
-}
-.add_menu__item > a:hover, .add_menu__item > a:focus {
-    background: var(--color-orange-dark);
-}
 
 @media (max-width: 100rem) {
     .menu {
