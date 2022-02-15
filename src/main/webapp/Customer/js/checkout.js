@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", () => {
     })
 
     modalBtnYes.addEventListener("click", () => {
-        // todo - redirect to other page (view order probably)
+        window.location.href = "./view-order.jsp";
     })
 
     getMenus();
@@ -80,7 +80,7 @@ const makePayment = () => {
             }
         })
         .catch(err => {
-            const {error} = err.response;
+            const {error} = err.response.data;
 
             modalContent.innerText = error;
             modalCard.className = "modal__card failed";
