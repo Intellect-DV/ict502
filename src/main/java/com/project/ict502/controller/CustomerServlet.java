@@ -28,6 +28,9 @@ public class CustomerServlet extends HttpServlet {
         if(action == null) return;
 
         switch (action.toLowerCase()) {
+            case "getcustomercount":
+                getCustomerCount(request, response);
+                break;
             case "logout":
                 logout(request, response);
                 break;
@@ -48,6 +51,31 @@ public class CustomerServlet extends HttpServlet {
                 login(request, response);
                 break;
         }
+    }
+
+    private void getCustomerCount(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            json.put("error", "Please login first");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        int custCount = -1;
+
+        custCount = CustomerDA.countCustomer();
+
+        if(custCount < 0) {
+            json.put("error", "Could not count customer");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        json.put("customer_count", custCount);
+        jsonResponse(response, 200, json);
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException{

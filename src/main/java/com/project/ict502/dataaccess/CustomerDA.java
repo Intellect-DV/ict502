@@ -66,6 +66,26 @@ public abstract class CustomerDA {
         return succeed;
     }
 
+    public static int countCustomer() {
+        int count = -1;
+
+        try {
+            String sql = "select count(custid) as totalcustomer from customer";
+
+            ResultSet rs = QueryHelper.getResultSet(sql);
+
+            if(rs != null && rs.next()) {
+                count = rs.getInt("totalcustomer");
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        } finally {
+            Database.closeConnection();
+        }
+
+        return count;
+    }
+
     // retrieve customer by username and passowrd
     public static Customer retrieveCustomer(String username, String password) {
         Customer cust = new Customer();
