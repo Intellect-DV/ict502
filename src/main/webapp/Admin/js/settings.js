@@ -9,7 +9,9 @@ const modalContent = document.querySelector(".modal__content");
 const modalClose = document.querySelector(".modal__close");
 
 window.addEventListener("DOMContentLoaded", () => {
-    navItem.classList.add("active");
+    if(navItem != null) {
+        navItem.classList.add("active");
+    }
     formProfile.addEventListener("submit", event => {
         event.preventDefault();
 

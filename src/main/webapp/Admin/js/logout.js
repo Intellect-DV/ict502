@@ -2,10 +2,12 @@ const logoutBtn = document.querySelector("#logoutBtn");
 let logoutTimeout;
 
 window.addEventListener("DOMContentLoaded", () => {
-    logoutBtn.addEventListener("click", event => {
-        event.preventDefault();
-        logoutHandler();
-    })
+    if(logoutBtn != null) {
+        logoutBtn.addEventListener("click", event => {
+            event.preventDefault();
+            logoutHandler();
+        })
+    }
 
     document.addEventListener("mousemove", resetLogoutTimer);
     document.addEventListener("keydown", resetLogoutTimer);
