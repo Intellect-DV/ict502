@@ -132,4 +132,24 @@ public abstract class CustomerDA {
 
         return succeed;
     }
+
+    public static boolean updateCustomerPassword(String newPassword, int id) {
+        boolean succeed = false;
+        try{
+            String sql;
+
+            sql = "UPDATE customer set password=? WHERE custid=?";
+
+            int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Object[]{
+                    newPassword,
+                    id
+            });
+
+            if(affectedRow == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return  succeed;
+    }
 }
