@@ -1,7 +1,9 @@
 package com.project.ict502.controller;
 
 import com.project.ict502.dataaccess.CustomerDA;
+import com.project.ict502.dataaccess.WorkerDA;
 import com.project.ict502.model.Customer;
+import com.project.ict502.model.Worker;
 import org.json.JSONObject;
 
 import javax.servlet.*;
@@ -49,6 +51,9 @@ public class CustomerServlet extends HttpServlet {
                 break;
             case "login":
                 login(request, response);
+                break;
+            case "updateprofile":
+                updateProfile(request, response);
                 break;
         }
     }
@@ -157,5 +162,65 @@ public class CustomerServlet extends HttpServlet {
         }
 
         jsonResponse(response, succeed ? 200 : 400 , json);
+    }
+
+    private void updateProfile(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+        String username, name, email;
+
+        username = request.getParameter("username");
+        name = request.getParameter("name");
+        email = request.getParameter("email");
+
+        if(username == null || name == null || email == null || username.equals("") || name.equals("") ||email.equals("")) {
+            System.out.println("Input empty");
+            json.put("error", "Input empty");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        // get manager session
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("customerObj") == null) {
+            System.out.println("Please login first before update profile");
+            json.put("error", "Authorization failed! Please login first!");
+            jsonResponse(response, 401, json);
+            return;
+        }
+
+        Customer currentCust = (Customer) session.getAttribute("customerObj");
+
+        // check if username existed
+        boolean isUsernameExisted = CustomerDA.isUsernameExisted(username).isValid();
+        boolean success = false;
+
+        if(!isUsernameExisted || currentCust.getCustomerUsername().equals(username)) {
+            // update profile
+            System.out.println("Update profile accepted");
+            Customer tempCust = new Customer();
+
+            tempCust.setCustomerUsername(username);
+            tempCust.setCustomerName(name);
+            tempCust.setCustomerEmail(email);
+
+            if(CustomerDA.updateCustomerProfile(tempCust, currentCust.getCustomerId())){
+                currentCust.setCustomerUsername(username);
+                currentCust.setCustomerName(name);
+                currentCust.setCustomerEmail(email);
+
+                session.setAttribute("customerObj", currentCust);
+
+                json.put("message", "Profile updated");
+                success = true;
+            } else {
+                json.put("error", "Cannot update profile");
+            }
+        } else {
+            System.out.println("Cannot update: username duplicated!");
+            json.put("error","Username duplicated");
+        }
+
+        jsonResponse(response,  success ? 200 : 403, json);
     }
 }
