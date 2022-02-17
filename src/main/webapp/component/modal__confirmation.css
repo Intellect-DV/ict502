@@ -37,6 +37,9 @@
 .modal-confirm > .header.red {
     color: rgb(225, 49, 49);
 }
+.modal-confirm > .header.green {
+    color: rgb(14, 185, 14);
+}
 .modal-confirm > .content {
     text-align: center;
     margin-bottom: 1.5rem;
@@ -75,4 +78,14 @@
     background: white;
     border: 2px  solid rgb(225, 49, 49);
     color: rgb(225, 49, 49);
+}
+.modal-confirm > .action > .btn-confirm.green {
+    background: rgb(14, 185, 14);
+    border: 2px  solid rgb(14, 185, 14);
+    color: white;
+}
+.modal-confirm > .action > .btn-confirm.green:hover {
+    background: white;
+    border: 2px  solid rgb(14, 185, 14);
+    color: rgb(14, 185, 14);
 }

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Saliza Eja Cafe</title>
+    <title>Homepage | Saliza Eja Cafe</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/index.css">
 
     <%-- Font Awesome --%>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -32,34 +32,7 @@
 </head>
 <body>
     <header class="navigation">
-        <nav class="navbar">
-            <div class="navbar__brand">
-                <a class="title" href="/Customer/">SEFOS</a>
-            </div>
-            <div class="navbar__list">
-                <div class="navbar__item">
-                    <a href="#">Home</a>
-                </div>
-                <div class="navbar__item">
-                    <a href="#">Cart</a>
-                </div>
-                <div class="navbar__item">
-                    Profile <i class="fas fa-chevron-down"></i>
-                    <div class="dropdown_menu">
-                        <div class="dropdown__inner">
-                            <ul class="dropdown__list">
-                                <li>
-                                    <a href="#">Settings</a>
-                                </li>
-                                <li>
-                                    <a href="#" id="logoutBtn">Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <%@include file="component/navigation.html"%>
     </header>
 
     <div class="container">

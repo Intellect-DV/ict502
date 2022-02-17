@@ -44,6 +44,9 @@ public class MenuServlet extends HttpServlet {
             case "getmenuinfo":
                 getMenuInfo(request, response);
                 break;
+            case "getmenucount":
+                getMenuCount(request, response);
+                break;
         }
     }
 
@@ -138,6 +141,29 @@ public class MenuServlet extends HttpServlet {
         jsonResponse(response, 200, json);
     }
 
+    private void getMenuCount(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json = new JSONObject();
+
+        HttpSession session = request.getSession(false);
+
+        if(session == null || session.getAttribute("workerObj") == null) {
+            json.put("error", "Please login first");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        int menuCount = MenuDA.countMenu();
+
+        if(menuCount < 0) {
+            json.put("error", "Could not retrieve menu");
+            jsonResponse(response, 400, json);
+            return;
+        }
+
+        json.put("menu_count", menuCount);
+        jsonResponse(response, 200, json);
+    }
+
     private void createMenu(HttpServletRequest request, HttpServletResponse response, String applicationPath) {
         JSONObject json = new JSONObject();
 
@@ -194,6 +220,8 @@ public class MenuServlet extends HttpServlet {
 
         if(part == null) {
             json.put("error", "Image file is null");
+            jsonResponse(response, 400, json);
+            return;
         }
 
         String host = request.getScheme() + "://" + request.getHeader("host") + "/";
@@ -310,23 +338,17 @@ public class MenuServlet extends HttpServlet {
         }
 
         String idTemp = request.getParameter("id");
-        String parentIdTemp = request.getParameter("parentId");
-        String type = request.getParameter("type");
 
-        if(idTemp == null || idTemp.equals("") || type == null || type.equals("")) {
+        if(idTemp == null || idTemp.equals("")) {
             json.put("error", "Input empty");
             jsonResponse(response, 400, json);
             return;
         }
 
-        int id = -1, parentId = -1;
+        int id = -1;
 
         try {
             id = Integer.parseInt(idTemp);
-
-            if(!(parentIdTemp == null || parentIdTemp.equals(""))) {
-                parentId = Integer.parseInt(parentIdTemp);
-            }
         } catch (Exception err) {
             err.printStackTrace();
             json.put("error", "Id must be number and not null");
@@ -340,7 +362,7 @@ public class MenuServlet extends HttpServlet {
 
         picUrl = MenuDA.retrieveMenuById(id).getItemPicUrl();
 
-        String realPath = applicationPath + "upload" + File.separator + picUrl.split("/")[2];
+        String realPath = applicationPath + "upload" + File.separator + picUrl.split("/")[4];
 
         boolean succeed;
         succeed = MenuDA.deleteMenu(id);
@@ -349,6 +371,7 @@ public class MenuServlet extends HttpServlet {
             File file = new File(realPath);
             if(file.exists()) {
                 file.delete(); // delete file from upload folder
+                System.out.println("Real Path: " + realPath);
             }
 
             json.put("message", "The menu has been successfully deleted!");

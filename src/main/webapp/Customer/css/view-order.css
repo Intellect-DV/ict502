@@ -1,0 +1,50 @@
+.order__item {
+    background: var(--color-white-dark);
+    width: 50rem;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+.order__detail {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 2rem;
+    color: var(--color-grey);
+}
+.order__status {
+    color: white;
+    padding: 0.5rem 0.5rem;
+    border-radius: 5rem;
+    font-weight: 500;
+}
+.order__status.green {
+    background: var(--color-btn-success);
+}
+.order__status.yellow {
+    background: var(--color-btn-alert);
+}
+.order__total_price {
+    color: var(--color-orange);
+    font-weight: 600;
+}
+.order__all_menus {
+    font-weight: 600;
+    color: var(--color-grey);
+}
+.order__all_menus > .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6rem;
+    margin-bottom: 2rem;
+}
+.order__all_menus > .menu:nth-last-child(1) {
+    margin-bottom: 0;
+}
+.menu__pic > img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+}

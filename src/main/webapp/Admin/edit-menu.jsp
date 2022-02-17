@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="css/edit-menu.css">
 
     <%-- Font Awesome --%>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <%-- Axios - to make Http request --%>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -33,31 +33,7 @@
 </head>
 <body>
     <header class="navigation">
-        <nav class="navbar">
-            <div class="navbar__user">
-                ${sessionScope.workerObj.getWorkerUsername()}
-            </div>
-            <div class="navbar__list">
-                <a href="./" class="navigation__item">
-                    <i class="fas fa-th-large"></i> General
-                </a>
-                <a href="./view-order.jsp" class="navigation__item">
-                    <i class="fas fa-utensils"></i> Order
-                </a>
-                <a href="./edit-menu.jsp" class="navigation__item active">
-                    <i class="fas fa-clipboard-list"></i> Menu
-                </a>
-                <a href="./manage-worker.jsp" class="navigation__item">
-                    <i class="fas fa-users"></i> Worker
-                </a>
-                <a href="./settings.jsp" class="navigation__item line">
-                    <i class="fas fa-user-cog"></i> Settings
-                </a>
-                <a href="#" id="logoutBtn" class="navigation__item">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </div>
-        </nav>
+        <%@include file="component/navigation.jsp"%>
     </header>
 
     <div class="container">

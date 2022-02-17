@@ -1,3 +1,4 @@
+const navItem = document.querySelector(".navigation__item[href='./edit-menu.jsp']");
 const filterBtn = document.querySelectorAll(".filter__item > button");
 const menuDiv = document.querySelector("div.menu");
 
@@ -11,6 +12,7 @@ const modalBtnYes = document.querySelector(".action > .btn-confirm.red");
 const modalBtnNo = document.querySelector(".action > .btn-confirm.grey");
 
 window.addEventListener("DOMContentLoaded", () => {
+    navItem.classList.add("active");
     for(let i = 0; i <  filterBtn.length; i++) {
         filterBtn[i].addEventListener("click", event => {
             filterBtn[0].removeAttribute("class");
@@ -95,7 +97,7 @@ const generateMenuHTML = (data) => {
                     <div class="menu__price">${menu.itemPriceToCurrency}</div>
                     <div class="menu__desc">${menu.itemDescription}</div>
                     <div class="menu__action">
-                        <button onclick='window.location.href="update-menu.jsp?id=${menu.itemId}'>Update</button>
+                        <button onclick='window.location.href="update-menu.jsp?id=${menu.itemId}"'>Update</button>
                         <button data-menu-id="${menu.itemId}" data-menu-type="${menu.itemType}" onclick="triggerConfirmPopup(event)">Delete</button>
                     </div>
                 </div>`;
@@ -124,7 +126,7 @@ modalBtnNo.addEventListener("click", () => modalBackdrop.className = "modal__bac
 
 modalBtnYes.addEventListener("click", () => {
     // delete http request
-    const {menuId,menuType} = modalBtnYes.dataset;
+    const {menuId, menuType} = modalBtnYes.dataset;
     const url = "/menu";
     const params = new URLSearchParams();
 

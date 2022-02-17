@@ -1,3 +1,5 @@
+const navItem = document.querySelector(".navigation__item[href='./manage-worker.jsp']");
+
 const modalInfo = document.querySelector(".modal__info");
 const modalCard = document.querySelector(".modal__card");
 const modalContent = document.querySelector(".modal__content");
@@ -6,7 +8,7 @@ const modalClose = document.querySelector(".modal__close");
 const form = document.querySelector(".form__add_worker");
 
 window.addEventListener("DOMContentLoaded", () => {
-
+    navItem.classList.add("active");
     form.addEventListener("submit", event => {
         event.preventDefault();
 

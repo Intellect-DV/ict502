@@ -21,7 +21,7 @@
     padding: 0.625rem 1.25rem;
     cursor: pointer;
 }
-.filter__item > button:hover, .filter__item > button:focus {
+.filter__item > button:hover {
     border-color: var(--color-orange);
     color: var(--color-orange);
 }
@@ -29,7 +29,7 @@
     background: var(--color-orange);
     border-color: var(--color-orange);
 }
-.filter__item > button.active:hover, .filter__item > button.active:focus {
+.filter__item > button.active:hover {
     color: white;
     background: var(--color-orange-dark);
     border-color: var(--color-orange-dark);
