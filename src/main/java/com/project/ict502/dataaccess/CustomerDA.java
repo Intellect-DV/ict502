@@ -110,4 +110,26 @@ public abstract class CustomerDA {
 
         return cust;
     }
+
+    public static boolean updateCustomerProfile(Customer updateCust, int id) {
+        boolean succeed = false;
+        try {
+            String sql;
+
+            sql = "UPDATE customer set username=?, custname=?, custemail=? WHERE custid=?";
+
+            int affectedRow  = QueryHelper.insertUpdateDeleteQuery(sql,new Object[]{
+                    updateCust.getCustomerUsername(),
+                    updateCust.getCustomerName(),
+                    updateCust.getCustomerEmail(),
+                    id
+            });
+
+            if(affectedRow == 1) succeed = true;
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        return succeed;
+    }
 }
