@@ -362,7 +362,7 @@ public class MenuServlet extends HttpServlet {
 
         picUrl = MenuDA.retrieveMenuById(id).getItemPicUrl();
 
-        String realPath = applicationPath + "upload" + File.separator + picUrl.split("/")[2];
+        String realPath = applicationPath + "upload" + File.separator + picUrl.split("/")[4];
 
         boolean succeed;
         succeed = MenuDA.deleteMenu(id);
@@ -371,6 +371,7 @@ public class MenuServlet extends HttpServlet {
             File file = new File(realPath);
             if(file.exists()) {
                 file.delete(); // delete file from upload folder
+                System.out.println("Real Path: " + realPath);
             }
 
             json.put("message", "The menu has been successfully deleted!");
