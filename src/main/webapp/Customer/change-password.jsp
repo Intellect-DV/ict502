@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Aiman
-  Date: 11/2/2022
-  Time: 6:11 PM
+  Date: 17/2/2022
+  Time: 5:52 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -31,39 +31,35 @@
     <script src="js/logout.js" defer></script>
 </head>
 <body>
-    <header class="navigation">
-        <%@include file="component/navigation.html"%>
-    </header>
-
     <div class="container">
-        <form class="form_profile" data-action="updateprofile">
+        <form class="form_profile" data-action="updatepassword">
             <div class="form_profile__title">Profile Settings</div>
             <div class="form_profile__item">
-                <label for="username">Username: </label>
-                <input type="text" id="username" name="username" placeholder="Username" autocomplete="off" required value="${sessionScope.workerObj.getWorkerUsername()}">
+                <label for="current-password">Current Password: </label>
+                <input type="password" id="current-password" name="current-password" placeholder="Current Password" autocomplete="off" required>
             </div>
             <div class="form_profile__item">
-                <label for="name">Name: </label>
-                <input type="text" id="name" name="name" placeholder="Name" autocomplete="off" required value="${sessionScope.workerObj.getWorkerName()}">
+                <label for="new-password">New Password: </label>
+                <input type="password" id="new-password" name="new-password" placeholder="Enter Password" autocomplete="off" required>
             </div>
             <div class="form_profile__item">
-                <label for="email">Email: </label>
-                <input type="email" id="email" name="email" placeholder="Email" autocomplete="off" required value="${sessionScope.workerObj.getWorkerEmail()}">
+                <label for="confirm-password">Confirm Password: </label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter Password" autocomplete="off" required>
             </div>
 
-            <button type="submit">Update</button>
-            <span class="form_profile__link"><a href="change-password.jsp"> Change Password </a></span>
+            <button type="submit">Change Password</button>
+            <span class="form_profile__link"><a href="settings.jsp"> Go Back </a></span>
         </form>
     </div>
 
     <div class="modal__info">
         <div class="modal__card failed">
-                <span class="modal__content">
+                    <span class="modal__content">
 
-                </span>
+                    </span>
             <span class="modal__close">
-                    <i class="fas fa-times"></i>
-                </span>
+                        <i class="fas fa-times"></i>
+                    </span>
         </div>
     </div>
 </body>
