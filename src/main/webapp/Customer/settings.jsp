@@ -57,13 +57,13 @@
     </div>
 
     <div class="modal__info">
-        <div class="modal__card failed">
-                <span class="modal__content">
+        <div class="modal__card">
+            <span class="modal__content">
 
-                </span>
+            </span>
             <span class="modal__close">
-                    <i class="fas fa-times"></i>
-                </span>
+                <i class="fas fa-times"></i>
+            </span>
         </div>
     </div>
 </body>
