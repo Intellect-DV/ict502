@@ -14,11 +14,8 @@ public abstract class MenuDA {
         try {
             String sql;
 
-            if(Database.getDbType().equals("postgres")) {
-                sql = "INSERT INTO menu(name, price, description, pic_path, type) VALUES (?,?,?,?,?)";
-            } else {
-                sql = "INSERT INTO menu(itemname,itemprice,itemdesc,itempic,itemtype) VALUES (?,?,?,?,?)";
-            }
+            sql = "INSERT INTO menu(itemname,itemprice,itemdesc,itempic,itemtype) VALUES (?,?,?,?,?)";
+
             int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Object[] {
                     menu.getItemName(),
                     menu.getItemPrice(),
@@ -41,11 +38,8 @@ public abstract class MenuDA {
         ArrayList <Menu> menus = new ArrayList<>();
         try {
             String sql;
-            if(Database.getDbType().equals("postgres")) {
-                sql = "SELECT * FROM menu order by type";
-            } else {
-                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path, itemtype as type FROM menu order by itemtype";
-            }
+
+            sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path, itemtype as type FROM menu order by itemtype";
 
             ResultSet rs = QueryHelper.getResultSet(sql);
 
@@ -76,11 +70,9 @@ public abstract class MenuDA {
         try {
             String sql;
             ResultSet rs;
-            if(Database.getDbType().equals("postgres")) {
-                sql = "SELECT * FROM menu WHERE type=?";
-            } else {
-                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path FROM menu WHERE itemtype=?";
-            }
+
+            sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path FROM menu WHERE itemtype=?";
+
             rs = QueryHelper.getResultSet(sql,new String[]{type});
 
             while(rs.next()) {
@@ -107,11 +99,7 @@ public abstract class MenuDA {
         Menu menu = new Menu();
 
         try {
-            String sql = "SELECT id, name, price, description, pic_path FROM menu WHERE id=?";
-
-            if(Database.getDbType().equals("oracle")) {
-                sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path FROM menu WHERE itemid=?";
-            }
+            String sql = "SELECT itemid as id, itemname as name, itemprice as price, itemdesc as description, itempic as pic_path FROM menu WHERE itemid=?";
 
             ResultSet rs = QueryHelper.getResultSet(sql,new Integer[]{id});
 
@@ -136,11 +124,7 @@ public abstract class MenuDA {
         boolean succeed = false;
 
         try {
-            String sql = "UPDATE menu SET name=?, price=?, description=? WHERE id=?";
-
-            if(Database.getDbType().equals("oracle")) {
-                sql = "UPDATE menu SET itemname=?, itemprice=?, itemdesc=? WHERE itemid=?";
-            }
+            String sql = "UPDATE menu SET itemname=?, itemprice=?, itemdesc=? WHERE itemid=?";
 
             int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql,new Object[] {
                     name, price, description, id
@@ -159,11 +143,7 @@ public abstract class MenuDA {
         boolean succeed = false;
 
         try {
-            String sql = "DELETE FROM menu WHERE id=?";
-
-            if(Database.getDbType().equals("oracle")) {
-                sql = "DELETE FROM menu WHERE itemid=?";
-            }
+            String sql = "DELETE FROM menu WHERE itemid=?";
 
             int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Integer[]{
                     id

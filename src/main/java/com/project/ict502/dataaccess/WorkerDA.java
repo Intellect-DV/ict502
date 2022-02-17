@@ -15,11 +15,7 @@ public abstract class WorkerDA {
 
         try {
             String sql;
-            if(Database.getDbType().equals("oracle")) {
-                sql = "SELECT workerid as id FROM worker WHERE username=?";
-            } else {
-                sql = "SELECT id FROM worker WHERE username=?";
-            }
+            sql = "SELECT workerid as id FROM worker WHERE username=?";
 
             ResultSet rs = QueryHelper.getResultSet(sql, new String[]{username});
 
@@ -45,11 +41,7 @@ public abstract class WorkerDA {
         try {
             String sql;
 
-            if(Database.getDbType().equals("oracle")){
-                sql = "INSERT INTO worker (username, password, workername, workeremail, managerid) VALUES (?,?,?,?,?)";
-            } else {
-                sql = "INSERT INTO worker (username, password, name, email, manager_id) VALUES (?,?,?,?,?)";
-            }
+            sql = "INSERT INTO worker (username, password, workername, workeremail, managerid) VALUES (?,?,?,?,?)";
 
             Object[] obj = new Object[] {
                     worker.getWorkerUsername(),
@@ -95,11 +87,7 @@ public abstract class WorkerDA {
             // COALESCE = NVL in oracle
             String sql = null;
 
-            if(Database.getDbType().equals("oracle")) {
-                sql = "SELECT workerid as id, workername as name, workeremail as email, NVL(to_char(managerid),-1) AS manager_id FROM worker WHERE username=? AND password=?";
-            } else {
-                sql = "SELECT id, name, email, COALESCE(manager_id,-1) AS manager_id FROM worker WHERE username=? AND password=?";
-            }
+            sql = "SELECT workerid as id, workername as name, workeremail as email, COALESCE(managerid,-1) AS manager_id FROM worker WHERE username=? AND password=?";
 
             ResultSet rs = QueryHelper.getResultSet(sql, new String[] {username, password});
 
@@ -131,11 +119,7 @@ public abstract class WorkerDA {
         try {
             String sql;
 
-            if(Database.getDbType().equals("oracle")) {
-                sql = "SELECT workerid as id, username, workername as name, workeremail as email FROM worker WHERE managerid=? ORDER BY workerid ASC";
-            } else {
-                sql = "SELECT id, username, name, email FROM worker WHERE manager_id=? ORDER BY id ASC";
-            }
+            sql = "SELECT workerid as id, username, workername as name, workeremail as email FROM worker WHERE managerid=? ORDER BY workerid ASC";
 
             ResultSet rs = QueryHelper.getResultSet(sql,new Integer[]{
                     id
@@ -166,11 +150,7 @@ public abstract class WorkerDA {
         try {
             String sql;
 
-            if(Database.getDbType().equals("oracle")) {
-                sql = "UPDATE worker set username=?, workername=?, workeremail=? WHERE workerid=?";
-            } else {
-                sql = "UPDATE worker set username=?, name=?, email=? WHERE id=?";
-            }
+            sql = "UPDATE worker set username=?, workername=?, workeremail=? WHERE workerid=?";
 
             int affectedRow  = QueryHelper.insertUpdateDeleteQuery(sql,new Object[]{
                     updateWorker.getWorkerUsername(),
@@ -192,11 +172,7 @@ public abstract class WorkerDA {
         try{
             String sql;
 
-            if(Database.getDbType().equals("oracle")) {
-                sql = "UPDATE worker set password=? WHERE workerid=?";
-            } else {
-                sql = "UPDATE worker set password=? WHERE id=?";
-            }
+            sql = "UPDATE worker set password=? WHERE workerid=?";
 
             int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Object[]{
                     newPassword,
@@ -216,11 +192,7 @@ public abstract class WorkerDA {
         try{
             String sql;
 
-            if(Database.getDbType().equals("oracle")) {
-                sql = "DELETE FROM worker WHERE workerid=?";
-            } else {
-                sql = "DELETE FROM worker WHERE id=?";
-            }
+            sql = "DELETE FROM worker WHERE workerid=?";
 
             int affectedRow = QueryHelper.insertUpdateDeleteQuery(sql, new Integer[] {
                     id

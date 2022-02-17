@@ -15,11 +15,8 @@ public abstract class CustomerDA {
 
         try {
             String sql;
-            if(Database.getDbType().equals("oracle")) {
-                sql = "SELECT custid FROM customer WHERE username=?";
-            } else {
-                sql = "SELECT id FROM customer WHERE username=?";
-            }
+            sql = "SELECT custid FROM customer WHERE username=?";
+
             ResultSet rs = QueryHelper.getResultSet(sql, new String[]{username});
 
             if (rs.next()) {
@@ -44,11 +41,7 @@ public abstract class CustomerDA {
         try {
             String sql;
 
-            if(Database.getDbType().equals("oracle")) {
-                sql = "INSERT INTO customer(username,password,custname,custemail) VALUES (?,?,?,?)";
-            } else {
-                sql = "INSERT INTO customer(username, password, name, email) VALUES (?,?,?,?)";
-            }
+            sql = "INSERT INTO customer(username,password,custname,custemail) VALUES (?,?,?,?)";
 
             Object[] obj = new Object[] {
                     cust.getCustomerUsername(),
@@ -93,11 +86,7 @@ public abstract class CustomerDA {
         try {
             String sql;
 
-            if(Database.getDbType().equals("oracle")) {
-                sql = "SELECT custid as id, custname as name, custemail as email FROM customer WHERE username=? AND password=?";
-            } else {
-                sql = "SELECT id, name, email FROM customer WHERE username=? AND password=?";
-            }
+            sql = "SELECT custid as id, custname as name, custemail as email FROM customer WHERE username=? AND password=?";
 
             ResultSet rs = QueryHelper.getResultSet(sql, new String[] {username, password});
 

@@ -39,7 +39,11 @@ public abstract class OrderDA {
         JSONObject jsonObject = new JSONObject();
 
         try {
-            String sql = "select (select sum(totalprice) from orders where orderstatus != 'uncompleted') as totalsales,(select count(orderid) from orders where orderstatus = 'ongoing') as ongoing,(select count(orderid) from orders where orderstatus = 'complete') as complete from dual";
+            String sql = "select (select sum(totalprice) from orders where orderstatus != 'uncompleted') as totalsales,(select count(orderid) from orders where orderstatus = 'ongoing') as ongoing,(select count(orderid) from orders where orderstatus = 'complete') as complete";
+
+            if(Database.getDbType().equals("oracle")) {
+                sql += " from dual";
+            }
 
             ResultSet rs = QueryHelper.getResultSet(sql);
 
