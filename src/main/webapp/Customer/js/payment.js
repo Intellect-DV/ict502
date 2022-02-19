@@ -1,4 +1,7 @@
-const paymentContent = document.querySelector(".payment__content");
+const paymentForm = document.querySelector(".payment__form");
+const paymentOptions = document.querySelectorAll(".payment__tab > .option");
+let creditDebitHtml;
+let fpxHtml;
 
 const modalInfo = document.querySelector(".modal__info");
 const modalCard = document.querySelector(".modal__card");
@@ -9,15 +12,45 @@ const modalBackdrop = document.querySelector(".modal__backdrop");
 const modalBtnYes = document.querySelector(".action > .btn-confirm.green");
 
 window.addEventListener("DOMContentLoaded", () => {
-    getCreditDebitForm()
+    paymentOptions.forEach((option) => {
+        option.addEventListener("click", paymentOptionHandler)
+    })
+
+    getHtmlForm();
 })
 
-const getCreditDebitForm = () => {
-   axios.get("component/payment__credit_debit.html")
-       .then(res => {
-           paymentContent.innerHTML = res.data;
+const paymentOptionHandler = (event) => {
+    const current = event.target;
+    const {option} = current.dataset;
+
+    paymentOptions.forEach((option) => {
+        option.className = "option";
+    })
+
+    current.classList.add("active");
+
+    if(option === "fpx") {
+        paymentForm.innerHTML = fpxHtml;
+        return;
+    }
+
+    paymentForm.innerHTML = creditDebitHtml;
+}
+
+const getHtmlForm = () => {
+    Promise.all([getCreditDebitForm(), getFpxForm()])
+        .then(contents => {
+            creditDebitHtml = contents[0].data;
+            fpxHtml = contents[1].data;
+
+            paymentForm.innerHTML = creditDebitHtml;
         })
-       .catch(err => {
-            console.log(err.response.data);
-       })
+}
+
+const getCreditDebitForm = () => {
+   return axios.get("component/payment__credit_debit.html");
+}
+
+const getFpxForm = () => {
+    return axios.get("component/payment__fpx.html");
 }
