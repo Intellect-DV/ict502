@@ -42,9 +42,9 @@
             </button>
         </div>
         <div class="payment__content">
-            <div class="payment__form">
+            <form class="payment__form">
 
-            </div>
+            </form>
         </div>
     </div>
 
