@@ -60,13 +60,12 @@
 .form__field > label {
     font-weight: 500;
 }
-.payment__form > .form__field > input {
+.payment__form > .form__field > input, .payment__form > .form__field > select {
     font: inherit;
     padding: 0.3rem 0.6rem;
     border: 1px solid black;
-
 }
-.payment__form > .form__field > input:focus {
+.payment__form > .form__field > input:focus, .payment__form > .form__field > select:focus {
     outline: 2px solid var(--color-orange);
 }
 .form__btn {
