@@ -71,7 +71,7 @@
 .form__btn {
     text-align: center;
 }
-.form__btn > button {
+.form__btn > .submit {
     all: unset;
     background: var(--color-btn-success);
     color: var(--color-white-dark);
@@ -79,6 +79,6 @@
     cursor: pointer;
     font-weight: 600;
 }
-.form__btn > button:hover {
+.form__btn > .submit:hover {
     background: var(--color-btn-success-hover);
 }
