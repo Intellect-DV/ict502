@@ -65,22 +65,6 @@
         </div>
     </div>
 
-    <div class="modal__backdrop hide">
-        <div class="modal-confirm">
-            <div class="header green">
-                Success
-            </div>
-            <div class="content">
-                Payment has been made
-            </div>
-            <div class="action">
-                <button class="btn-confirm green">
-                    Okay
-                </button>
-            </div>
-        </div>
-    </div>
-
     <div class="modal__info">
         <div class="modal__card failed">
             <span class="modal__content">
