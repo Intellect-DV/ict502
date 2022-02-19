@@ -30,6 +30,35 @@ window.addEventListener("DOMContentLoaded", () => {
         for(let key of formData.keys()){
             params.append(key, String(formData.get(key)));
         }
+
+        axios.post(url, params)
+            .then(response => {
+                const {message} = response.data;
+
+                if(message === "Profile updated") {
+                    modalContent.innerText = "Profile successfully updated!";
+                } else if(message === "Password updated"){
+                    modalContent.innerText = "Password successfully updated!";
+                }
+                modalCard.className = "modal__card success";
+                modalInfo.className = "modal__info active";
+                setTimeout(closePopup, 1500);
+                setTimeout(()=> {
+                    window.location.href = "settings.jsp";
+                }, 1600);
+            })
+            .catch(err => {
+                const {error} = err.response.data;
+
+                if(error === "Username duplicated") {
+                    modalContent.innerText = "Cannot update profile! Please use another username.";
+                } else {
+                    modalContent.innerText = error;
+                }
+                modalCard.className = "modal__card failed";
+                modalInfo.className = "modal__info active";
+                setTimeout(closePopup, 1500);
+            })
     })
 })
 

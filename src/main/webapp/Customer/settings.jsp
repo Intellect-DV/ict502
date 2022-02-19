@@ -40,15 +40,15 @@
             <div class="form_profile__title">Profile Settings</div>
             <div class="form_profile__item">
                 <label for="username">Username: </label>
-                <input type="text" id="username" name="username" placeholder="Username" autocomplete="off" required value="${sessionScope.workerObj.getWorkerUsername()}">
+                <input type="text" id="username" name="username" placeholder="Username" autocomplete="off" required value="${sessionScope.customerObj.getCustomerUsername()}">
             </div>
             <div class="form_profile__item">
                 <label for="name">Name: </label>
-                <input type="text" id="name" name="name" placeholder="Name" autocomplete="off" required value="${sessionScope.workerObj.getWorkerName()}">
+                <input type="text" id="name" name="name" placeholder="Name" autocomplete="off" required value="${sessionScope.customerObj.getCustomerName()}">
             </div>
             <div class="form_profile__item">
                 <label for="email">Email: </label>
-                <input type="email" id="email" name="email" placeholder="Email" autocomplete="off" required value="${sessionScope.workerObj.getWorkerEmail()}">
+                <input type="email" id="email" name="email" placeholder="Email" autocomplete="off" required value="${sessionScope.customerObj.getCustomerEmail()}">
             </div>
 
             <button type="submit">Update</button>
