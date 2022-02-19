@@ -44,6 +44,9 @@
     border: 2px solid var(--color-grey);
     padding: 1rem;
 }
+.payment__title {
+    margin-bottom: 1rem;
+}
 .payment__title > .title.big {
     display: block;
     font-size: 1.3rem;
@@ -56,7 +59,15 @@
     display: block;
     margin-bottom: 1rem;
 }
-.payment_method__box {
+.payment_method__box > div {
+    margin-bottom: 1.2rem;
+}
+.payment_method__box > .details > div {
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    color: var(--color-grey);
+}
+.payment_method__box > .button_method {
     display: flex;
     gap: 0.5rem;
     justify-content: space-evenly;
@@ -65,19 +76,22 @@
     font-size: 0.8rem;
     margin-bottom: 1.5rem;
 }
-.payment_method__box > .payment_method__btn {
+.payment_method__box > .button_method > .payment_method__btn {
     all: unset;
     background: var(--color-grey);
     color: white;
     padding: 0.5rem;
+    cursor: pointer;
+    width: 6rem;
+    text-align: center;
 }
-.payment_method__box > .payment_method__btn:hover {
+.payment_method__box > .button_method > .payment_method__btn:hover {
     background: var(--color-grey-hover);
 }
-.payment_method__box > .payment_method__btn.active {
+.payment_method__box > .button_method > .payment_method__btn.active {
     background: var(--color-orange);
 }
-.payment_action__btn {
+.payment_action__proceed > .payment_action__proceed_btn {
     all: unset;
     background: var(--color-btn-success);
     color: white;
@@ -87,14 +101,11 @@
     margin: 0 auto;
     cursor: pointer;
 }
-.payment_action__btn:hover {
+.payment_action__proceed > .payment_action__proceed_btn:hover {
     background: var(--color-btn-success-hover);
 }
 @media screen and (min-width: 93.75rem) {
     .checkout__box {
         width: 75rem;
-    }
-    .checkout__payment {
-        width: 24.375rem;
     }
 }
