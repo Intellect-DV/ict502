@@ -16,6 +16,15 @@ window.addEventListener("DOMContentLoaded", () => {
         option.addEventListener("click", paymentOptionHandler)
     })
 
+    paymentForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        makePayment();
+    })
+
+    modalBtnYes.addEventListener("click", () => {
+        window.location.href = "./view-order.jsp";
+    })
+
     getHtmlForm();
 })
 
@@ -54,3 +63,35 @@ const getCreditDebitForm = () => {
 const getFpxForm = () => {
     return axios.get("component/payment__fpx.html");
 }
+
+const makePayment = () => {
+    const url = "/payment";
+    const params = new URLSearchParams({"action": "makepayment"});
+
+    axios.post(url, params)
+        .then(res => {
+            const {message} = res.data;
+
+            if(message === "Payment created") {
+                modalBackdrop.className = "modal__backdrop";
+            }
+        })
+        .catch(err => {
+            const {error} = err.response.data;
+
+            modalContent.innerText = error;
+            modalCard.className = "modal__card failed";
+            modalInfo.className = "modal__info active";
+            setTimeout(closePopup, 1500);
+        })
+}
+
+function closePopup() {
+    if(modalInfo.className === "modal__info active") {
+        modalInfo.className = "modal__info";
+    }
+}
+
+modalClose.addEventListener("click", () => {
+    closePopup();
+})
