@@ -42,11 +42,13 @@
 }
 .form_profile__link {
     font: inherit;
-    color: rgb(25, 140, 255);
     display: block;
     text-align: center;
     font-weight: 600;
 }
 .form_profile__link > a {
-    color: inherit;
+    color: var(--color-btn-link);
+}
+.form_profile__link > a:hover {
+    color: var(--color-btn-link-hover);
 }
