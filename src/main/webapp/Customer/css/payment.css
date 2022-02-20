@@ -1,0 +1,84 @@
+.payment__box {
+    background: var(--color-white-dark);
+    padding: 1.5rem;
+    width: 30rem;
+    margin: 0 auto;
+}
+.payment__box > .payment__tab {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.payment__tab > .option {
+    all: unset;
+    border: 2px solid var(--color-grey);
+    padding: 0.5rem 1rem;
+    width: 7rem;
+    text-align: center;
+    color: var(--color-grey);
+    font-weight: 600;
+    cursor: pointer;
+}
+.payment__tab > .option.active {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    color: white;
+}
+.payment__tab > .option.active:hover {
+    color: white;
+}
+.payment__tab > .option.active {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    color: white;
+}
+.payment__tab > .option.active {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    color: white;
+}
+.payment__tab > .option:hover {
+    border-color: var(--color-orange);
+    color: var(--color-orange);
+}
+.payment__tab > .option.active:hover {
+    color: var(--color-white-dark);
+}
+.payment__content > form {
+    margin: 0;
+}
+.payment__form > .form__field {
+    margin-bottom: 1rem;
+}
+.payment__form > .form__field {
+    display: flex;
+    padding: 0 2rem;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.form__field > label {
+    font-weight: 500;
+}
+.payment__form > .form__field > input, .payment__form > .form__field > select {
+    font: inherit;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid black;
+}
+.payment__form > .form__field > input:focus, .payment__form > .form__field > select:focus {
+    outline: 2px solid var(--color-orange);
+}
+.form__btn {
+    text-align: center;
+}
+.form__btn > .submit {
+    all: unset;
+    background: var(--color-btn-success);
+    color: var(--color-white-dark);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+.form__btn > .submit:hover {
+    background: var(--color-btn-success-hover);
+}
