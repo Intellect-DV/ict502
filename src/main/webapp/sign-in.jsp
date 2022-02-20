@@ -45,7 +45,8 @@
                 <input type="password" name="password" placeholder="Password" autocomplete="off" required>
             </div>
             <div class="btn-box">
-                <button type="submit">Login</button>
+                <a href="/" class="btn secondary">Back</a>
+                <button class="btn" type="submit">Login</button>
             </div>
         </form>
     </div>
