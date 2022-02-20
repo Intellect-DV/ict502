@@ -46,6 +46,10 @@
             </tbody>
         </table>
     </div>
+    
+    <div class="btn__container">
+        <a href="manage-worker.jsp" class="btn-back">Back</a>
+    </div>
 
     <div class="modal__info">
         <div class="modal__card">

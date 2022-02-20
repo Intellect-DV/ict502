@@ -25,3 +25,20 @@
 .table__row > td > button:hover, .table__row > td > button:focus {
     background-color: var(--color-btn-error-hover);
 }
+.btn__container {
+    width: 30rem;
+    margin: 0 auto;
+    margin-top: 3rem;
+    text-align: center;
+}
+.btn__container > .btn-back {
+    all: unset;
+    color: white;
+    font-weight: 600;
+    background: var(--color-orange);
+    padding: 0.7rem 1.4rem;
+    cursor: pointer;
+}
+.btn__container > .btn-back:hover {
+    background: var(--color-orange-dark);
+}
