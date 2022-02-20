@@ -4,6 +4,7 @@
     grid-template-columns: 15rem 15rem 15rem;
     justify-content: center;
     margin-top: 4rem;
+    margin-bottom: 3rem;
 }
 .item {
     background: var(--color-orange);
