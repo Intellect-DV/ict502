@@ -2,13 +2,13 @@
 .modal__info {
     color: white;
     position: fixed;
-    bottom: -5vh;
+    bottom: -5rem;
     left: 50vw;
     transform: translateX(-50%);
     transition: all ease-in-out 200ms;
 }
 .modal__info.active {
-    bottom: 5vh;
+    bottom: 1rem;
 }
 .modal__card {
     padding: 0.5rem 2rem;
