@@ -45,6 +45,7 @@
         <input type="file" name="image" accept="image/jpeg, image/png, image/jpg" placeholder="Image" autocomplete="off" required>
 
         <button type="submit">Add</button>
+        <a class="btn-back" href="edit-menu.jsp"> Back </a>
     </form>
 
     <div class="modal__info">
