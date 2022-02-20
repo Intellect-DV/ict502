@@ -11,7 +11,7 @@ const sendRequest = () => {
     Promise.all([getOrderSummary(), getMenuCount(), getWorkerCount(), getCustomerCount()])
         .then( results => {
 
-            const {order_ongoing, order_complete, total_sales} = results[0].data;
+            const {order_preparing, order_complete, total_sales} = results[0].data;
             const {menu_count} = results[1].data;
             const {worker_count} = results[2].data;
             const {customer_count} = results[3].data;
@@ -21,8 +21,8 @@ const sendRequest = () => {
                                 <div class="content">${"RM " + parseFloat(total_sales).toFixed(2)}</div>
                             </div>
                             <div class="item">
-                                <div class="title">Ongoing Orders</div>
-                                <div class="content">${order_ongoing}</div>
+                                <div class="title">Preparing Orders</div>
+                                <div class="content">${order_preparing}</div>
                             </div>
                             <div class="item">
                                 <div class="title">Complete Orders</div>

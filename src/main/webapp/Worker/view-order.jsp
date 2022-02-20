@@ -39,7 +39,7 @@
         <div class="filter">
             <div class="filter__box">
                 <div class="filter__item">
-                    <button class="active" data-order-status="ongoing">Ongoing</button>
+                    <button class="active" data-order-status="preparing">Preparing</button>
                 </div>
                 <div class="filter__item">
                     <button data-order-status="complete">Complete</button>

@@ -32,8 +32,8 @@ const filterHandler = (event) => {
 
     currentBtn.classList.add("active");
 
-    if(orderStatus === "ongoing") {
-        filterOngoingOrders();
+    if(orderStatus === "preparing") {
+        filterPreparingOrders();
     } else {
         filterCompleteOrders();
     }
@@ -62,7 +62,7 @@ const retrieveOrders = () => {
                 setTimeout(closePopup, 3000);
             } else {
                 storedOrders = orders;
-                filterOngoingOrders();
+                filterPreparingOrders();
             }
         })
         .catch(err => {
@@ -75,8 +75,8 @@ const retrieveOrders = () => {
         })
 }
 
-const filterOngoingOrders = () => {
-    currentOrder = storedOrders.filter(order => order.order_status === "ongoing");
+const filterPreparingOrders = () => {
+    currentOrder = storedOrders.filter(order => order.order_status === "preparing");
     generateHtml();
 }
 
@@ -103,7 +103,7 @@ const generateHtml = () => {
                             <div class="order_id">Order Id: ${order.order_id}</div>
                             <div class="order_date">${date.toLocaleDateString()}</div>
                             <div class="order_total_price">${"RM " + parseFloat(order.order_total_price).toFixed(2)}</div>
-                            <div class="order_status${order.order_status === 'ongoing' ? ' orange' : ' green'}">${order.order_status}</div>
+                            <div class="order_status${order.order_status === 'preparing' ? ' orange' : ' green'}">${order.order_status}</div>
                         </div>
                         <div class="order__menu_details">`;
 
@@ -116,7 +116,7 @@ const generateHtml = () => {
 
         output += `</div>`;
 
-        if (order.order_status === 'ongoing') {
+        if (order.order_status === 'preparing') {
             output += `<div class="order__action">
                             <button class="btn_set" data-order-id="${order.order_id}" onclick="changeStatus(event)">
                                 Set Status to Complete
@@ -128,6 +128,13 @@ const generateHtml = () => {
 
         return output;
     }).join("");
+
+    if(currentOrder.length === 0) {
+        modalContent.innerText = `There is no current order`;
+        modalCard.className = "modal__card success";
+        modalInfo.className = "modal__info active";
+        setTimeout(closePopup, 3000);
+    }
 }
 
 const changeStatus = (event) => {

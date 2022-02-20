@@ -68,7 +68,7 @@ public class PaymentServlet extends HttpServlet {
             return;
         }
 
-        succeed = OrderDA.updateOrderStatus(currentOrder.getOrderId(), "ongoing");
+        succeed = OrderDA.updateOrderStatus(currentOrder.getOrderId(), "preparing");
 
         if(!succeed) {
             json.put("error", "Could not update order status");
