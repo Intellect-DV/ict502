@@ -4,6 +4,6 @@
 This is restaurant website based system.
 
 #### Notes :memo:
-    :pushpin: Change popup info notification (make it large)
-    :pushpin: Add report sales details
-    :pushpin: Add view payment details
+:pushpin: Change popup info notification (make it large) <br>
+:pushpin: Add report sales details <br>
+:pushpin: Add view payment details <br>
