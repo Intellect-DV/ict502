@@ -1,10 +1,10 @@
 # SEFOS :sparkles:
 ### SalizaEja Food Ordering System :hamburger::hotdog::pizza::poultry_leg:
 
-Restaurant Website Based
+This is restaurant website based system.
 
 #### Notes :memo:
 
-- Change popup info notification (make it large)
-- Add report sales details
-- Add view payment details
+:pushpin: Change popup info notification (make it large)
+:pushpin: Add report sales details
+:pushpin: Add view payment details
