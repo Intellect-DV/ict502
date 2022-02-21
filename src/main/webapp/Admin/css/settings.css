@@ -44,12 +44,14 @@
     background: var(--color-orange-dark);
 }
 .form_profile__link {
-    color: rgb(25, 140, 255);
     font-weight: 600;
     display: block;
     text-align: center;
     margin-top: 1.5rem;
 }
 .form_profile__link > a {
-    color: inherit;
+    color: var(--color-btn-link);
+}
+.form_profile__link > a:hover {
+    color: var(--color-btn-link-hover);
 }

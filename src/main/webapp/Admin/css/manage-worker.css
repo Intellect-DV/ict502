@@ -39,6 +39,9 @@
     background: var(--color-orange-dark);
 }
 .form__redirect > a {
-    color: rgb(25, 140, 255);
+    color: var(--color-btn-link);
     font-weight: 600;
+}
+.form__redirect > a:hover {
+    color: var(--color-btn-link-hover);
 }

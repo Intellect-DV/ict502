@@ -95,13 +95,28 @@ body::after {
 #form-signin > .inputbox > input:focus {
     outline: 2px solid var(--color-orange);
 }
-#form-signin > .btn-box > button {
+#form-signin > .btn-box {
+    display: flex;
+    gap: 0.5rem;
+}
+#form-signin > .btn-box > .btn {
     all: unset;
     background: var(--color-orange);
     padding: 0.5rem 2rem;
     cursor: pointer;
     font-weight: 600;
+    border: 2px solid var(--color-orange);
 }
-#form-signin > .btn-box > button:hover {
+#form-signin > .btn-box > .btn:hover {
     background: var(--color-orange-dark);
+    border: 2px solid var(--color-orange-dark);
+}
+#form-signin > .btn-box > .btn.secondary {
+    border: 2px solid var(--color-white-dark);
+    background: none;
+    color: var(--color-white-dark);
+}
+#form-signin > .btn-box > .btn.secondary:hover {
+    border-color: var(--color-orange);
+    color: var(--color-orange);
 }

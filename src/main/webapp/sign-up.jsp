@@ -47,7 +47,9 @@
             <input type="password" name="password-confirm" placeholder="Re-enter Password" autocomplete="off" required>
         </div>
         <div class="action-box">
-            <button type="submit">Submit</button>
+            <button class="btn" type="submit">Submit</button>
+            <a href="/" class="btn secondary">Back</a>
+            <a class="btn tertiary" href="sign-in.jsp">Click here to login</a>
         </div>
     </form>
 

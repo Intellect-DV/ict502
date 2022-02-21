@@ -39,7 +39,7 @@ public abstract class OrderDA {
         JSONObject jsonObject = new JSONObject();
 
         try {
-            String sql = "select (select sum(totalprice) from orders where orderstatus != 'uncompleted') as totalsales,(select count(orderid) from orders where orderstatus = 'ongoing') as ongoing,(select count(orderid) from orders where orderstatus = 'complete') as complete";
+            String sql = "select (select sum(totalprice) from orders where orderstatus != 'uncompleted') as totalsales,(select count(orderid) from orders where orderstatus = 'preparing') as preparing,(select count(orderid) from orders where orderstatus = 'complete') as complete";
 
             if(Database.getDbType().equals("oracle")) {
                 sql += " from dual";
@@ -49,11 +49,11 @@ public abstract class OrderDA {
 
             if(rs != null && rs.next()) {
                 double totalSales = rs.getDouble("totalsales");
-                int ongoing = rs.getInt("ongoing");
+                int preparing = rs.getInt("preparing");
                 int complete = rs.getInt("complete");
 
                 jsonObject.put("total_sales", totalSales);
-                jsonObject.put("order_ongoing", ongoing);
+                jsonObject.put("order_preparing", preparing);
                 jsonObject.put("order_complete", complete);
             }
         } catch (Exception err) {

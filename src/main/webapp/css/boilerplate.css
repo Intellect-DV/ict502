@@ -15,7 +15,9 @@
     --color-btn-success: rgba(34, 189, 2,0.7);
     --color-btn-success-hover: rgba(34, 189, 2,1);
     --color-btn-alert: rgb(206, 157, 11);
-    --color-bnt-alert-hover: rgb(173, 131, 8);
+    --color-btn-alert-hover: rgb(173, 131, 8);
+    --color-btn-link: rgb(25, 140, 255);
+    --color-btn-link-hover: rgb(23, 119, 217);
 }
 html {
    font-size: 100%;

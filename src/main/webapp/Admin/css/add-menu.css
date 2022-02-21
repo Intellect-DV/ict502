@@ -52,3 +52,16 @@
 #form_add_menu > button:hover, #form_add_menu > button:active {
     background: var(--color-orange-dark);
 }
+#form_add_menu > .btn-back {
+    all: unset;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-btn-link);
+    text-decoration: 2px solid underline var(--color-btn-link);
+}
+#form_add_menu > .btn-back:hover {
+    color: var(--color-btn-link-hover);
+    text-decoration-color: var(--color-btn-link-hover);
+}
