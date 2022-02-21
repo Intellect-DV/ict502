@@ -1,6 +1,5 @@
-![SEFOS ICON](https://raw.githubusercontent.com/Intellect-DV/ict502/main/src/main/webapp/favicon.ico)
 # SEFOS :sparkles:
-### SalizaEja Food Ordering System
+### SalizaEja Food Ordering System :hamburger::hotdog::pizza::poultry_leg:
 
 Restaurant Website Based
 
